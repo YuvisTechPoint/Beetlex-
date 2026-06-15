@@ -55,7 +55,7 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
     return (
       <section id="prizes" className="section-shell" aria-labelledby="prizes-heading">
         <div className="container mx-auto px-4">
-          <div className="section-intro-left">
+          <div className="section-intro text-center">
             <p className="text-label">Competition</p>
             <h2 id="prizes-heading" className="text-heading mt-3">
               Tracks & prizes
@@ -70,18 +70,18 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
   return (
     <section id="prizes" className="section-shell" aria-labelledby="prizes-heading">
       <div className="container mx-auto px-4">
-        <div className="section-intro-left">
+        <div className="section-intro text-center">
           <p className="text-label">Competition</p>
           <h2 id="prizes-heading" className="text-heading mt-3">
             Tracks & prizes
           </h2>
-          <p className="text-subtitle mt-3 max-w-lg">
+          <p className="text-subtitle mx-auto mt-3 max-w-lg">
             Pick a track, read the problem statement, and see what is on the line.
           </p>
         </div>
 
         <Tabs value={activeTrack} onValueChange={setActiveTrack} className="mt-10">
-          <TabsList className="flex h-auto w-full max-w-3xl flex-wrap justify-start gap-1 bg-transparent p-0">
+          <TabsList className="mx-auto flex h-auto w-full max-w-4xl flex-wrap justify-center gap-1 bg-transparent p-0">
             {event.tracks.map((track) => (
               <TabsTrigger
                 key={track.id}
@@ -100,13 +100,13 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
 
             return (
               <TabsContent key={track.id} value={track.id} className="mt-8">
-                <div className="max-w-3xl">
+                <div className="mx-auto max-w-3xl text-center">
                   <p className="text-subtitle">{track.description}</p>
                   <p className="text-meta mt-4">
                     <span className="font-medium text-foreground">Problem — </span>
                     {track.problemStatement}
                   </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="mt-4 flex flex-wrap justify-center gap-2">
                     {track.techStack.map((tech) => (
                       <Badge key={tech} variant="secondary">
                         {tech}
@@ -115,7 +115,7 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
                   </div>
                 </div>
 
-                <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                <div className="mx-auto mt-8 grid max-w-4xl gap-4 sm:grid-cols-3">
                   {trackPrizes.map((prize, i) => (
                     <Card
                       key={`${prize.trackId}-${prize.rank}`}

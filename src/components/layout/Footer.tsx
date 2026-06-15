@@ -13,22 +13,20 @@ const FOOTER_LINKS = {
     { href: '/#faq', label: 'FAQ' },
     { href: '/#prizes', label: 'Tracks & prizes' },
     { href: '/#sponsors', label: 'Sponsors' },
-    { href: '/legal/privacy', label: 'Privacy' },
-    { href: '/legal/terms', label: 'Terms' },
   ],
   Legal: [
     { href: '/legal/privacy', label: 'Privacy Policy' },
     { href: '/legal/terms', label: 'Terms of Service' },
-    { href: '/#faq', label: 'Code of Conduct' },
+    { href: '/legal/terms', label: 'Code of Conduct' },
   ],
 } as const
 
 export function Footer() {
   return (
     <footer className="border-t bg-muted/20" role="contentinfo">
-      <div className="container mx-auto px-4 py-12 md:py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
-          <div className="lg:col-span-2">
+      <div className="container mx-auto px-4 pt-12 pb-8 md:pt-16 md:pb-10">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+          <div className="md:col-span-2 lg:col-span-5">
             <Link to="/" aria-label="BeetleX home">
               <BeetleLogo />
             </Link>
@@ -38,26 +36,28 @@ export function Footer() {
             </p>
           </div>
 
-          {Object.entries(FOOTER_LINKS).map(([title, links]) => (
-            <div key={title}>
-              <h3 className="text-label mb-3">{title}</h3>
-              <ul className="space-y-2">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      to={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7 lg:col-start-6">
+            {Object.entries(FOOTER_LINKS).map(([title, links]) => (
+              <div key={title}>
+                <h3 className="text-label mb-4">{title}</h3>
+                <ul className="space-y-2.5">
+                  {links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        to={link.href}
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <Separator className="my-8" />
+        <Separator className="my-10" />
 
         <div className="flex flex-col gap-2 text-meta sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; {new Date().getFullYear()} BeetleX, Inc.</p>

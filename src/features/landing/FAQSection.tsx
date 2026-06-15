@@ -30,12 +30,12 @@ export function FAQSection({ event, isLoading }: FAQSectionProps) {
   return (
     <section id="faq" className="section-shell border-t" aria-labelledby="faq-heading">
       <div className="container mx-auto px-4">
-        <div className="section-intro-left mx-auto max-w-2xl md:mx-0">
+        <div className="section-intro text-center">
           <p className="text-label">FAQ</p>
           <h2 id="faq-heading" className="text-heading mt-3">
             Before you register
           </h2>
-          <p className="text-subtitle mt-3">
+          <p className="text-subtitle mx-auto mt-3 max-w-lg">
             Rules, logistics, and what to expect on event day.
           </p>
         </div>

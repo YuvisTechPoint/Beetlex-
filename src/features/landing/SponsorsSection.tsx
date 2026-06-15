@@ -17,12 +17,12 @@ export function SponsorsSection({ event, isLoading }: SponsorsSectionProps) {
       aria-labelledby="sponsors-heading"
     >
       <div className="container mx-auto px-4">
-        <div className="section-intro-left">
+        <div className="section-intro text-center">
           <p className="text-label">Partners</p>
           <h2 id="sponsors-heading" className="text-heading mt-3">
             Supported by teams building the stack
           </h2>
-          <p className="text-subtitle mt-3 max-w-lg">
+          <p className="text-subtitle mx-auto mt-3 max-w-lg">
             Cloud platforms, AI labs, and developer tools backing builders on BeetleX.
           </p>
         </div>
@@ -31,7 +31,7 @@ export function SponsorsSection({ event, isLoading }: SponsorsSectionProps) {
           <SponsorShowcase sponsors={sponsors} isLoading={isLoading} variant="landing" />
         </div>
 
-        <p className="text-meta mt-10 max-w-lg">
+        <p className="text-meta mx-auto mt-10 max-w-lg text-center">
           Interested in sponsoring?{' '}
           <a
             href="mailto:sponsors@beetlex.dev"

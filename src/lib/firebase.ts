@@ -8,16 +8,10 @@ import {
   type Auth,
   type User as FirebaseUser,
 } from 'firebase/auth'
+import { firebasePublicConfig, googleOAuthClientId } from '@/config/firebase.public'
 
 function readFirebaseConfig() {
-  return {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  }
+  return { ...firebasePublicConfig }
 }
 
 export function isFirebaseConfigured(): boolean {
@@ -40,9 +34,8 @@ function ensureFirebase(): { auth: Auth; googleProvider: GoogleAuthProvider } {
     googleProvider = new GoogleAuthProvider()
     googleProvider.setCustomParameters({ prompt: 'select_account' })
 
-    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
-    if (clientId) {
-      googleProvider.setCustomParameters({ prompt: 'select_account', client_id: clientId })
+    if (googleOAuthClientId) {
+      googleProvider.setCustomParameters({ prompt: 'select_account', client_id: googleOAuthClientId })
     }
   }
 

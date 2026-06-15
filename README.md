@@ -32,7 +32,7 @@ Open **http://localhost:5173**
 
 ## Environment variables
 
-Copy `.env.example` to `.env` and fill in values as needed.
+Copy `.env.example` to `.env` to override Firebase defaults. Google sign-in also requires **Authentication → Sign-in method → Google** enabled in the [Firebase Console](https://console.firebase.google.com/), and your deploy domain (e.g. `beetlex.vercel.app`) listed under **Authentication → Settings → Authorized domains**.
 
 | Variable | Purpose |
 |----------|---------|
