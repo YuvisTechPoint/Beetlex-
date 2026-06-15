@@ -120,6 +120,10 @@
     @apply font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground;
   }
 
+  .text-label-accent {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-primary;
+  }
+
   .text-meta {
     @apply text-xs leading-normal text-muted-foreground;
   }
@@ -189,11 +193,15 @@
   }
 
   .text-brand-gradient {
-    @apply text-primary;
+    @apply bg-gradient-to-r from-orange-500 via-primary to-amber-400 bg-clip-text text-transparent;
+  }
+
+  .text-heading-gradient {
+    @apply bg-gradient-to-r from-orange-500 via-primary to-amber-400 bg-clip-text text-transparent;
   }
 
   .bg-brand-gradient {
-    @apply bg-primary;
+    @apply bg-gradient-to-r from-orange-500 via-primary to-amber-400;
   }
 
   @keyframes rank-rise {

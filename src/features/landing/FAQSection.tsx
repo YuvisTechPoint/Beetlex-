@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { Event } from '@/types'
+import { SectionIntro } from '@/components/shared/SectionIntro'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
   Accordion,
@@ -30,15 +31,12 @@ export function FAQSection({ event, isLoading }: FAQSectionProps) {
   return (
     <section id="faq" className="section-shell border-t" aria-labelledby="faq-heading">
       <div className="container mx-auto px-4">
-        <div className="section-intro text-center">
-          <p className="text-label">FAQ</p>
-          <h2 id="faq-heading" className="text-heading mt-3">
-            Before you register
-          </h2>
-          <p className="text-subtitle mx-auto mt-3 max-w-lg">
-            Rules, logistics, and what to expect on event day.
-          </p>
-        </div>
+        <SectionIntro
+          label="FAQ"
+          title="Before you register"
+          headingId="faq-heading"
+          subtitle="Rules, logistics, and what to expect on event day."
+        />
 
         <div className="mx-auto mt-8 max-w-2xl">
           <Input

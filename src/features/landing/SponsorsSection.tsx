@@ -1,4 +1,5 @@
 import type { Event } from '@/types'
+import { SectionIntro } from '@/components/shared/SectionIntro'
 import { SponsorShowcase } from '@/components/shared/SponsorShowcase'
 import { resolveShowcaseSponsors } from '@/data/sponsors'
 
@@ -17,15 +18,13 @@ export function SponsorsSection({ event, isLoading }: SponsorsSectionProps) {
       aria-labelledby="sponsors-heading"
     >
       <div className="container mx-auto px-4">
-        <div className="section-intro text-center">
-          <p className="text-label">Partners</p>
-          <h2 id="sponsors-heading" className="text-heading mt-3">
-            Supported by teams building the stack
-          </h2>
-          <p className="text-subtitle mx-auto mt-3 max-w-lg">
-            Cloud platforms, AI labs, and developer tools backing builders on BeetleX.
-          </p>
-        </div>
+        <SectionIntro
+          label="Partners"
+          title="Supported by teams building the stack"
+          accentWords={2}
+          headingId="sponsors-heading"
+          subtitle="Cloud platforms, AI labs, and developer tools backing builders on BeetleX."
+        />
 
         <div className="mt-10 md:mt-12">
           <SponsorShowcase sponsors={sponsors} isLoading={isLoading} variant="landing" />

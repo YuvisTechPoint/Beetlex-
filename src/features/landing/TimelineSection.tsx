@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import type { Event } from '@/types'
+import { GradientText, SectionIntro } from '@/components/shared/SectionIntro'
 import { cn } from '@/lib/utils'
 import { Skeleton } from '@/components/ui/skeleton'
 
@@ -16,18 +17,9 @@ function extractEventYear(event: Event): string | null {
   return format(new Date(event.registrationOpen), 'yyyy')
 }
 
-function TimelineHeading({ event }: { event?: Event }) {
+function timelineSubtitle(event?: Event) {
   if (!event) {
-    return (
-      <>
-        <h2 id="timeline-heading" className="text-heading">
-          Timeline
-        </h2>
-        <p className="text-subtitle mt-3 md:mt-4">
-          Important milestones for our featured hackathon
-        </p>
-      </>
-    )
+    return 'Important milestones for our featured hackathon'
   }
 
   const year = extractEventYear(event)
@@ -37,10 +29,7 @@ function TimelineHeading({ event }: { event?: Event }) {
 
   return (
     <>
-      <h2 id="timeline-heading" className="text-heading">
-        Timeline
-      </h2>
-      <p className="text-subtitle mt-3 md:mt-4">Key dates for {titleBase}</p>
+      Key dates for <GradientText>{titleBase}</GradientText>
     </>
   )
 }
@@ -182,9 +171,11 @@ export function TimelineSection({ event, isLoading }: TimelineSectionProps) {
       aria-labelledby="timeline-heading"
     >
       <div className="container mx-auto px-4">
-        <div className="section-intro-left mx-auto max-w-3xl md:mx-0">
-          <TimelineHeading event={event} />
-        </div>
+        <SectionIntro
+          title="Timeline"
+          headingId="timeline-heading"
+          subtitle={timelineSubtitle(event)}
+        />
 
         <div className="mx-auto mt-10 max-w-6xl md:mt-12">
           {isLoading ? (

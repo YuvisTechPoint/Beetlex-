@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { Event } from '@/types'
+import { SectionIntro } from '@/components/shared/SectionIntro'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -55,13 +56,12 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
     return (
       <section id="prizes" className="section-shell" aria-labelledby="prizes-heading">
         <div className="container mx-auto px-4">
-          <div className="section-intro text-center">
-            <p className="text-label">Competition</p>
-            <h2 id="prizes-heading" className="text-heading mt-3">
-              Tracks & prizes
-            </h2>
-            <p className="text-subtitle mt-3">Prize details will be published soon.</p>
-          </div>
+          <SectionIntro
+            label="Competition"
+            title="Tracks & prizes"
+            headingId="prizes-heading"
+            subtitle="Prize details will be published soon."
+          />
         </div>
       </section>
     )
@@ -70,15 +70,12 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
   return (
     <section id="prizes" className="section-shell" aria-labelledby="prizes-heading">
       <div className="container mx-auto px-4">
-        <div className="section-intro text-center">
-          <p className="text-label">Competition</p>
-          <h2 id="prizes-heading" className="text-heading mt-3">
-            Tracks & prizes
-          </h2>
-          <p className="text-subtitle mx-auto mt-3 max-w-lg">
-            Pick a track, read the problem statement, and see what is on the line.
-          </p>
-        </div>
+        <SectionIntro
+          label="Competition"
+          title="Tracks & prizes"
+          headingId="prizes-heading"
+          subtitle="Pick a track, read the problem statement, and see what is on the line."
+        />
 
         <Tabs value={activeTrack} onValueChange={setActiveTrack} className="mt-10">
           <TabsList className="mx-auto flex h-auto w-full max-w-4xl flex-wrap justify-center gap-1 bg-transparent p-0">
