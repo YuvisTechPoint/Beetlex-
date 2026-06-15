@@ -115,7 +115,7 @@ Toggle **Overload** in the dev toolbar, then register for an event. The mock API
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start development server (MSW on) |
-| `npm run build` | Production build (MSW off) |
+| `npm run build` | Production build (MSW on by default; set `VITE_DISABLE_MSW=true` for a real API) |
 | `npm run build:qa` | QA build with MSW + fast mock delays |
 | `npm run preview:qa` | Preview QA build at :4173 |
 | `npm run lint` | ESLint (`src`, `e2e`) |

@@ -8,6 +8,7 @@ import { Footer } from '@/components/layout/Footer'
 import { SponsorShowcase } from '@/components/shared/SponsorShowcase'
 import { useEvent, useEvents } from '@/hooks'
 import { resolveShowcaseSponsors } from '@/data/sponsors'
+import { mockEventById } from '@/mocks/data/events'
 import { calculatePrizePool } from '@/utils'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -24,6 +25,7 @@ import {
 import { Input } from '@/components/ui/input'
 
 const FEATURED_EVENT_ID = 'evt-upcoming-1'
+const FEATURED_EVENT_FALLBACK = mockEventById[FEATURED_EVENT_ID]
 
 // ---------------------------------------------------------------------------
 // AnimatedCounter (inlined from shared)
@@ -467,7 +469,20 @@ function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionProps) {
     )
   }
 
-  if (!event) return null
+  if (!event) {
+    return (
+      <section id="prizes" className="py-20" aria-labelledby="prizes-heading">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 id="prizes-heading" className="text-3xl font-bold tracking-tight md:text-4xl">
+              Tracks & Prizes
+            </h2>
+            <p className="mt-4 text-muted-foreground">Prize details will be published soon.</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section id="prizes" className="py-20" aria-labelledby="prizes-heading">
@@ -770,7 +785,8 @@ export default function LandingPage() {
     limit: 1,
   })
 
-  const event = featuredEvent ?? activeEvents?.data[0]
+  const event =
+    featuredEvent ?? activeEvents?.data[0] ?? FEATURED_EVENT_FALLBACK
   const isLoading = !event && (featuredLoading || activeLoading)
 
   return (
