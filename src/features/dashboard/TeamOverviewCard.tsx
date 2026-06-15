@@ -35,7 +35,9 @@ export function TeamOverviewCard({ team, trackName }: TeamOverviewCardProps) {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex flex-wrap items-center gap-2">
-          <code className="rounded-md bg-muted px-3 py-1.5 text-sm font-mono">{team.inviteCode}</code>
+          <code className="rounded-md bg-muted px-3 py-1.5 text-sm font-mono">
+            {team.inviteCode}
+          </code>
           <Button variant="outline" size="sm" onClick={copyCode}>
             <Copy className="h-4 w-4" aria-hidden="true" />
             Copy code

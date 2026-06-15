@@ -10,8 +10,8 @@ export function loginWithRole(role: UserRole) {
   return apiClient.post<AuthSessionResponse>('/auth/login', { role })
 }
 
-export function loginWithEmail(email: string) {
-  return apiClient.post<AuthSessionResponse>('/auth/login', { email })
+export function loginWithFirebaseIdToken(firebaseIdToken: string) {
+  return apiClient.post<AuthSessionResponse>('/auth/login', { firebaseIdToken })
 }
 
 export function fetchCurrentSession() {

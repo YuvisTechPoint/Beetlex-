@@ -195,7 +195,7 @@ export const mockUsers: User[] = [
   },
   {
     id: 'user-participant-20',
-    name: 'Ryan O\'Connor',
+    name: "Ryan O'Connor",
     email: 'ryan.oconnor@ucd.ie',
     role: 'participant',
     college: 'University College Dublin',
@@ -243,6 +243,7 @@ export const mockUsers: User[] = [
   },
 ]
 
-export const mockUserById = Object.fromEntries(
-  mockUsers.map((user) => [user.id, user]),
-) as Record<string, User>
+export const mockUserById = Object.fromEntries(mockUsers.map((user) => [user.id, user])) as Record<
+  string,
+  User
+>

@@ -14,7 +14,7 @@ export {
 export { StepWizard } from './StepWizard'
 export { TeamSetupStep } from './TeamSetupStep'
 export { TrackSelectionStep } from './TrackSelectionStep'
-export type { RegistrationDraft, RegistrationResult, WizardStep } from './types'
+export type { RegistrationDraft, RegistrationResult, WizardStep } from '@/types'
 export { useRegistrationPage, type RegistrationPageState } from './useRegistrationPage'
 export {
   getRegistrationStepIndex,

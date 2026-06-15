@@ -57,11 +57,12 @@ export const mockAnnouncementById = Object.fromEntries(
   mockAnnouncements.map((announcement) => [announcement.id, announcement]),
 ) as Record<string, Announcement>
 
-export const mockAnnouncementsByEventId = mockAnnouncements.reduce<
-  Record<string, Announcement[]>
->((acc, announcement) => {
-  const list = acc[announcement.eventId] ?? []
-  list.push(announcement)
-  acc[announcement.eventId] = list
-  return acc
-}, {})
+export const mockAnnouncementsByEventId = mockAnnouncements.reduce<Record<string, Announcement[]>>(
+  (acc, announcement) => {
+    const list = acc[announcement.eventId] ?? []
+    list.push(announcement)
+    acc[announcement.eventId] = list
+    return acc
+  },
+  {},
+)

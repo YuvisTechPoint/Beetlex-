@@ -1,8 +1,17 @@
 import { http, HttpResponse } from 'msw'
 import { mockEvents } from '@/mocks/data'
 import { randomGetDelay, randomMutateDelay } from '@/mocks/utils'
+import type { Registration, Team } from '@/types'
 import { db } from './db'
 import { generateId, jsonError, requireAuth } from './helpers'
+
+function buildInviteCode(teamName: string) {
+  return teamName
+    .replace(/[^a-zA-Z0-9]/g, '')
+    .slice(0, 6)
+    .toUpperCase()
+    .padEnd(6, 'X')
+}
 
 export const registrationHandlers = [
   http.get('/api/registrations/me', async ({ request }) => {
@@ -89,13 +98,106 @@ export const registrationHandlers = [
       ...team,
       members: team.members.map((member) => {
         const profile = db.users.find((user) => user.id === member.userId)
-        return profile
-          ? { ...member, name: profile.name, email: profile.email }
-          : member
+        return profile ? { ...member, name: profile.name, email: profile.email } : member
       }),
     }
 
     return HttpResponse.json(hydratedTeam)
+  }),
+
+  http.post('/api/teams', async ({ request }) => {
+    await randomMutateDelay()
+    const auth = requireAuth(request)
+    if (auth instanceof Response) return auth
+
+    const body = (await request.json()) as {
+      eventId: string
+      teamName: string
+      trackId: string
+    }
+
+    const event = db.events.find((e) => e.id === body.eventId)
+    if (!event) {
+      return jsonError('NOT_FOUND', 'Event not found', 404)
+    }
+
+    if (event.status === 'closed') {
+      return jsonError('REGISTRATION_CLOSED', 'Registration is closed for this event', 403)
+    }
+
+    const track = event.tracks.find((t) => t.id === body.trackId)
+    if (!track) {
+      return jsonError('INVALID_TRACK', 'Select a valid track', 400)
+    }
+
+    const teamName = body.teamName?.trim() ?? ''
+    if (teamName.length < 3 || teamName.length > 30) {
+      return jsonError('INVALID_TEAM_NAME', 'Team name must be 3–30 characters', 400)
+    }
+
+    if (!/^[a-zA-Z0-9 ]+$/.test(teamName)) {
+      return jsonError('INVALID_TEAM_NAME', 'Team name can only contain letters and numbers', 400)
+    }
+
+    const existingRegistration = db.registrations.find((r) => r.userId === auth.id)
+    if (existingRegistration) {
+      const existingTeam = db.teams.find((t) => t.id === existingRegistration.teamId)
+      const existingEvent = db.events.find((e) => e.id === existingRegistration.eventId)
+      const existingTrack = existingEvent?.tracks.find((t) => t.id === existingTeam?.trackId)
+      return jsonError('ALREADY_REGISTERED', 'You are already registered for an event', 409, {
+        registrationId: existingRegistration.id,
+        registrationCode: existingRegistration.registrationCode,
+        teamId: existingRegistration.teamId,
+        teamName: existingTeam?.name,
+        trackName: existingTrack?.name,
+      })
+    }
+
+    const teamId = generateId('team')
+    const inviteCode = buildInviteCode(teamName)
+
+    const team: Team = {
+      id: teamId,
+      name: teamName,
+      inviteCode,
+      eventId: body.eventId,
+      trackId: body.trackId,
+      submissionStatus: 'not_started',
+      members: [
+        {
+          userId: auth.id,
+          name: auth.name,
+          email: auth.email,
+          role: 'leader',
+          joinedAt: new Date().toISOString(),
+        },
+      ],
+    }
+
+    const registration: Registration = {
+      id: generateId('reg'),
+      userId: auth.id,
+      eventId: body.eventId,
+      teamId,
+      registrationCode: `BX-${inviteCode}`,
+      createdAt: new Date().toISOString(),
+    }
+
+    db.teams.push(team)
+    db.registrations.push(registration)
+    event.participantCount += 1
+    db.organizerStats.totalParticipants += 1
+    db.organizerStats.totalTeams += 1
+    db.organizerStats.registrationsToday += 1
+
+    return HttpResponse.json(
+      {
+        team,
+        registrationCode: registration.registrationCode,
+        inviteCode,
+      },
+      { status: 201 },
+    )
   }),
 
   http.post('/api/teams/verify', async ({ request }) => {
@@ -104,9 +206,7 @@ export const registrationHandlers = [
     if (auth instanceof Response) return auth
 
     const body = (await request.json()) as { inviteCode: string }
-    const team = db.teams.find(
-      (t) => t.inviteCode.toLowerCase() === body.inviteCode.toLowerCase(),
-    )
+    const team = db.teams.find((t) => t.inviteCode.toLowerCase() === body.inviteCode.toLowerCase())
 
     if (!team) {
       return jsonError('INVALID_INVITE_CODE', 'Invalid invite code', 404)
@@ -145,9 +245,7 @@ export const registrationHandlers = [
     }
 
     const body = (await request.json()) as { inviteCode: string }
-    const team = db.teams.find(
-      (t) => t.inviteCode.toLowerCase() === body.inviteCode.toLowerCase(),
-    )
+    const team = db.teams.find((t) => t.inviteCode.toLowerCase() === body.inviteCode.toLowerCase())
 
     if (!team) {
       return jsonError('INVALID_INVITE_CODE', 'Invalid invite code', 404)

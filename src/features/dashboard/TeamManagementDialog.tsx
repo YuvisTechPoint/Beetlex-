@@ -52,8 +52,8 @@ export function TeamManagementDialog({
           <DialogHeader>
             <DialogTitle>Leave team?</DialogTitle>
             <DialogDescription>
-              You will lose access to this team&apos;s submission. This action cannot be undone in the
-              demo environment.
+              You will lose access to this team&apos;s submission. This action cannot be undone in
+              the demo environment.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

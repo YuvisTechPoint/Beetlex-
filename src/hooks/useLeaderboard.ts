@@ -15,10 +15,7 @@ interface UseLeaderboardOptions {
   forOrganizer?: boolean
 }
 
-export function useLeaderboard(
-  eventId = 'evt-active-1',
-  options: UseLeaderboardOptions = {},
-) {
+export function useLeaderboard(eventId = 'evt-active-1', options: UseLeaderboardOptions = {}) {
   const queryClient = useQueryClient()
   const { refetchInterval, includeStatus, forOrganizer = false } = options
   const role = useAuth().user?.role
@@ -69,9 +66,7 @@ export function useLeaderboard(
   })
 
   const data = useOrganizerApi ? organizerQuery.data : publicQuery.data?.entries
-  const published = useOrganizerApi
-    ? statusQuery.data?.published
-    : publicQuery.data?.published
+  const published = useOrganizerApi ? statusQuery.data?.published : publicQuery.data?.published
 
   return {
     data,

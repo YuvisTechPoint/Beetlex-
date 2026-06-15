@@ -20,7 +20,7 @@ import {
 import { useAssignJudge } from '@/hooks/useAssignJudge'
 import { useEvent } from '@/hooks/useEvent'
 import { useOrganizerJudges } from '@/hooks/useOrganizerJudges'
-import { DEFAULT_EVENT_ID } from '../types'
+import { DEFAULT_EVENT_ID } from '../constants'
 
 export default function JudgesPanel() {
   const { data: judges, isLoading } = useOrganizerJudges()

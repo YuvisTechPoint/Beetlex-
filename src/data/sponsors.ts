@@ -140,10 +140,7 @@ export const BEETLEX_SHOWCASE_SPONSORS: ShowcaseSponsor[] = [
 
 export const SPONSOR_TIER_ORDER: SponsorTier[] = ['platinum', 'gold', 'silver', 'bronze']
 
-export const SPONSOR_TIER_META: Record<
-  SponsorTier,
-  { label: string; description: string }
-> = {
+export const SPONSOR_TIER_META: Record<SponsorTier, { label: string; description: string }> = {
   platinum: {
     label: 'Platinum',
     description: 'Founding partners powering the hackathon ecosystem',

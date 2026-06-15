@@ -48,18 +48,19 @@ export const mockOrganizerStats: OrganizerStats = {
   totalTeams: activeEventTeams.length,
   registrationsToday: Math.max(
     3,
-    activeEventTeams.flatMap((team) => team.members).filter((member) => {
-      const joined = new Date(member.joinedAt).getTime()
-      return joined >= Date.now() - 86_400_000
-    }).length,
+    activeEventTeams
+      .flatMap((team) => team.members)
+      .filter((member) => {
+        const joined = new Date(member.joinedAt).getTime()
+        return joined >= Date.now() - 86_400_000
+      }).length,
   ),
   submissionsReceived: submittedCount,
   submissionsPending: activeEventSubmissions.filter(
     (sub) => !sub.isDraft && (sub.scores?.length ?? 0) === 0,
   ).length,
   draftSubmissions: activeEventSubmissions.filter((sub) => sub.isDraft).length,
-  judgingProgress:
-    submittedCount > 0 ? Math.round((scoredCount / submittedCount) * 100) : 0,
+  judgingProgress: submittedCount > 0 ? Math.round((scoredCount / submittedCount) * 100) : 0,
   tracksBreakdown: trackBreakdown(),
 }
 
@@ -213,17 +214,17 @@ function buildJudgeSummaries(): OrganizerJudge[] {
     .map((judge) => {
       const assignedSubs = mockSubmissions.filter(
         (sub) =>
-          !sub.isDraft &&
-          (sub.scores ?? []).some((score) => score.judgeId === judge.id) === false,
+          !sub.isDraft && (sub.scores ?? []).some((score) => score.judgeId === judge.id) === false,
       )
       const reviewed = mockSubmissions.filter(
         (sub) => !sub.isDraft && (sub.scores ?? []).some((score) => score.judgeId === judge.id),
       ).length
-      const trackId = judge.id === 'user-judge-1'
-        ? 'evt-active-1-track-devtools'
-        : judge.id === 'user-judge-2'
-          ? 'evt-active-1-track-ai'
-          : 'evt-active-1-track-ml'
+      const trackId =
+        judge.id === 'user-judge-1'
+          ? 'evt-active-1-track-devtools'
+          : judge.id === 'user-judge-2'
+            ? 'evt-active-1-track-ai'
+            : 'evt-active-1-track-ml'
 
       return {
         id: judge.id,
@@ -287,4 +288,3 @@ export const mockOrganizerJudgeAssignments: OrganizerJudgeAssignment[] = [
 ]
 
 export const mockSubmissionJudgeAssignments: SubmissionJudgeAssignment[] = []
-

@@ -78,7 +78,11 @@ export default function OverviewCharts({
               <XAxis dataKey="range" tick={{ fontSize: 10 }} />
               <YAxis allowDecimals={false} tick={{ fontSize: 10 }} width={28} />
               <Tooltip />
-              <Bar dataKey="count" fill="hsl(var(--chart-2, var(--primary)))" radius={[4, 4, 0, 0]} />
+              <Bar
+                dataKey="count"
+                fill="hsl(var(--chart-2, var(--primary)))"
+                radius={[4, 4, 0, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>

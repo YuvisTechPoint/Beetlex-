@@ -20,6 +20,18 @@ export interface JoinTeamPayload {
   inviteCode: string
 }
 
+export interface CreateTeamPayload {
+  eventId: string
+  teamName: string
+  trackId: string
+}
+
+export interface CreateTeamResult {
+  team: Team
+  registrationCode: string
+  inviteCode: string
+}
+
 export interface JoinTeamOptions {
   simulateOverload?: boolean
 }
@@ -34,6 +46,10 @@ export function joinTeam(payload: JoinTeamPayload, options?: JoinTeamOptions) {
     headers['X-Simulate-Overload'] = '1'
   }
   return apiClient.post<Team>('/teams/join', payload, { headers })
+}
+
+export function createTeam(payload: CreateTeamPayload) {
+  return apiClient.post<CreateTeamResult>('/teams', payload)
 }
 
 export function leaveTeam() {

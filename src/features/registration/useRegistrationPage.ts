@@ -23,7 +23,7 @@ import {
   teamSetupSchema,
   type RegistrationFormValues,
 } from './schemas'
-import type { RegistrationDraft, RegistrationResult } from './types'
+import type { RegistrationDraft, RegistrationResult } from '@/types'
 import { buildSoloTeamName, usesTrackSelectionStep } from './teamMode'
 import {
   getRegistrationStepIndex,
@@ -55,15 +55,17 @@ export function useRegistrationPage() {
   const [currentStep, setCurrentStep] = useState(0)
   const [result, setResult] = useState<RegistrationResult | null>(null)
   const [duplicateInfo, setDuplicateInfo] = useState<DuplicateRegistrationInfo | null>(null)
-  const [registrationInProgressElsewhere, setRegistrationInProgressElsewhere] = useState(
-    () => (id ? isRegistrationInProgress(id) : false),
+  const [registrationInProgressElsewhere, setRegistrationInProgressElsewhere] = useState(() =>
+    id ? isRegistrationInProgress(id) : false,
   )
   const [isRetryingSubmit, setIsRetryingSubmit] = useState(false)
   const [queueInfo, setQueueInfo] = useState<QueueInfo | null>(null)
   const [overloadPaused, setOverloadPaused] = useState(false)
   const failedSubmitAttemptsRef = useRef(0)
   const backgroundRetryRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const handleSubmitRef = useRef<(options?: { silent?: boolean }) => Promise<boolean>>(async () => false)
+  const handleSubmitRef = useRef<(options?: { silent?: boolean }) => Promise<boolean>>(
+    async () => false,
+  )
 
   const lastSubmitAtRef = useRef(0)
   const draftRestoredRef = useRef(false)
@@ -113,8 +115,7 @@ export function useRegistrationPage() {
   const teamMode = form.watch('teamMode')
   const wizardSteps = useMemo(() => getRegistrationSteps(teamMode), [teamMode])
   const wizardStepIndex = getRegistrationStepIndex(currentStep, teamMode)
-  const isSubmitting =
-    registerMutation.isPending || joinTeamMutation.isPending || isRetryingSubmit
+  const isSubmitting = registerMutation.isPending || joinTeamMutation.isPending || isRetryingSubmit
 
   useEffect(() => {
     if (!id) return
@@ -272,9 +273,7 @@ export function useRegistrationPage() {
 
       if (values.teamMode === 'create' || values.teamMode === 'solo') {
         const teamName =
-          values.teamMode === 'solo'
-            ? buildSoloTeamName(values.name)
-            : values.teamName!.trim()
+          values.teamMode === 'solo' ? buildSoloTeamName(values.name) : values.teamName!.trim()
 
         const response = await retryWithBackoff(
           () =>

@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { buildAuthStreamUrl } from '@/api/auth'
+import { buildAuthStreamUrl, loginWithFirebaseIdToken } from '@/api/auth'
+import { isFirebaseConfigured, subscribeFirebaseAuth } from '@/lib/firebase'
+import { isFirebaseIdToken } from '@/lib/firebaseJwt'
 import { AUTH_CHANNEL, AUTH_STORAGE_KEY, useAuthStore } from '@/store/authStore'
 import type { User } from '@/types'
 
@@ -38,6 +40,31 @@ export function useAuthSync() {
   const lastAuthKeyRef = useRef<string | null>(null)
 
   useEffect(() => {
+    if (!isFirebaseConfigured()) return
+
+    return subscribeFirebaseAuth((firebaseUser, idToken) => {
+      const { token, setSession, clearSession } = useAuthStore.getState()
+
+      if (!firebaseUser || !idToken) {
+        if (token && isFirebaseIdToken(token)) {
+          clearSession()
+        }
+        return
+      }
+
+      if (token === idToken) return
+
+      void loginWithFirebaseIdToken(idToken)
+        .then((session) => {
+          setSession(session.user, session.token)
+        })
+        .catch(() => {
+          clearSession()
+        })
+    })
+  }, [])
+
+  useEffect(() => {
     if (!isHydrated) {
       void hydrate()
     }
@@ -55,7 +82,9 @@ export function useAuthSync() {
     if (typeof BroadcastChannel === 'undefined') return
 
     const channel = new BroadcastChannel(AUTH_CHANNEL)
-    channel.onmessage = (event: MessageEvent<{ type: string; user?: User; token?: string | null }>) => {
+    channel.onmessage = (
+      event: MessageEvent<{ type: string; user?: User; token?: string | null }>,
+    ) => {
       if (event.data.type === 'session' && event.data.user && event.data.token) {
         setSession(event.data.user, event.data.token)
       }

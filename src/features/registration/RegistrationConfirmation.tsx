@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import type { Event } from '@/types'
-import type { RegistrationResult } from './types'
+import type { RegistrationResult } from '@/types'
 
 export interface RegistrationConfirmationProps {
   event: Event

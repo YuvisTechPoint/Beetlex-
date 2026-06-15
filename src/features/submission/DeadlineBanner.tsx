@@ -1,6 +1,5 @@
 import { format } from 'date-fns'
-import { Clock, Lock } from 'lucide-react'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { AlertBanner } from '@/components/shared/AlertBanner'
 import { cn } from '@/lib/utils'
 import { URGENT_THRESHOLD_MS } from './constants'
 import { pad } from './utils'
@@ -29,39 +28,36 @@ export function DeadlineBanner({
 
   if (isDeadlinePassed) {
     return (
-      <Alert variant="destructive" className="mb-6">
-        <Lock className="h-4 w-4" />
-        <AlertTitle>Submissions are now closed</AlertTitle>
-        <AlertDescription>
-          Submissions closed on {format(new Date(submissionDeadline), 'PPpp')}.
-        </AlertDescription>
-      </Alert>
+      <AlertBanner
+        contained={false}
+        priority="urgent"
+        title="Submissions are now closed"
+        description={`Submissions closed on ${format(new Date(submissionDeadline), 'PPpp')}.`}
+        className="mb-6"
+        ariaLive="polite"
+      />
     )
   }
 
+  const priority = isUrgent ? 'urgent' : 'info'
+
   return (
-    <div
-      className={cn(
-        'mb-6 flex items-center gap-3 rounded-lg border px-4 py-3',
-        isUrgent
-          ? 'border-destructive/50 bg-destructive/10 text-destructive'
-          : 'border-border bg-muted/50',
-      )}
-      aria-live="polite"
+    <AlertBanner
+      contained={false}
+      priority={priority}
+      title="Submission closes in"
+      className="mb-6"
+      ariaLive="polite"
     >
-      <Clock className="h-5 w-5 shrink-0" aria-hidden="true" />
-      <div>
-        <p className="text-sm font-medium">Submission closes in:</p>
-        <p
-          className={cn(
-            'font-mono text-lg font-bold tabular-nums',
-            isUrgent && 'text-destructive',
-          )}
-        >
-          {pad(countdown.days * 24 + countdown.hours)}:{pad(countdown.minutes)}:
-          {pad(countdown.seconds)}
-        </p>
-      </div>
-    </div>
+      <p
+        className={cn(
+          'font-mono text-base font-bold tabular-nums tracking-tight',
+          isUrgent ? 'text-red-800 dark:text-red-200' : 'text-blue-900 dark:text-blue-200',
+        )}
+      >
+        {pad(countdown.days * 24 + countdown.hours)}:{pad(countdown.minutes)}:
+        {pad(countdown.seconds)}
+      </p>
+    </AlertBanner>
   )
 }

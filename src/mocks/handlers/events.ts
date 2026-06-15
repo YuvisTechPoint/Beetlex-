@@ -47,12 +47,15 @@ export const eventHandlers = [
     const start = (page - 1) * limit
     const data = filtered.slice(start, start + limit)
 
-    return HttpResponse.json({
-      data,
-      pagination: { page, limit, total, totalPages },
-    }, {
-      headers: { 'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60' },
-    })
+    return HttpResponse.json(
+      {
+        data,
+        pagination: { page, limit, total, totalPages },
+      },
+      {
+        headers: { 'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60' },
+      },
+    )
   }),
 
   http.get('/api/events/:id', async ({ params }) => {
@@ -127,9 +130,7 @@ export const eventHandlers = [
       }
     }
 
-    const existing = db.registrations.find(
-      (r) => r.userId === auth.id && r.eventId === eventId,
-    )
+    const existing = db.registrations.find((r) => r.userId === auth.id && r.eventId === eventId)
     if (existing) {
       const team = db.teams.find((t) => t.id === existing.teamId)
       const track = team ? event.tracks.find((t) => t.id === team.trackId) : undefined

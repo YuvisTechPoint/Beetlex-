@@ -58,7 +58,10 @@ export function SubmissionDetailSheet({ submission, onClose }: SubmissionDetailS
                 <div>
                   <dt className="text-muted-foreground">Status</dt>
                   <dd>
-                    <Badge variant="outline" className={SUBMISSION_STATUS_STYLES[submission.status]}>
+                    <Badge
+                      variant="outline"
+                      className={SUBMISSION_STATUS_STYLES[submission.status]}
+                    >
                       {submission.status}
                     </Badge>
                   </dd>

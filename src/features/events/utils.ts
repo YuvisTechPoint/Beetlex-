@@ -1,12 +1,11 @@
 import type { Event } from '@/types'
-import type { EventFilterState } from './types'
+import type { EventFilterState } from '@/types'
 
 export function parseFilters(params: URLSearchParams): EventFilterState {
   const status = params.get('status')
   return {
     search: params.get('q') ?? '',
-    status:
-      status === 'upcoming' || status === 'active' || status === 'closed' ? status : 'all',
+    status: status === 'upcoming' || status === 'active' || status === 'closed' ? status : 'all',
     track: params.get('track') ?? '',
     dateFrom: params.get('from') ?? '',
     dateTo: params.get('to') ?? '',

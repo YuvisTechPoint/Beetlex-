@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { GoogleSignInButton } from '@/components/auth/GoogleSignInButton'
 import { useAuth } from '@/hooks/useAuth'
 import type { UserRole } from '@/types'
 import {
@@ -10,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import { Separator } from '@/components/ui/separator'
 
 const DEMO_ACCOUNTS: {
   role: UserRole
@@ -47,8 +49,9 @@ interface SignInDialogProps {
 }
 
 export function SignInDialog({ open, onOpenChange }: SignInDialogProps) {
-  const { login, isLoading, error } = useAuth()
+  const { login, loginWithGoogle, isLoading, error, isGoogleSignInEnabled } = useAuth()
   const [pendingRole, setPendingRole] = useState<UserRole | null>(null)
+  const [googlePending, setGooglePending] = useState(false)
 
   const handleSignIn = async (role: UserRole) => {
     setPendingRole(role)
@@ -63,17 +66,46 @@ export function SignInDialog({ open, onOpenChange }: SignInDialogProps) {
     }
   }
 
+  const handleGoogleSignIn = async () => {
+    setGooglePending(true)
+    try {
+      await loginWithGoogle()
+      toast.success('Signed in with Google')
+      onOpenChange(false)
+    } catch {
+      // error surfaced via store
+    } finally {
+      setGooglePending(false)
+    }
+  }
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Sign in to BeetleX</DialogTitle>
           <DialogDescription>
-            Choose a demo account. Sessions sync in real time across tabs via the auth database.
+            Sign in with Google or choose a demo account for testing. Sessions sync across tabs.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-3 pt-2">
+        {isGoogleSignInEnabled && (
+          <div className="space-y-4 pt-2">
+            <GoogleSignInButton
+              loading={googlePending}
+              disabled={isLoading && !googlePending}
+              onClick={() => void handleGoogleSignIn()}
+            />
+            <div className="relative">
+              <Separator />
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-2 text-xs text-muted-foreground">
+                or demo as
+              </span>
+            </div>
+          </div>
+        )}
+
+        <div className="space-y-3 pt-1">
           {DEMO_ACCOUNTS.map((account) => (
             <button
               key={account.role}
@@ -97,7 +129,9 @@ export function SignInDialog({ open, onOpenChange }: SignInDialogProps) {
                   )}
                 </span>
                 <span className="mt-0.5 block text-sm text-muted-foreground">{account.name}</span>
-                <span className="mt-1 block text-xs text-muted-foreground">{account.description}</span>
+                <span className="mt-1 block text-xs text-muted-foreground">
+                  {account.description}
+                </span>
               </span>
             </button>
           ))}

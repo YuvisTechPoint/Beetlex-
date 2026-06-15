@@ -11,7 +11,7 @@ import { useBroadcastAnnouncement } from '@/hooks/useBroadcastAnnouncement'
 import { cn } from '@/lib/utils'
 import type { Announcement } from '@/types'
 import { ANNOUNCEMENT_PRIORITY_PREVIEW } from './announcementConstants'
-import { DEFAULT_EVENT_ID } from '../types'
+import { DEFAULT_EVENT_ID } from '../constants'
 
 interface AnnouncementComposeFormProps {
   totalParticipants: number

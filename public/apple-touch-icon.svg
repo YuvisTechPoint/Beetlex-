@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none" role="img" aria-label="BeetleX">
+  <rect width="180" height="180" rx="40" fill="#9333EA"/>
+  <ellipse cx="90" cy="104" rx="50" ry="40" fill="#A855F7"/>
+  <ellipse cx="90" cy="70" rx="31" ry="25" fill="#C084FC"/>
+  <circle cx="70" cy="62" r="8" fill="#FAFAFA"/>
+  <circle cx="110" cy="62" r="8" fill="#FAFAFA"/>
+  <path
+    d="M39 93C31 84 27 70 31 59M141 93C149 84 153 70 149 59"
+    stroke="#7E22CE"
+    stroke-width="9"
+    stroke-linecap="round"
+  />
+  <path
+    d="M51 127L34 146M129 127L146 146"
+    stroke="#7E22CE"
+    stroke-width="9"
+    stroke-linecap="round"
+  />
+</svg>

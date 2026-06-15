@@ -20,7 +20,7 @@ export { EventListingPageContent } from './EventListingPageContent'
 export { RecommendedSection } from './RecommendedSection'
 export { useEventListingPage, type EventListingPageState } from './useEventListingPage'
 export { PAGE_SIZE, STATUS_OPTIONS, STATUS_STYLES } from './constants'
-export type { EventFilterState } from './types'
+export type { EventFilterState } from '@/types'
 export {
   buildTrackOptions,
   getAvatarInitials,

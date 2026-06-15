@@ -1,5 +1,5 @@
 import { Badge } from '@/components/ui/badge'
-import type { JudgeQueueItem } from '@/api/judges'
+import type { JudgeQueueItem } from '@/types'
 
 interface ProjectDetailHeaderProps {
   title: string

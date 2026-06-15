@@ -34,10 +34,7 @@ export function useLeaderboardStream({ eventId, enabled = true }: UseLeaderboard
   const setConnectionMode = useLeaderboardStore((s) => s.setConnectionMode)
   const connectionMode = useLeaderboardStore((s) => s.connectionMode)
   const entryMap = useLeaderboardStore((s) => s.entries)
-  const entries = useMemo(
-    () => [...entryMap.values()].sort((a, b) => a.rank - b.rank),
-    [entryMap],
-  )
+  const entries = useMemo(() => [...entryMap.values()].sort((a, b) => a.rank - b.rank), [entryMap])
 
   const snapshotQuery = useQuery({
     queryKey: ['leaderboard', eventId, 'snapshot'],
@@ -142,10 +139,13 @@ export function useLeaderboardStream({ eventId, enabled = true }: UseLeaderboard
   useEffect(() => {
     if (connectionMode !== 'degraded') return
 
-    const retryTimer = setTimeout(() => {
-      reconnectAttemptRef.current += 1
-      connectStream()
-    }, Math.min(30_000, 2_000 * 2 ** reconnectAttemptRef.current))
+    const retryTimer = setTimeout(
+      () => {
+        reconnectAttemptRef.current += 1
+        connectStream()
+      },
+      Math.min(30_000, 2_000 * 2 ** reconnectAttemptRef.current),
+    )
 
     return () => clearTimeout(retryTimer)
   }, [connectStream, connectionMode])

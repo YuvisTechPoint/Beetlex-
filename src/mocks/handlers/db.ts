@@ -54,9 +54,7 @@ export const db = {
   organizerStats: clone(mockOrganizerStats) as OrganizerStats,
   organizerActivity: clone(mockOrganizerActivity) as OrganizerActivityItem[],
   judgeAssignments: clone(mockOrganizerJudgeAssignments) as OrganizerJudgeAssignment[],
-  submissionJudgeAssignments: clone(
-    mockSubmissionJudgeAssignments,
-  ) as SubmissionJudgeAssignment[],
+  submissionJudgeAssignments: clone(mockSubmissionJudgeAssignments) as SubmissionJudgeAssignment[],
   leaderboardPublished: true,
   lastRandomNotificationAt: Date.now(),
   leaderboardSequence: 0,

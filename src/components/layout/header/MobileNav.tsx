@@ -3,13 +3,7 @@ import { Bug, Menu } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { useUiStore } from '@/store/uiStore'
 import { Button } from '@/components/ui/button'
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { NavLinks } from './NavLinks'
 import { dashboardLabelForRole, dashboardPathForRole } from './utils'
 
@@ -39,9 +33,7 @@ export function MobileNav() {
             <p className="text-sm font-medium">{user.name}</p>
             <p className="text-xs text-muted-foreground">{user.email}</p>
             <Button asChild className="mt-4 w-full" size="sm">
-              <Link to={dashboardPathForRole(user.role)}>
-                {dashboardLabelForRole(user.role)}
-              </Link>
+              <Link to={dashboardPathForRole(user.role)}>{dashboardLabelForRole(user.role)}</Link>
             </Button>
           </div>
         ) : (

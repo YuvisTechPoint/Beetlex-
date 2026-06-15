@@ -28,14 +28,15 @@ export function FAQSection({ event, isLoading }: FAQSectionProps) {
   }, [faqs, search])
 
   return (
-    <section id="faq" className="py-20" aria-labelledby="faq-heading">
+    <section id="faq" className="section-shell border-t" aria-labelledby="faq-heading">
       <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 id="faq-heading" className="text-3xl font-bold tracking-tight md:text-4xl">
-            Frequently Asked Questions
+        <div className="section-intro-left mx-auto max-w-2xl md:mx-0">
+          <p className="text-label">FAQ</p>
+          <h2 id="faq-heading" className="text-heading mt-3">
+            Before you register
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Everything you need to know before registering.
+          <p className="text-subtitle mt-3">
+            Rules, logistics, and what to expect on event day.
           </p>
         </div>
 
@@ -62,7 +63,9 @@ export function FAQSection({ event, isLoading }: FAQSectionProps) {
               {filtered.map((faq, index) => (
                 <AccordionItem key={faq.question} value={`faq-${index}`}>
                   <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">{faq.answer}</AccordionContent>
+                  <AccordionContent className="text-muted-foreground">
+                    {faq.answer}
+                  </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>

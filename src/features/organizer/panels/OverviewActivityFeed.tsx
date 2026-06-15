@@ -36,10 +36,7 @@ export function OverviewActivityFeed({ activity, isLoading }: OverviewActivityFe
             {(activity ?? []).slice(0, 12).map((item) => {
               const Icon = ACTIVITY_ICONS[item.type]
               return (
-                <li
-                  key={item.id}
-                  className="flex items-start gap-3 rounded-lg border p-3 text-sm"
-                >
+                <li key={item.id} className="flex items-start gap-3 rounded-lg border p-3 text-sm">
                   <div
                     className={cn(
                       'flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted',

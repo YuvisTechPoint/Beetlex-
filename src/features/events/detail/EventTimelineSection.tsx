@@ -14,9 +14,7 @@ export function EventTimelineSection({ timeline }: EventTimelineSectionProps) {
         {timeline.map((item, index) => {
           const itemTime = new Date(item.date).getTime()
           const nextTime =
-            index < timeline.length - 1
-              ? new Date(timeline[index + 1].date).getTime()
-              : Infinity
+            index < timeline.length - 1 ? new Date(timeline[index + 1].date).getTime() : Infinity
           const isPast = itemTime < Date.now()
           const isCurrent = itemTime <= Date.now() && Date.now() < nextTime
           return (
@@ -41,9 +39,7 @@ export function EventTimelineSection({ timeline }: EventTimelineSectionProps) {
         {timeline.map((item, index) => {
           const itemTime = new Date(item.date).getTime()
           const nextTime =
-            index < timeline.length - 1
-              ? new Date(timeline[index + 1].date).getTime()
-              : Infinity
+            index < timeline.length - 1 ? new Date(timeline[index + 1].date).getTime() : Infinity
           const isCurrent = itemTime <= Date.now() && Date.now() < nextTime
           return (
             <li key={item.label} className="relative pb-8 last:pb-0">
@@ -54,9 +50,7 @@ export function EventTimelineSection({ timeline }: EventTimelineSectionProps) {
                 )}
               />
               <p className="font-medium">{item.label}</p>
-              <p className="text-sm text-muted-foreground">
-                {formatDateTime(item.date)}
-              </p>
+              <p className="text-sm text-muted-foreground">{formatDateTime(item.date)}</p>
               <p className="mt-1 text-sm text-muted-foreground">{item.description}</p>
             </li>
           )

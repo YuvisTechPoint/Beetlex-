@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import type { ComponentType } from 'react'
 
 export function OverviewStatCard({
   title,
@@ -9,18 +9,18 @@ export function OverviewStatCard({
   title: string
   value: string
   subtitle?: string
-  icon: React.ComponentType<{ className?: string }>
+  icon: ComponentType<{ className?: string }>
 }) {
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <Icon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
-        {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
-      </CardContent>
-    </Card>
+    <div className="rounded-lg border border-border/80 bg-surface p-4">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-label">{title}</p>
+          <p className="mt-2 font-mono-data text-2xl font-semibold tracking-tight">{value}</p>
+          {subtitle && <p className="text-meta mt-1">{subtitle}</p>}
+        </div>
+        <Icon className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+      </div>
+    </div>
   )
 }

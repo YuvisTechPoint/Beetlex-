@@ -16,9 +16,7 @@ export function formatDateTime(date: string): string {
   })
 }
 
-export function calculatePrizePool(
-  prizes: { amount: number }[],
-): number {
+export function calculatePrizePool(prizes: { amount: number }[]): number {
   return prizes.reduce((sum, p) => sum + p.amount, 0)
 }
 

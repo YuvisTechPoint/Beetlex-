@@ -19,17 +19,6 @@ dist-ssr
 .env.*
 !.env.example
 
-# Playwright (local run outputs)
-test-results/
-playwright-report/
-
-# QA artifacts — regenerate with `npm run qa`
-reports/**
-!reports/.gitkeep
-!reports/screenshots/.gitkeep
-!reports/lighthouse/.gitkeep
-!reports/playwright/.gitkeep
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

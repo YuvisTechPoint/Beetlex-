@@ -29,10 +29,7 @@ export function EventRegistrationSidebar({
             <CardTitle className="text-lg">Registration</CardTitle>
           </CardHeader>
           <CardContent className="space-y-5">
-            <CountdownTimer
-              target={event.registrationClose}
-              label="Registration closes in"
-            />
+            <CountdownTimer target={event.registrationClose} label="Registration closes in" />
 
             <Separator />
 

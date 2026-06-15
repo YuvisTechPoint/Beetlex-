@@ -129,7 +129,9 @@ export function SponsorShowcase({
   }
 
   return (
-    <div className={cn(variant === 'landing' ? 'space-y-10 md:space-y-12' : 'space-y-6', className)}>
+    <div
+      className={cn(variant === 'landing' ? 'space-y-10 md:space-y-12' : 'space-y-6', className)}
+    >
       {grouped.map(({ tier, sponsors: tierSponsors }) => (
         <SponsorTierRow
           key={tier}

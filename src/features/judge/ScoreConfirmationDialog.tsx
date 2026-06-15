@@ -38,7 +38,9 @@ export function ScoreConfirmationDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{isOverwrite ? 'Overwrite existing score?' : 'Confirm score submission'}</DialogTitle>
+          <DialogTitle>
+            {isOverwrite ? 'Overwrite existing score?' : 'Confirm score submission'}
+          </DialogTitle>
           <DialogDescription>
             {isOverwrite ? (
               <>
@@ -49,8 +51,8 @@ export function ScoreConfirmationDialog({
             ) : (
               <>
                 Review your scores for{' '}
-                <span className="font-medium text-foreground">{projectTitle}</span> by {teamName}. This
-                action cannot be undone.
+                <span className="font-medium text-foreground">{projectTitle}</span> by {teamName}.
+                This action cannot be undone.
               </>
             )}
           </DialogDescription>

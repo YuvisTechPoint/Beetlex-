@@ -4,7 +4,12 @@ import { createSseResponse } from '@/lib/sse'
 import { randomGetDelay } from '@/mocks/utils'
 import { db } from './db'
 import { emitAuth, subscribeAuth } from './authBus'
-import { generateId, getUserFromRequest, jsonError, revokeAuthToken } from './helpers'
+import {
+  bindFirebaseSession,
+  createMockSessionToken,
+  resolveUserFromFirebaseToken,
+} from './firebaseAuth'
+import { getUserFromRequest, jsonError, revokeAuthToken } from './helpers'
 
 const DEV_USER_IDS: Record<UserRole, string> = {
   participant: 'user-participant-1',
@@ -17,15 +22,7 @@ function findUserById(userId: string): User | undefined {
 }
 
 function createSession(user: User) {
-  const token = `mock-token-${user.role}-${user.id}-${generateId('sess')}`
-  const now = new Date().toISOString()
-  db.authSessions[token] = {
-    token,
-    userId: user.id,
-    createdAt: now,
-    lastSeenAt: now,
-  }
-  return token
+  return createMockSessionToken(user)
 }
 
 function sessionResponse(user: User, token: string) {
@@ -52,7 +49,26 @@ function invalidateUserSessions(userId: string, exceptToken?: string) {
 export const authHandlers = [
   http.post('/api/auth/login', async ({ request }) => {
     await randomGetDelay()
-    const body = (await request.json()) as { role?: UserRole; email?: string }
+    const body = (await request.json()) as {
+      role?: UserRole
+      email?: string
+      firebaseIdToken?: string
+    }
+
+    if (body.firebaseIdToken) {
+      const user = resolveUserFromFirebaseToken(body.firebaseIdToken)
+      if (!user) {
+        return jsonError('INVALID_CREDENTIALS', 'Invalid or expired Google session', 401)
+      }
+
+      const token = body.firebaseIdToken
+      bindFirebaseSession(token, user)
+      invalidateUserSessions(user.id, token)
+      const payload = sessionResponse(user, token)
+      emitAuth({ type: 'session', user, token })
+      return HttpResponse.json(payload)
+    }
+
     let user: User | undefined
 
     if (body.role) {
@@ -95,11 +111,14 @@ export const authHandlers = [
     }
 
     const user = getUserFromRequest(request)
-    if (!user || !db.authSessions[token]) {
+    if (!user) {
       return jsonError('UNAUTHORIZED', 'Session expired', 401)
     }
 
-    db.authSessions[token].lastSeenAt = new Date().toISOString()
+    if (db.authSessions[token]) {
+      db.authSessions[token].lastSeenAt = new Date().toISOString()
+    }
+
     return HttpResponse.json({ user, token })
   }),
 
@@ -119,7 +138,7 @@ export const authHandlers = [
       return jsonError('UNAUTHORIZED', 'Missing session token', 401)
     }
 
-    if (!db.authSessions[token]) {
+    if (!getUserFromRequest(request)) {
       return jsonError('UNAUTHORIZED', 'Session expired', 401)
     }
 

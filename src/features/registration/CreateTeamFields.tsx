@@ -58,7 +58,7 @@ export function CreateTeamFields({ form, previewCode }: CreateTeamFieldsProps) {
               />
             </FormControl>
             <FormDescription className="text-right">
-              {(field.value?.length ?? 0)}/200 characters
+              {field.value?.length ?? 0}/200 characters
             </FormDescription>
             <FormMessage role="alert" />
           </FormItem>

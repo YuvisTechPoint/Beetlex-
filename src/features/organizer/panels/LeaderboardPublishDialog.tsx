@@ -27,9 +27,7 @@ export function LeaderboardPublishDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>
-            {pendingPublish ? 'Publish Results?' : 'Unpublish Results?'}
-          </DialogTitle>
+          <DialogTitle>{pendingPublish ? 'Publish Results?' : 'Unpublish Results?'}</DialogTitle>
           <DialogDescription>
             {pendingPublish
               ? 'Participants will immediately see the leaderboard on their dashboards.'

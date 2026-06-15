@@ -59,7 +59,10 @@ export function SubmissionsTable({
               <TableCell className="max-w-[200px] truncate">{submission.title}</TableCell>
               <TableCell className="max-w-[120px] truncate">{submission.trackName}</TableCell>
               <TableCell>
-                <Badge variant="outline" className={cn(SUBMISSION_STATUS_STYLES[submission.status])}>
+                <Badge
+                  variant="outline"
+                  className={cn(SUBMISSION_STATUS_STYLES[submission.status])}
+                >
                   {submission.status}
                 </Badge>
               </TableCell>

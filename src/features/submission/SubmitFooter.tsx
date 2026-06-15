@@ -32,7 +32,12 @@ export function SubmitFooter({
             : 'Auto-saves every 60 seconds'}
         </p>
         <div className="flex gap-2">
-          <Button type="button" variant="ghost" disabled={disabled || isSaving} onClick={onSaveDraft}>
+          <Button
+            type="button"
+            variant="ghost"
+            disabled={disabled || isSaving}
+            onClick={onSaveDraft}
+          >
             {isSaving ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
             Save Draft
           </Button>

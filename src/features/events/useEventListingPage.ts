@@ -4,7 +4,7 @@ import { useDebounce, useEvents, useMyRegistrations } from '@/hooks'
 import { useAuth } from '@/hooks/useAuth'
 import type { Event } from '@/types'
 import { PAGE_SIZE } from './constants'
-import type { EventFilterState } from './types'
+import type { EventFilterState } from '@/types'
 import { buildTrackOptions, hasActiveFilters, parseFilters, recommendEvents } from './utils'
 
 export interface EventListingPageState {
@@ -75,10 +75,7 @@ export function useEventListingPage(): EventListingPageState {
     [setSearchParams],
   )
 
-  const tracks = useMemo(
-    () => buildTrackOptions(allEventsData?.data ?? []),
-    [allEventsData?.data],
-  )
+  const tracks = useMemo(() => buildTrackOptions(allEventsData?.data ?? []), [allEventsData?.data])
 
   const registeredEventIds = useMemo(
     () => new Set(registrations?.map((r) => r.eventId) ?? []),

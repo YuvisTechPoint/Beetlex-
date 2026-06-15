@@ -20,14 +20,8 @@ export function HeaderActions() {
 
       {isAuthenticated && user ? (
         <>
-          <Button
-            size="sm"
-            asChild
-            className="hidden h-9 rounded-full px-4 sm:inline-flex"
-          >
-            <Link to={dashboardPathForRole(user.role)}>
-              {dashboardLabelForRole(user.role)}
-            </Link>
+          <Button size="sm" asChild className="hidden h-9 rounded-full px-4 sm:inline-flex">
+            <Link to={dashboardPathForRole(user.role)}>{dashboardLabelForRole(user.role)}</Link>
           </Button>
           <AuthMenu />
         </>

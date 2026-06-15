@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useEventAnnouncements } from '@/hooks/useEventAnnouncements'
 import { useParticipants } from '@/hooks/useParticipants'
 import { AnnouncementComposeForm } from './AnnouncementComposeForm'
-import { DEFAULT_EVENT_ID } from '../types'
+import { DEFAULT_EVENT_ID } from '../constants'
 import { SentAnnouncementsList } from './SentAnnouncementsList'
 
 export default function AnnouncementsPanel() {

@@ -1,8 +1,8 @@
 import { Wifi, WifiOff } from 'lucide-react'
 import type { LeaderboardConnectionMode } from '@/store/leaderboardStore'
 import type { WebSocketStatus } from '@/hooks/useWebSocket'
-import type { DashboardTab } from './types'
-import { VALID_TABS } from './types'
+import type { DashboardTab } from '@/types'
+import { VALID_TABS } from './nav'
 
 export const STATUS_CONFIG: Record<
   LeaderboardConnectionMode,
@@ -34,10 +34,14 @@ export function parseTab(value: string | null): DashboardTab {
   return 'overview'
 }
 
-export function getInitials(name: string) {
-  return name
+export function getInitials(name?: string) {
+  const trimmed = name?.trim()
+  if (!trimmed) return '?'
+
+  return trimmed
     .split(' ')
-    .map((n) => n[0])
+    .map((part) => part[0])
+    .filter(Boolean)
     .join('')
     .slice(0, 2)
     .toUpperCase()

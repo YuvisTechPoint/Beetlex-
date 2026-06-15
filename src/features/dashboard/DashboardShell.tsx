@@ -3,8 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Send } from 'lucide-react'
 import { Header } from '@/components/layout/Header'
 import { cn } from '@/lib/utils'
-import type { DashboardTab } from './types'
-import { NAV_ITEMS } from './types'
+import type { DashboardTab } from '@/types'
+import { NAV_ITEMS } from './nav'
 import { ConnectionStatus } from './ConnectionStatus'
 import { DashboardSidebar } from './DashboardSidebar'
 
@@ -74,7 +74,9 @@ export function DashboardShell({ activeTab, onTabChange, children }: DashboardSh
 
       <footer className="border-t bg-muted/30 px-4 py-2 pb-safe md:pb-2">
         <div className="container mx-auto flex max-w-6xl items-center justify-between">
-          <p className="hidden text-xs text-muted-foreground md:block">BeetleX Participant Dashboard</p>
+          <p className="hidden text-xs text-muted-foreground md:block">
+            BeetleX Participant Dashboard
+          </p>
           <ConnectionStatus />
         </div>
       </footer>

@@ -1,4 +1,6 @@
 import type { User } from '@/types'
+import { isFirebaseIdToken } from '@/lib/firebaseJwt'
+import { bindFirebaseSession, resolveUserFromFirebaseToken } from '@/mocks/handlers/firebaseAuth'
 import { db } from './db'
 
 export function jsonError(code: string, message: string, status: number, details?: unknown) {
@@ -20,6 +22,13 @@ export function restoreSessionFromToken(token: string): User | null {
   const session = db.authSessions[token]
   if (session) {
     return db.users.find((user) => user.id === session.userId) ?? null
+  }
+
+  if (isFirebaseIdToken(token)) {
+    const user = resolveUserFromFirebaseToken(token)
+    if (!user) return null
+    bindFirebaseSession(token, user)
+    return user
   }
 
   const userId = parseUserIdFromToken(token)

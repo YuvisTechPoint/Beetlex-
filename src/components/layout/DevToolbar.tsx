@@ -32,9 +32,7 @@ export function DevToolbar() {
         <Button
           key={label}
           size="sm"
-          variant={
-            (role === null ? !user : user?.role === role) ? 'default' : 'outline'
-          }
+          variant={(role === null ? !user : user?.role === role) ? 'default' : 'outline'}
           onClick={() => void (role ? login(role) : logout())}
         >
           {label}

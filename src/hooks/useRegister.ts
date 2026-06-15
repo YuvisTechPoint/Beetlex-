@@ -26,9 +26,10 @@ export function useRegister() {
     mutationFn: ({
       simulateOverload,
       ...payload
-    }: JoinTeamPayload & { simulateOverload?: boolean }) =>
-      joinTeam(payload, { simulateOverload }),
-    onSuccess: () => {
+    }: JoinTeamPayload & { simulateOverload?: boolean }) => joinTeam(payload, { simulateOverload }),
+    onSuccess: (team) => {
+      queryClient.setQueryData(['teams', 'me'], team)
+      queryClient.invalidateQueries({ queryKey: ['teams', 'me'] })
       queryClient.invalidateQueries({ queryKey: ['registrations'] })
     },
   })

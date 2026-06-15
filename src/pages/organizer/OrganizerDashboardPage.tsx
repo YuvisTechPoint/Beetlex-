@@ -60,9 +60,7 @@ export default function OrganizerDashboardPage() {
                 <BarChart3 className="h-5 w-5 text-primary" aria-hidden="true" />
                 <h1 className="text-xl font-bold tracking-tight">Organizer Hub</h1>
               </div>
-              <p className="text-sm text-muted-foreground">
-                {event?.title ?? 'Loading event...'}
-              </p>
+              <p className="text-sm text-muted-foreground">{event?.title ?? 'Loading event...'}</p>
             </div>
           </div>
         </div>

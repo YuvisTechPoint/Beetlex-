@@ -1,5 +1,5 @@
 export { ProjectDetail } from './ProjectDetail'
-export type { ProjectDetailProps } from './ProjectDetail.types'
+export type { ProjectDetailProps } from '@/types'
 export { ProjectDetailHeader } from './ProjectDetailHeader'
 export { ProjectDetailSkeleton } from './ProjectDetailSkeleton'
 export { ProjectMediaViewers } from './ProjectMediaViewers'

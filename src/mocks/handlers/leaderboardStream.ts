@@ -37,42 +37,45 @@ export const leaderboardStreamHandlers = [
     return createSseResponse((send, close) => {
       send('0', 'connected', { eventId, ts: Date.now() })
 
-      const interval = setInterval(() => {
-        if (db.leaderboard.length === 0) return
+      const interval = setInterval(
+        () => {
+          if (db.leaderboard.length === 0) return
 
-        const idx = Math.floor(Math.random() * db.leaderboard.length)
-        const bumped = bumpLeaderboardEntry(db.leaderboard[idx])
-        db.leaderboard[idx] = bumped
-        db.leaderboard = resortLeaderboard(db.leaderboard)
-        const updated = db.leaderboard.find((e) => e.teamId === bumped.teamId)!
+          const idx = Math.floor(Math.random() * db.leaderboard.length)
+          const bumped = bumpLeaderboardEntry(db.leaderboard[idx])
+          db.leaderboard[idx] = bumped
+          db.leaderboard = resortLeaderboard(db.leaderboard)
+          const updated = db.leaderboard.find((e) => e.teamId === bumped.teamId)!
 
-        db.leaderboardSequence += 1
-        send(String(db.leaderboardSequence), 'score_update', {
-          sequenceNumber: db.leaderboardSequence,
-          teamId: updated.teamId,
-          teamName: updated.teamName,
-          trackId: updated.trackId,
-          score: updated.score,
-          delta: updated.delta,
-          rank: updated.rank,
-          previousRank: updated.previousRank,
-        })
+          db.leaderboardSequence += 1
+          send(String(db.leaderboardSequence), 'score_update', {
+            sequenceNumber: db.leaderboardSequence,
+            teamId: updated.teamId,
+            teamName: updated.teamName,
+            trackId: updated.trackId,
+            score: updated.score,
+            delta: updated.delta,
+            rank: updated.rank,
+            previousRank: updated.previousRank,
+          })
 
-        if (updated.delta !== 0) {
-          const direction = updated.delta > 0 ? 'moved up' : 'moved down'
-          const notification: Notification = {
-            id: generateId('notif'),
-            title: 'Live leaderboard update',
-            message: `${updated.teamName} ${direction} to #${updated.rank} (${updated.score.toFixed(1)} pts)`,
-            type: 'score_update',
-            priority: 'info',
-            createdAt: new Date().toISOString(),
-            read: false,
+          if (updated.delta !== 0) {
+            const direction = updated.delta > 0 ? 'moved up' : 'moved down'
+            const notification: Notification = {
+              id: generateId('notif'),
+              title: 'Live leaderboard update',
+              message: `${updated.teamName} ${direction} to #${updated.rank} (${updated.score.toFixed(1)} pts)`,
+              type: 'score_update',
+              priority: 'info',
+              createdAt: new Date().toISOString(),
+              read: false,
+            }
+            db.notifications.unshift(notification)
+            emitNotification(notification)
           }
-          db.notifications.unshift(notification)
-          emitNotification(notification)
-        }
-      }, 3500 + Math.random() * 1500)
+        },
+        3500 + Math.random() * 1500,
+      )
 
       return () => {
         clearInterval(interval)

@@ -27,24 +27,29 @@ interface EventCardProps {
 
 export const EventCard = memo(function EventCard({ event, recommended }: EventCardProps) {
   const prizePool = calculatePrizePool(event.prizes)
-  const teamCount = Math.floor(event.participantCount / ((event.teamMinSize + event.teamMaxSize) / 2))
+  const teamCount = Math.floor(
+    event.participantCount / ((event.teamMinSize + event.teamMaxSize) / 2),
+  )
 
   return (
     <Card
       className={cn(
-        'flex flex-col transition-all duration-200 hover:scale-[1.02] hover:shadow-lg',
-        recommended && 'ring-2 ring-primary/30',
+        'flex flex-col transition-colors duration-150 hover:border-border',
+        recommended && 'border-primary/30',
       )}
     >
       {recommended && (
-        <div className="border-b bg-primary/5 px-4 py-1.5 text-center text-xs font-medium text-primary">
-          ✦ Recommended
+        <div className="border-b border-border/60 bg-muted/40 px-4 py-1.5 text-center text-xs font-medium text-muted-foreground">
+          Recommended for you
         </div>
       )}
       <CardHeader>
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="line-clamp-2 text-lg">{event.title}</CardTitle>
-          <Badge variant="outline" className={cn('shrink-0 capitalize', STATUS_STYLES[event.status])}>
+          <Badge
+            variant="outline"
+            className={cn('shrink-0 capitalize', STATUS_STYLES[event.status])}
+          >
             {event.status}
           </Badge>
         </div>
@@ -72,8 +77,8 @@ export const EventCard = memo(function EventCard({ event, recommended }: EventCa
             {format(new Date(event.submissionDeadline), 'MMM d')}
           </span>
           <span className="inline-flex items-center gap-2">
-            <Trophy className="h-4 w-4 shrink-0 text-amber-500" aria-hidden="true" />
-            ${prizePool.toLocaleString()} prize pool
+            <Trophy className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />$
+            {prizePool.toLocaleString()} prize pool
           </span>
         </div>
 

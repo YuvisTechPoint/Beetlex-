@@ -4,13 +4,7 @@ function padCountdown(value: number): string {
   return String(value).padStart(2, '0')
 }
 
-export function CountdownTimer({
-  target,
-  label,
-}: {
-  target: string | Date
-  label?: string
-}) {
+export function CountdownTimer({ target, label }: { target: string | Date; label?: string }) {
   const { days, hours, minutes, seconds, isExpired } = useCountdown(target)
 
   const liveText = isExpired

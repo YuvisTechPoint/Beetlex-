@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import type { DashboardTab } from './types'
+import type { DashboardTab } from '@/types'
 import { parseTab } from './utils'
 
 export interface DashboardPageState {

@@ -19,9 +19,9 @@ function formatPrize(amount: number, currency: string) {
 }
 
 const RANK_STYLES = [
-  'border-amber-400/50 bg-amber-500/10',
-  'border-slate-400/50 bg-slate-500/10',
-  'border-orange-600/40 bg-orange-700/10',
+  'border-border bg-surface',
+  'border-border bg-surface',
+  'border-border bg-surface',
 ]
 
 export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionProps) {
@@ -53,13 +53,14 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
 
   if (!event) {
     return (
-      <section id="prizes" className="py-20" aria-labelledby="prizes-heading">
+      <section id="prizes" className="section-shell" aria-labelledby="prizes-heading">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 id="prizes-heading" className="text-3xl font-bold tracking-tight md:text-4xl">
-              Tracks & Prizes
+          <div className="section-intro-left">
+            <p className="text-label">Competition</p>
+            <h2 id="prizes-heading" className="text-heading mt-3">
+              Tracks & prizes
             </h2>
-            <p className="mt-4 text-muted-foreground">Prize details will be published soon.</p>
+            <p className="text-subtitle mt-3">Prize details will be published soon.</p>
           </div>
         </div>
       </section>
@@ -67,21 +68,26 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
   }
 
   return (
-    <section id="prizes" className="py-20" aria-labelledby="prizes-heading">
+    <section id="prizes" className="section-shell" aria-labelledby="prizes-heading">
       <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 id="prizes-heading" className="text-3xl font-bold tracking-tight md:text-4xl">
-            Tracks & Prizes
+        <div className="section-intro-left">
+          <p className="text-label">Competition</p>
+          <h2 id="prizes-heading" className="text-heading mt-3">
+            Tracks & prizes
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Choose your track and compete for prizes across multiple categories.
+          <p className="text-subtitle mt-3 max-w-lg">
+            Pick a track, read the problem statement, and see what is on the line.
           </p>
         </div>
 
-        <Tabs value={activeTrack} onValueChange={setActiveTrack} className="mt-12">
-          <TabsList className="mx-auto flex w-full max-w-2xl flex-wrap justify-center">
+        <Tabs value={activeTrack} onValueChange={setActiveTrack} className="mt-10">
+          <TabsList className="flex h-auto w-full max-w-3xl flex-wrap justify-start gap-1 bg-transparent p-0">
             {event.tracks.map((track) => (
-              <TabsTrigger key={track.id} value={track.id} className="flex-1 sm:flex-none">
+              <TabsTrigger
+                key={track.id}
+                value={track.id}
+                className="rounded-md border border-transparent data-[state=active]:border-border data-[state=active]:bg-surface"
+              >
                 {track.name}
               </TabsTrigger>
             ))}
@@ -94,13 +100,13 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
 
             return (
               <TabsContent key={track.id} value={track.id} className="mt-8">
-                <div className="mx-auto max-w-3xl text-center">
-                  <p className="text-muted-foreground">{track.description}</p>
-                  <p className="mt-4 text-sm text-muted-foreground">
-                    <span className="font-medium text-foreground">Problem: </span>
+                <div className="max-w-3xl">
+                  <p className="text-subtitle">{track.description}</p>
+                  <p className="text-meta mt-4">
+                    <span className="font-medium text-foreground">Problem — </span>
                     {track.problemStatement}
                   </p>
-                  <div className="mt-4 flex flex-wrap justify-center gap-2">
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {track.techStack.map((tech) => (
                       <Badge key={tech} variant="secondary">
                         {tech}
@@ -115,11 +121,11 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
                       key={`${prize.trackId}-${prize.rank}`}
                       className={RANK_STYLES[i] ?? 'border-border'}
                     >
-                      <CardHeader className="pb-2 text-center">
-                        <CardTitle className="text-4xl font-bold">
+                      <CardHeader className="pb-2">
+                        <CardTitle className="font-mono-data text-2xl font-semibold tracking-tight">
                           {formatPrize(prize.amount, prize.currency)}
                         </CardTitle>
-                        <CardDescription>#{prize.rank} Place</CardDescription>
+                        <CardDescription>#{prize.rank} place</CardDescription>
                       </CardHeader>
                       {prize.perks.length > 0 && (
                         <CardContent>

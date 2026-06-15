@@ -13,9 +13,7 @@ export function ProjectOverviewTab({ submission }: ProjectOverviewTabProps) {
     <div className="space-y-4">
       <div>
         <h3 className="mb-2 text-sm font-medium text-muted-foreground">Description</h3>
-        <p className="whitespace-pre-wrap text-sm leading-relaxed">
-          {submission.description}
-        </p>
+        <p className="whitespace-pre-wrap text-sm leading-relaxed">{submission.description}</p>
       </div>
 
       <Separator />

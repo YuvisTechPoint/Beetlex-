@@ -20,12 +20,7 @@ interface ScoringFormProps {
   isAlreadyScored: boolean
 }
 
-export function ScoringForm({
-  form,
-  onSubmit,
-  isSubmitting,
-  isAlreadyScored,
-}: ScoringFormProps) {
+export function ScoringForm({ form, onSubmit, isSubmitting, isAlreadyScored }: ScoringFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={onSubmit} className="space-y-6">
@@ -81,14 +76,8 @@ export function ScoringForm({
           )}
         />
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={isSubmitting || !form.formState.isValid}
-        >
-          {isSubmitting && (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
-          )}
+        <Button type="submit" className="w-full" disabled={isSubmitting || !form.formState.isValid}>
+          {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
           {isAlreadyScored ? 'Update score' : 'Submit score'}
         </Button>
       </form>

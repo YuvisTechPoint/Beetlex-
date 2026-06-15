@@ -1,11 +1,4 @@
-import {
-  AlertOctagon,
-  AlertTriangle,
-  Bell,
-  Clock,
-  Info,
-  Trophy,
-} from 'lucide-react'
+import { AlertOctagon, AlertTriangle, Bell, Clock, Info, Trophy } from 'lucide-react'
 import type { Notification } from '@/types'
 
 export const NAV_LINKS = [

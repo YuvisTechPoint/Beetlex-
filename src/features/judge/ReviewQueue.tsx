@@ -1,6 +1,6 @@
 import { formatDistanceToNow } from 'date-fns'
 import { CheckCircle2, Clock, Inbox } from 'lucide-react'
-import type { JudgeQueueItem } from '@/api/judges'
+import type { JudgeQueueItem } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
@@ -72,9 +72,7 @@ export function ReviewQueue({
       <Tabs value={filter} onValueChange={(v) => onFilterChange(v as QueueFilter)}>
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="all">All ({items.length})</TabsTrigger>
-          <TabsTrigger value="pending">
-            Pending ({items.length - scoredCount})
-          </TabsTrigger>
+          <TabsTrigger value="pending">Pending ({items.length - scoredCount})</TabsTrigger>
           <TabsTrigger value="completed">Done ({scoredCount})</TabsTrigger>
         </TabsList>
       </Tabs>

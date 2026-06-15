@@ -32,10 +32,7 @@ export function OverviewTab() {
     eventId: eventIdForLeaderboard,
     enabled: Boolean(team),
   })
-  const leaderboard = useMemo(
-    () => leaderboardEntries.slice(0, 10),
-    [leaderboardEntries],
-  )
+  const leaderboard = useMemo(() => leaderboardEntries.slice(0, 10), [leaderboardEntries])
   const { data: announcements, isLoading: announcementsLoading } = useEventAnnouncements(eventId)
   const countdown = useCountdown(event?.submissionDeadline)
 

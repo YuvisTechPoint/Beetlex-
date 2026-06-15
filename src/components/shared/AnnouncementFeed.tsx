@@ -1,29 +1,40 @@
 import { formatDistanceToNow } from 'date-fns'
-import { AlertCircle, AlertTriangle, Info } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { Announcement } from '@/types'
 import { useAuth } from '@/hooks/useAuth'
 import { useNotificationStore } from '@/store/notificationStore'
+import {
+  ALERT_BANNER_LABELS,
+  ALERT_BANNER_STYLES,
+  type AlertBannerPriority,
+} from '@/components/shared/alertBannerStyles'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const PRIORITY_CONFIG = {
   info: {
-    label: 'Info',
-    className: 'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300',
-    icon: Info,
+    label: ALERT_BANNER_LABELS.info,
+    className: ALERT_BANNER_STYLES.info.container,
+    icon: ALERT_BANNER_STYLES.info.icon,
   },
   warning: {
-    label: 'Warning',
-    className: 'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-300',
-    icon: AlertTriangle,
+    label: ALERT_BANNER_LABELS.warning,
+    className: ALERT_BANNER_STYLES.warning.container,
+    icon: ALERT_BANNER_STYLES.warning.icon,
   },
   urgent: {
-    label: 'Urgent',
-    className: 'border-red-200 bg-red-50 text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300',
-    icon: AlertCircle,
+    label: ALERT_BANNER_LABELS.urgent,
+    className: ALERT_BANNER_STYLES.urgent.container,
+    icon: ALERT_BANNER_STYLES.urgent.icon,
   },
-} as const
+} satisfies Record<
+  AlertBannerPriority,
+  {
+    label: string
+    className: string
+    icon: (typeof ALERT_BANNER_STYLES)[AlertBannerPriority]['icon']
+  }
+>
 
 interface AnnouncementFeedProps {
   announcements: Announcement[]
@@ -93,10 +104,7 @@ export function AnnouncementFeed({
                   <Icon className="h-3 w-3" aria-hidden="true" />
                   {config.label}
                 </Badge>
-                <time
-                  className="text-xs text-muted-foreground"
-                  dateTime={announcement.createdAt}
-                >
+                <time className="text-xs text-muted-foreground" dateTime={announcement.createdAt}>
                   {formatDistanceToNow(new Date(announcement.createdAt), { addSuffix: true })}
                 </time>
               </div>

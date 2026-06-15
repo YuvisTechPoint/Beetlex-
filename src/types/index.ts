@@ -1,3 +1,8 @@
+import type { ComponentType } from 'react'
+import type { RegistrationFormValues } from '@/features/registration/schemas'
+
+// ─── Domain ────────────────────────────────────────────────────────────────
+
 export interface Event {
   id: string
   title: string
@@ -188,3 +193,104 @@ export interface PaginatedResponse<T> {
 }
 
 export type UserRole = User['role']
+
+// ─── Events listing ────────────────────────────────────────────────────────
+
+export interface EventFilterState {
+  search: string
+  status: Event['status'] | 'all'
+  track: string
+  dateFrom: string
+  dateTo: string
+}
+
+// ─── Dashboard ─────────────────────────────────────────────────────────────
+
+export type DashboardTab = 'overview' | 'team' | 'leaderboard' | 'resources' | 'announcements'
+
+export interface NavItem {
+  id: DashboardTab | 'submit'
+  label: string
+  icon: ComponentType<{ className?: string }>
+  href?: string
+}
+
+// ─── Organizer ─────────────────────────────────────────────────────────────
+
+export type OrganizerTab =
+  | 'overview'
+  | 'participants'
+  | 'submissions'
+  | 'judges'
+  | 'announcements'
+  | 'leaderboard'
+
+// ─── Registration ──────────────────────────────────────────────────────────
+
+export interface WizardStep {
+  id: string
+  label: string
+  description?: string
+}
+
+export interface RegistrationResult {
+  registrationId?: string
+  registrationCode?: string
+  inviteCode?: string
+  teamName?: string
+  trackName?: string
+  mode: 'create' | 'join' | 'solo'
+}
+
+export interface RegistrationDraft {
+  values: RegistrationFormValues
+  currentStep: number
+}
+
+// ─── Judge ─────────────────────────────────────────────────────────────────
+
+export interface JudgeQueueItem {
+  submissionId: string
+  teamId: string
+  teamName: string
+  title: string
+  trackId: string
+  trackName: string
+  submittedAt: string
+  scored: boolean
+}
+
+export interface SubmitScorePayload {
+  innovation: number
+  technicalExecution: number
+  impact: number
+  presentation: number
+  comments: string
+}
+
+export interface ProjectDetailProps {
+  submissionId: string
+  queueItem?: JudgeQueueItem
+  onScored?: () => void
+  readOnly?: boolean
+}
+
+// ─── Vite env ──────────────────────────────────────────────────────────────
+
+declare global {
+  interface ImportMetaEnv {
+    readonly VITE_FIREBASE_API_KEY?: string
+    readonly VITE_FIREBASE_AUTH_DOMAIN?: string
+    readonly VITE_FIREBASE_PROJECT_ID?: string
+    readonly VITE_FIREBASE_STORAGE_BUCKET?: string
+    readonly VITE_FIREBASE_MESSAGING_SENDER_ID?: string
+    readonly VITE_FIREBASE_APP_ID?: string
+    readonly VITE_GOOGLE_CLIENT_ID?: string
+    readonly VITE_DISABLE_MSW?: string
+    readonly VITE_STATIC_API?: string
+    readonly VITE_ENABLE_MSW?: string
+    readonly VITE_QA_FAST_MS?: string
+  }
+}
+
+export {}

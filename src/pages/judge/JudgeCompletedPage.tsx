@@ -26,10 +26,7 @@ export default function JudgeCompletedPage() {
   const { data: queue = [], isLoading: queueLoading } = useJudgeQueue()
   const [viewId, setViewId] = useState<string | null>(null)
 
-  const completedItems = useMemo(
-    () => queue.filter((item) => item.scored),
-    [queue],
-  )
+  const completedItems = useMemo(() => queue.filter((item) => item.scored), [queue])
 
   const submissionQueries = useQueries({
     queries: completedItems.map((item) => ({

@@ -74,9 +74,11 @@ export function RegistrationFormView({
           <Button variant="ghost" size="sm" className="mb-4 -ml-2" onClick={() => navigate(-1)}>
             &larr; Back
           </Button>
-          <h1 className="text-2xl font-bold">Register for {event.title}</h1>
-          <p className="mt-1 text-muted-foreground">
-            Complete all steps to secure your spot in the hackathon.
+          <p className="text-label">Registration</p>
+          <h1 className="text-heading mt-2">Join {event.title}</h1>
+          <p className="text-subtitle mt-2 max-w-lg">
+            Takes about 4 minutes. You can save progress and return anytime before registration
+            closes.
           </p>
         </div>
 

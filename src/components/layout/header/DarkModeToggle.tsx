@@ -14,7 +14,11 @@ export function DarkModeToggle() {
       onClick={toggleDarkMode}
       aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
     >
-      {darkMode ? <Sun className="h-[1.125rem] w-[1.125rem]" /> : <Moon className="h-[1.125rem] w-[1.125rem]" />}
+      {darkMode ? (
+        <Sun className="h-[1.125rem] w-[1.125rem]" />
+      ) : (
+        <Moon className="h-[1.125rem] w-[1.125rem]" />
+      )}
     </Button>
   )
 }

@@ -1,14 +1,5 @@
-import type { ComponentType } from 'react'
-import {
-  Bell,
-  BookOpen,
-  LayoutDashboard,
-  Send,
-  Trophy,
-  Users,
-} from 'lucide-react'
-
-export type DashboardTab = 'overview' | 'team' | 'leaderboard' | 'resources' | 'announcements'
+import { Bell, BookOpen, LayoutDashboard, Send, Trophy, Users } from 'lucide-react'
+import type { DashboardTab, NavItem } from '@/types'
 
 export const VALID_TABS: DashboardTab[] = [
   'overview',
@@ -17,13 +8,6 @@ export const VALID_TABS: DashboardTab[] = [
   'resources',
   'announcements',
 ]
-
-export interface NavItem {
-  id: DashboardTab | 'submit'
-  label: string
-  icon: ComponentType<{ className?: string }>
-  href?: string
-}
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'overview', label: 'Overview', icon: LayoutDashboard },

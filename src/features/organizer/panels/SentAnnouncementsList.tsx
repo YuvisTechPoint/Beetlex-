@@ -41,7 +41,10 @@ export function SentAnnouncementsList({
             <div className="mb-2 flex flex-wrap items-center gap-2">
               <Badge
                 variant="outline"
-                className={cn('gap-1', ANNOUNCEMENT_PRIORITY_PREVIEW[announcement.priority].className)}
+                className={cn(
+                  'gap-1',
+                  ANNOUNCEMENT_PRIORITY_PREVIEW[announcement.priority].className,
+                )}
               >
                 {ANNOUNCEMENT_PRIORITY_PREVIEW[announcement.priority].label}
               </Badge>
@@ -51,7 +54,9 @@ export function SentAnnouncementsList({
               </time>
             </div>
             <h4 className="font-medium">{announcement.title}</h4>
-            <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{announcement.message}</p>
+            <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+              {announcement.message}
+            </p>
             <p className="mt-2 text-xs text-muted-foreground">
               Read by {readCount}/{totalParticipants} participants
             </p>

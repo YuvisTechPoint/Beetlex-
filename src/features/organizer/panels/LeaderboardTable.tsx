@@ -1,9 +1,5 @@
 import type { LeaderboardEntry } from '@/types'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import {
   Table,
   TableBody,
@@ -86,9 +82,7 @@ export function LeaderboardTable({ entries, scoreBreakdowns, trackName }: Leader
                   </Popover>
                 </TableCell>
                 <TableCell className="font-medium">{entry.teamName}</TableCell>
-                <TableCell className="max-w-[140px] truncate">
-                  {trackName(entry.trackId)}
-                </TableCell>
+                <TableCell className="max-w-[140px] truncate">{trackName(entry.trackId)}</TableCell>
                 <TableCell className="text-muted-foreground">
                   {breakdown ? (
                     <span className="text-xs tabular-nums">

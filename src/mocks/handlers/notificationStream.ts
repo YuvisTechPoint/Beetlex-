@@ -10,10 +10,13 @@ export const notificationStreamHandlers = [
   http.get('/api/notifications/stream', ({ request }) => {
     const user = getUserFromRequest(request)
     if (!user) {
-      return new Response(JSON.stringify({ code: 'UNAUTHORIZED', message: 'Authentication required' }), {
-        status: 401,
-        headers: { 'Content-Type': 'application/json' },
-      })
+      return new Response(
+        JSON.stringify({ code: 'UNAUTHORIZED', message: 'Authentication required' }),
+        {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' },
+        },
+      )
     }
 
     const url = new URL(request.url)

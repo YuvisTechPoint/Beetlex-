@@ -13,9 +13,7 @@ export const notificationHandlers = [
     const now = Date.now()
     if (now - db.lastRandomNotificationAt >= 45_000 && Math.random() > 0.4) {
       const template =
-        randomNotificationTemplates[
-          Math.floor(Math.random() * randomNotificationTemplates.length)
-        ]
+        randomNotificationTemplates[Math.floor(Math.random() * randomNotificationTemplates.length)]
       db.notifications.unshift({
         id: generateId('notif'),
         ...template,

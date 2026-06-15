@@ -48,7 +48,7 @@ export function SponsorLogo({ src, name, size, className }: SponsorLogoProps) {
       <div
         className={cn(
           'h-full w-full bg-muted-foreground/60 transition-all duration-300 ease-out',
-          'group-hover:bg-foreground group-hover:scale-[1.02] group-focus-visible:bg-foreground',
+          'group-hover:bg-foreground group-focus-visible:bg-foreground',
           status === 'loading' && 'opacity-0',
         )}
         style={{

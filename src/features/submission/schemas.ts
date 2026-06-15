@@ -3,18 +3,12 @@ import { z } from 'zod'
 const repoUrlSchema = z
   .string()
   .url('Must be a valid URL')
-  .refine(
-    (url) => /github\.com|gitlab\.com/i.test(url),
-    'Must be a GitHub or GitLab URL',
-  )
+  .refine((url) => /github\.com|gitlab\.com/i.test(url), 'Must be a GitHub or GitLab URL')
 
 const videoUrlSchema = z
   .string()
   .url('Must be a valid URL')
-  .refine(
-    (url) => /youtube\.com|youtu\.be|loom\.com/i.test(url),
-    'Must be a YouTube or Loom URL',
-  )
+  .refine((url) => /youtube\.com|youtu\.be|loom\.com/i.test(url), 'Must be a YouTube or Loom URL')
 
 export const submissionSchema = z.object({
   title: z.string().min(5, 'Title must be at least 5 characters').max(100),

@@ -39,9 +39,10 @@ export function EventListingPageContent({
         <div className="container mx-auto px-4 py-8">
           <header className="mb-8 flex flex-wrap items-start justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">All Hackathons</h1>
-              <p className="mt-2 text-muted-foreground">
-                {total} events on BeetleX — find your next challenge.
+              <p className="text-label">Discover</p>
+              <h1 className="text-heading mt-2">Hackathons</h1>
+              <p className="text-subtitle mt-2">
+                {total} events · filter by status, track, or prize pool
               </p>
             </div>
             {isOrganizer && (

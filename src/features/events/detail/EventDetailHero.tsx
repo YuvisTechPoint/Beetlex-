@@ -24,12 +24,9 @@ export function EventDetailHero({
     <section className="border-b bg-gradient-to-br from-primary/10 via-background to-background min-h-[280px] md:min-h-[320px]">
       <div className="container mx-auto px-4 py-10 md:py-14">
         <div className="flex flex-wrap items-center gap-3 min-h-[28px]">
-          <Badge variant={STATUS_VARIANTS[event.status]}>
-            {STATUS_LABELS[event.status]}
-          </Badge>
+          <Badge variant={STATUS_VARIANTS[event.status]}>{STATUS_LABELS[event.status]}</Badge>
           <Badge variant="outline">
-            <Trophy className="mr-1 h-3 w-3" />
-            ${prizePool.toLocaleString()} prize pool
+            <Trophy className="mr-1 h-3 w-3" />${prizePool.toLocaleString()} prize pool
           </Badge>
         </div>
         <h1 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">

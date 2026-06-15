@@ -62,67 +62,67 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthBootstrap>
-      <BrowserRouter>
-        <DarkModeSync />
-        <HashScrollHandler />
-        <PageWrapper>
-          <NetworkStatusBanner />
-          <ErrorBoundary>
-            <Suspense fallback={<PageSkeleton />}>
-              <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/events" element={<EventListingPage />} />
-              <Route path="/events/:id" element={<EventDetailPage />} />
-              <Route path="/events/:id/register" element={<RegistrationPage />} />
-              <Route path="/legal/privacy" element={<PrivacyPage />} />
-              <Route path="/legal/terms" element={<TermsPage />} />
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute requiredRole="participant">
-                    <DashboardPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/dashboard/submit"
-                element={
-                  <ProtectedRoute requiredRole="participant">
-                    <SubmissionPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/judge"
-                element={
-                  <ProtectedRoute requiredRole="judge">
-                    <JudgeDashboardPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/judge/completed"
-                element={
-                  <ProtectedRoute requiredRole="judge">
-                    <JudgeCompletedPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/organizer"
-                element={
-                  <ProtectedRoute requiredRole="organizer">
-                    <OrganizerDashboardPage />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-            </Suspense>
-          </ErrorBoundary>
-        </PageWrapper>
-        <DevToolbar />
-        <Toaster richColors position="bottom-right" offset={16} />
-      </BrowserRouter>
+        <BrowserRouter>
+          <DarkModeSync />
+          <HashScrollHandler />
+          <PageWrapper>
+            <NetworkStatusBanner />
+            <ErrorBoundary>
+              <Suspense fallback={<PageSkeleton />}>
+                <Routes>
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/events" element={<EventListingPage />} />
+                  <Route path="/events/:id" element={<EventDetailPage />} />
+                  <Route path="/events/:id/register" element={<RegistrationPage />} />
+                  <Route path="/legal/privacy" element={<PrivacyPage />} />
+                  <Route path="/legal/terms" element={<TermsPage />} />
+                  <Route
+                    path="/dashboard"
+                    element={
+                      <ProtectedRoute requiredRole="participant">
+                        <DashboardPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/dashboard/submit"
+                    element={
+                      <ProtectedRoute requiredRole="participant">
+                        <SubmissionPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/judge"
+                    element={
+                      <ProtectedRoute requiredRole="judge">
+                        <JudgeDashboardPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/judge/completed"
+                    element={
+                      <ProtectedRoute requiredRole="judge">
+                        <JudgeCompletedPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/organizer"
+                    element={
+                      <ProtectedRoute requiredRole="organizer">
+                        <OrganizerDashboardPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
+          </PageWrapper>
+          <DevToolbar />
+          <Toaster richColors position="bottom-right" offset={16} />
+        </BrowserRouter>
       </AuthBootstrap>
     </QueryClientProvider>
   )

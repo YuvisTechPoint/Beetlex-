@@ -1,4 +1,6 @@
 export { AnnouncementsTab } from './AnnouncementsTab'
+export { CreateTeamDialog } from './CreateTeamDialog'
+export { JoinTeamDialog } from './JoinTeamDialog'
 export { ConnectionStatus } from './ConnectionStatus'
 export { DashboardPageContent } from './DashboardPageContent'
 export { useDashboardPage, type DashboardPageState } from './useDashboardPage'
@@ -12,12 +14,6 @@ export { SubmissionStatusCard } from './SubmissionStatusCard'
 export { TeamManagementDialog } from './TeamManagementDialog'
 export { TeamOverviewCard } from './TeamOverviewCard'
 export { TeamTab } from './TeamTab'
-export type { DashboardTab, NavItem } from './types'
-export { NAV_ITEMS, VALID_TABS } from './types'
-export {
-  getInitials,
-  MODE_LABELS,
-  parseTab,
-  STATUS_CONFIG,
-  WS_STATUS_CONFIG,
-} from './utils'
+export type { DashboardTab, NavItem } from '@/types'
+export { NAV_ITEMS, VALID_TABS } from './nav'
+export { getInitials, MODE_LABELS, parseTab, STATUS_CONFIG, WS_STATUS_CONFIG } from './utils'

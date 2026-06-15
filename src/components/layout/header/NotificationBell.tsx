@@ -2,11 +2,7 @@ import { Bell } from 'lucide-react'
 import { useNotificationActions } from '@/hooks/useNotificationActions'
 import { useNotificationStore } from '@/store/notificationStore'
 import { Button } from '@/components/ui/button'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { NotificationItem } from './NotificationItem'
 
 export function NotificationBell() {
@@ -30,7 +26,12 @@ export function NotificationBell() {
         <div className="flex items-center justify-between border-b px-4 py-3">
           <h3 className="text-sm font-semibold">Notifications</h3>
           {unreadCount > 0 && (
-            <Button variant="ghost" size="sm" className="h-auto px-2 py-1 text-xs" onClick={markAllAsRead}>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-auto px-2 py-1 text-xs"
+              onClick={markAllAsRead}
+            >
               Mark all read
             </Button>
           )}

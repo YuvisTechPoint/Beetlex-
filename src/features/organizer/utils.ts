@@ -1,4 +1,5 @@
-import { TABS, type OrganizerTab } from './types'
+import type { OrganizerTab } from '@/types'
+import { TABS } from './constants'
 
 export function downloadCsv(filename: string, headers: string[], rows: string[][]) {
   const escape = (value: string) => `"${value.replace(/"/g, '""')}"`

@@ -24,17 +24,13 @@ export function EventTracksSection({ event, prizesByTrack }: EventTracksSectionP
               <AccordionTrigger className="text-left hover:no-underline">
                 <div>
                   <p className="font-medium">{track.name}</p>
-                  <p className="text-sm font-normal text-muted-foreground">
-                    {track.description}
-                  </p>
+                  <p className="text-sm font-normal text-muted-foreground">{track.description}</p>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4">
                 <div>
                   <p className="text-sm font-medium">Problem statement</p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {track.problemStatement}
-                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">{track.problemStatement}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {track.techStack.map((tech) => (
@@ -52,8 +48,7 @@ export function EventTracksSection({ event, prizesByTrack }: EventTracksSectionP
                         .map((prize) => (
                           <li key={`${prize.trackId}-${prize.rank}`} className="text-sm">
                             <span className="font-medium">
-                              #{prize.rank} — {prize.currency}{' '}
-                              {prize.amount.toLocaleString()}
+                              #{prize.rank} — {prize.currency} {prize.amount.toLocaleString()}
                             </span>
                             {prize.perks.length > 0 && (
                               <span className="text-muted-foreground">

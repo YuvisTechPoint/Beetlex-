@@ -10,9 +10,44 @@ interface TimelineSectionProps {
 
 type TimelineItem = Event['timeline'][number]
 
+function extractEventYear(event: Event): string | null {
+  const fromTitle = event.title.match(/\b(20\d{2})\b/)?.[1]
+  if (fromTitle) return fromTitle
+  return format(new Date(event.registrationOpen), 'yyyy')
+}
+
+function TimelineHeading({ event }: { event?: Event }) {
+  if (!event) {
+    return (
+      <>
+        <h2 id="timeline-heading" className="text-heading">
+          Timeline
+        </h2>
+        <p className="text-subtitle mt-3 md:mt-4">
+          Important milestones for our featured hackathon
+        </p>
+      </>
+    )
+  }
+
+  const year = extractEventYear(event)
+  const titleBase = year
+    ? event.title.replace(new RegExp(`\\s*${year}\\s*`, 'i'), '').trim()
+    : event.title
+
+  return (
+    <>
+      <h2 id="timeline-heading" className="text-heading">
+        Timeline
+      </h2>
+      <p className="text-subtitle mt-3 md:mt-4">Key dates for {titleBase}</p>
+    </>
+  )
+}
+
 function TimelineDate({ date }: { date: string }) {
   return (
-    <time dateTime={date} className="text-sm font-semibold text-primary">
+    <time dateTime={date} className="font-mono-data text-sm font-medium text-foreground">
       {format(new Date(date), 'MMM d, yyyy')}
     </time>
   )
@@ -33,12 +68,12 @@ function TimelineCopy({ item }: { item: TimelineItem }) {
 function TimelineDot({ className }: { className?: string }) {
   return (
     <span
-      className={cn(
-        'relative z-10 box-border h-3.5 w-3.5 shrink-0 rounded-full border-2 border-primary bg-background shadow-[0_0_0_4px_hsl(var(--muted)/0.35)]',
-        className,
-      )}
+      className={cn('relative z-10 box-border h-3.5 w-3.5 shrink-0 rounded-full p-[2px]', className)}
       aria-hidden="true"
-    />
+    >
+      <span className="bg-brand-gradient block h-full w-full rounded-full" />
+      <span className="absolute inset-[3px] rounded-full bg-background" />
+    </span>
   )
 }
 
@@ -51,7 +86,12 @@ function MobileTimeline({ items }: { items: TimelineItem[] }) {
           <li key={item.label} className="relative flex gap-4">
             <div className="flex w-5 flex-col items-center">
               <TimelineDot className="mt-1.5" />
-              {!isLast && <span className="mt-2 w-0.5 flex-1 bg-primary/35" aria-hidden="true" />}
+              {!isLast && (
+                <span
+                  className="bg-brand-gradient mt-2 w-0.5 flex-1 opacity-40"
+                  aria-hidden="true"
+                />
+              )}
             </div>
             <div className={cn('min-w-0 flex-1', !isLast && 'pb-8')}>
               <TimelineCopy item={item} />
@@ -72,7 +112,7 @@ function TabletTimeline({ items }: { items: TimelineItem[] }) {
       {items.map((item, index) => (
         <li
           key={item.label}
-          className="rounded-xl border border-border/50 bg-background/60 p-5 shadow-sm"
+          className="surface-panel rounded-lg border-border/60 p-5"
         >
           <div className="mb-3 flex items-center gap-2">
             <TimelineDot />
@@ -98,13 +138,13 @@ function DesktopTimeline({ items }: { items: TimelineItem[] }) {
             <div className="relative flex h-4 w-full items-center justify-center">
               {!isFirst && (
                 <span
-                  className="absolute right-1/2 top-1/2 h-0.5 w-full -translate-y-1/2 bg-primary/35"
+                  className="bg-brand-gradient absolute right-1/2 top-1/2 h-0.5 w-full -translate-y-1/2 opacity-40"
                   aria-hidden="true"
                 />
               )}
               {!isLast && (
                 <span
-                  className="absolute left-1/2 top-1/2 h-0.5 w-full -translate-y-1/2 bg-primary/35"
+                  className="bg-brand-gradient absolute left-1/2 top-1/2 h-0.5 w-full -translate-y-1/2 opacity-40"
                   aria-hidden="true"
                 />
               )}
@@ -113,7 +153,7 @@ function DesktopTimeline({ items }: { items: TimelineItem[] }) {
             <div className="mt-4 w-full px-1">
               <time
                 dateTime={item.date}
-                className="text-xs font-semibold text-primary xl:text-sm"
+                className="font-mono-data text-xs font-medium text-muted-foreground xl:text-sm"
               >
                 {format(new Date(item.date), 'MMM d')}
               </time>
@@ -138,17 +178,12 @@ export function TimelineSection({ event, isLoading }: TimelineSectionProps) {
   return (
     <section
       id="timeline"
-      className="scroll-mt-20 border-y bg-muted/30 py-16 pb-24 md:py-20 md:pb-28"
+      className="section-shell scroll-mt-20 border-y bg-muted/30"
       aria-labelledby="timeline-heading"
     >
       <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 id="timeline-heading" className="text-3xl font-bold tracking-tight md:text-4xl">
-            Event Timeline
-          </h2>
-          <p className="mt-3 text-base text-muted-foreground md:mt-4">
-            {event ? `Key dates for ${event.title}` : 'Important milestones for our featured hackathon'}
-          </p>
+        <div className="section-intro-left mx-auto max-w-3xl md:mx-0">
+          <TimelineHeading event={event} />
         </div>
 
         <div className="mx-auto mt-10 max-w-6xl md:mt-12">

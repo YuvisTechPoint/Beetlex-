@@ -4,21 +4,23 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useEvent } from '@/hooks/useEvent'
 import { useLeaderboard } from '@/hooks/useLeaderboard'
 import { useOrganizerSubmissions } from '@/hooks/useOrganizerSubmissions'
-import { DEFAULT_EVENT_ID } from '../types'
+import { DEFAULT_EVENT_ID } from '../constants'
 import { downloadCsv } from '../utils'
 import { LeaderboardPublishDialog } from './LeaderboardPublishDialog'
 import { LeaderboardTable } from './LeaderboardTable'
 import { LeaderboardToolbar } from './LeaderboardToolbar'
 
 export default function LeaderboardPanel() {
-  const { data: leaderboard, isLoading, statusQuery, publishMutation } = useLeaderboard(
-    DEFAULT_EVENT_ID,
-    {
-      forOrganizer: true,
-      includeStatus: true,
-      refetchInterval: 30_000,
-    },
-  )
+  const {
+    data: leaderboard,
+    isLoading,
+    statusQuery,
+    publishMutation,
+  } = useLeaderboard(DEFAULT_EVENT_ID, {
+    forOrganizer: true,
+    includeStatus: true,
+    refetchInterval: 30_000,
+  })
   const { data: submissions } = useOrganizerSubmissions()
   const { data: event } = useEvent(DEFAULT_EVENT_ID)
   const [trackFilter, setTrackFilter] = useState('all')
@@ -61,7 +63,9 @@ export default function LeaderboardPanel() {
     try {
       await publishMutation.mutateAsync(pendingPublish)
       toast.success(
-        pendingPublish ? 'Results are now live for participants' : 'Results hidden from participants',
+        pendingPublish
+          ? 'Results are now live for participants'
+          : 'Results hidden from participants',
       )
     } catch {
       toast.error('Failed to update publish status')

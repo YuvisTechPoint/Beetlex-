@@ -33,7 +33,8 @@ export function LeaderboardTab() {
         <Alert variant="destructive">
           <AlertTitle>Could not load leaderboard</AlertTitle>
           <AlertDescription>
-            Check your connection and refresh the page. If you just signed in, try again in a moment.
+            Check your connection and refresh the page. If you just signed in, try again in a
+            moment.
           </AlertDescription>
         </Alert>
       </div>
@@ -45,7 +46,9 @@ export function LeaderboardTab() {
       <div className="space-y-6">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Leaderboard</h2>
-          <p className="text-muted-foreground">Results will appear here once organizers publish them.</p>
+          <p className="text-muted-foreground">
+            Results will appear here once organizers publish them.
+          </p>
         </div>
         <Alert>
           <AlertTitle>Results are hidden</AlertTitle>
@@ -80,7 +83,9 @@ export function LeaderboardTab() {
           {MODE_LABELS[connectionMode]}
         </Badge>
       </div>
-      <Leaderboard entries={entries} currentTeamId={team?.id} />
+      <div className="overflow-hidden rounded-xl border bg-card/50 p-4 sm:p-6">
+        <Leaderboard entries={entries} currentTeamId={team?.id} />
+      </div>
     </div>
   )
 }

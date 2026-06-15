@@ -6,7 +6,7 @@ import { ProjectMediaViewers } from './ProjectMediaViewers'
 import { ScoringSection } from './ScoringSection'
 import { ScoreConfirmationDialog } from './ScoreConfirmationDialog'
 import { useProjectDetailScoring } from './useProjectDetailScoring'
-import type { ProjectDetailProps } from './ProjectDetail.types'
+import type { ProjectDetailProps } from '@/types'
 
 export function ProjectDetail({
   submissionId,

@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => {
         : [{ find: '@', replacement: path.resolve(__dirname, './src') }],
     },
     build: {
-      modulePreload: disableMsw ? false : undefined,
+      modulePreload: { polyfill: true },
     rollupOptions: {
       output: {
         manualChunks(id) {

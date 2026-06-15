@@ -32,8 +32,7 @@ function buildParticipants(): OrganizerParticipant[] {
         userId: member.userId,
         name: member.name,
         email: member.email,
-        college:
-          mockUserById[member.userId]?.college ?? mockUserById[member.userId]?.organization,
+        college: mockUserById[member.userId]?.college ?? mockUserById[member.userId]?.organization,
         teamId: team.id,
         teamName: team.name,
         trackId: team.trackId,
@@ -121,13 +120,11 @@ function buildSubmissions() {
     const scoreBreakdown =
       scores.length > 0
         ? {
-            innovation:
-              scores.reduce((sum, s) => sum + s.innovation, 0) / scores.length,
+            innovation: scores.reduce((sum, s) => sum + s.innovation, 0) / scores.length,
             technicalExecution:
               scores.reduce((sum, s) => sum + s.technicalExecution, 0) / scores.length,
             impact: scores.reduce((sum, s) => sum + s.impact, 0) / scores.length,
-            presentation:
-              scores.reduce((sum, s) => sum + s.presentation, 0) / scores.length,
+            presentation: scores.reduce((sum, s) => sum + s.presentation, 0) / scores.length,
           }
         : undefined
 

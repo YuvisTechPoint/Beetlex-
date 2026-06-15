@@ -15,9 +15,27 @@ const coreTeams: Team[] = [
     leaderboardPosition: 1,
     score: 94.2,
     members: [
-      { userId: 'user-participant-1', name: 'Alex Chen', email: 'alex.chen@university.edu', role: 'leader', joinedAt: '2026-05-02T10:30:00.000Z' },
-      { userId: 'user-participant-2', name: 'Sneha Patel', email: 'sneha.patel@vit.ac.in', role: 'member', joinedAt: '2026-05-02T11:00:00.000Z' },
-      { userId: 'user-participant-3', name: 'Arjun Krishnan', email: 'arjun.k@bits-pilani.ac.in', role: 'member', joinedAt: '2026-05-03T09:15:00.000Z' },
+      {
+        userId: 'user-participant-1',
+        name: 'Alex Chen',
+        email: 'alex.chen@university.edu',
+        role: 'leader',
+        joinedAt: '2026-05-02T10:30:00.000Z',
+      },
+      {
+        userId: 'user-participant-2',
+        name: 'Sneha Patel',
+        email: 'sneha.patel@vit.ac.in',
+        role: 'member',
+        joinedAt: '2026-05-02T11:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-3',
+        name: 'Arjun Krishnan',
+        email: 'arjun.k@bits-pilani.ac.in',
+        role: 'member',
+        joinedAt: '2026-05-03T09:15:00.000Z',
+      },
     ],
   },
   {
@@ -30,10 +48,34 @@ const coreTeams: Team[] = [
     leaderboardPosition: 2,
     score: 91.8,
     members: [
-      { userId: 'user-participant-4', name: 'Meera Nair', email: 'meera.nair@nitt.edu', role: 'leader', joinedAt: '2026-05-05T14:20:00.000Z' },
-      { userId: 'user-participant-5', name: 'Vikram Singh', email: 'vikram.singh@dtu.ac.in', role: 'member', joinedAt: '2026-05-05T15:00:00.000Z' },
-      { userId: 'user-participant-6', name: 'Aisha Khan', email: 'aisha.khan@iiit-h.ac.in', role: 'member', joinedAt: '2026-05-06T08:45:00.000Z' },
-      { userId: 'user-participant-7', name: 'David Park', email: 'david.park@stanford.edu', role: 'member', joinedAt: '2026-05-07T12:00:00.000Z' },
+      {
+        userId: 'user-participant-4',
+        name: 'Meera Nair',
+        email: 'meera.nair@nitt.edu',
+        role: 'leader',
+        joinedAt: '2026-05-05T14:20:00.000Z',
+      },
+      {
+        userId: 'user-participant-5',
+        name: 'Vikram Singh',
+        email: 'vikram.singh@dtu.ac.in',
+        role: 'member',
+        joinedAt: '2026-05-05T15:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-6',
+        name: 'Aisha Khan',
+        email: 'aisha.khan@iiit-h.ac.in',
+        role: 'member',
+        joinedAt: '2026-05-06T08:45:00.000Z',
+      },
+      {
+        userId: 'user-participant-7',
+        name: 'David Park',
+        email: 'david.park@stanford.edu',
+        role: 'member',
+        joinedAt: '2026-05-07T12:00:00.000Z',
+      },
     ],
   },
   {
@@ -46,8 +88,20 @@ const coreTeams: Team[] = [
     leaderboardPosition: 3,
     score: 89.5,
     members: [
-      { userId: 'user-participant-8', name: 'Fatima Al-Hassan', email: 'fatima.h@kaust.edu.sa', role: 'leader', joinedAt: '2026-05-08T09:00:00.000Z' },
-      { userId: 'user-participant-9', name: 'Lucas Müller', email: 'lucas.muller@tum.de', role: 'member', joinedAt: '2026-05-08T10:30:00.000Z' },
+      {
+        userId: 'user-participant-8',
+        name: 'Fatima Al-Hassan',
+        email: 'fatima.h@kaust.edu.sa',
+        role: 'leader',
+        joinedAt: '2026-05-08T09:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-9',
+        name: 'Lucas Müller',
+        email: 'lucas.muller@tum.de',
+        role: 'member',
+        joinedAt: '2026-05-08T10:30:00.000Z',
+      },
     ],
   },
   {
@@ -60,9 +114,27 @@ const coreTeams: Team[] = [
     leaderboardPosition: 4,
     score: 87.3,
     members: [
-      { userId: 'user-participant-10', name: 'Yuki Tanaka', email: 'yuki.tanaka@u-tokyo.ac.jp', role: 'leader', joinedAt: '2026-05-10T07:00:00.000Z' },
-      { userId: 'user-participant-11', name: 'Olivia Brooks', email: 'olivia.brooks@mit.edu', role: 'member', joinedAt: '2026-05-10T08:15:00.000Z' },
-      { userId: 'user-participant-12', name: 'Carlos Mendez', email: 'carlos.mendez@unam.mx', role: 'member', joinedAt: '2026-05-11T16:00:00.000Z' },
+      {
+        userId: 'user-participant-10',
+        name: 'Yuki Tanaka',
+        email: 'yuki.tanaka@u-tokyo.ac.jp',
+        role: 'leader',
+        joinedAt: '2026-05-10T07:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-11',
+        name: 'Olivia Brooks',
+        email: 'olivia.brooks@mit.edu',
+        role: 'member',
+        joinedAt: '2026-05-10T08:15:00.000Z',
+      },
+      {
+        userId: 'user-participant-12',
+        name: 'Carlos Mendez',
+        email: 'carlos.mendez@unam.mx',
+        role: 'member',
+        joinedAt: '2026-05-11T16:00:00.000Z',
+      },
     ],
   },
   {
@@ -75,8 +147,20 @@ const coreTeams: Team[] = [
     leaderboardPosition: 5,
     score: 85.1,
     members: [
-      { userId: 'user-participant-13', name: 'Nina Volkov', email: 'nina.volkov@ethz.ch', role: 'leader', joinedAt: '2026-05-12T11:30:00.000Z' },
-      { userId: 'user-participant-14', name: 'Ethan Wright', email: 'ethan.wright@cam.ac.uk', role: 'member', joinedAt: '2026-05-12T12:00:00.000Z' },
+      {
+        userId: 'user-participant-13',
+        name: 'Nina Volkov',
+        email: 'nina.volkov@ethz.ch',
+        role: 'leader',
+        joinedAt: '2026-05-12T11:30:00.000Z',
+      },
+      {
+        userId: 'user-participant-14',
+        name: 'Ethan Wright',
+        email: 'ethan.wright@cam.ac.uk',
+        role: 'member',
+        joinedAt: '2026-05-12T12:00:00.000Z',
+      },
     ],
   },
   {
@@ -89,9 +173,27 @@ const coreTeams: Team[] = [
     leaderboardPosition: 6,
     score: 83.7,
     members: [
-      { userId: 'user-participant-15', name: 'Zara Ahmed', email: 'zara.ahmed@lums.edu.pk', role: 'leader', joinedAt: '2026-05-14T13:00:00.000Z' },
-      { userId: 'user-participant-16', name: 'Tomás Silva', email: 'tomas.silva@usp.br', role: 'member', joinedAt: '2026-05-14T14:20:00.000Z' },
-      { userId: 'user-participant-17', name: 'Hannah Lee', email: 'hannah.lee@nus.edu.sg', role: 'member', joinedAt: '2026-05-15T09:00:00.000Z' },
+      {
+        userId: 'user-participant-15',
+        name: 'Zara Ahmed',
+        email: 'zara.ahmed@lums.edu.pk',
+        role: 'leader',
+        joinedAt: '2026-05-14T13:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-16',
+        name: 'Tomás Silva',
+        email: 'tomas.silva@usp.br',
+        role: 'member',
+        joinedAt: '2026-05-14T14:20:00.000Z',
+      },
+      {
+        userId: 'user-participant-17',
+        name: 'Hannah Lee',
+        email: 'hannah.lee@nus.edu.sg',
+        role: 'member',
+        joinedAt: '2026-05-15T09:00:00.000Z',
+      },
     ],
   },
   {
@@ -104,9 +206,27 @@ const coreTeams: Team[] = [
     leaderboardPosition: 7,
     score: 81.4,
     members: [
-      { userId: 'user-participant-18', name: 'Ibrahim Hassan', email: 'ibrahim.h@cairo.edu.eg', role: 'leader', joinedAt: '2026-05-16T10:00:00.000Z' },
-      { userId: 'user-participant-19', name: 'Sophie Laurent', email: 'sophie.laurent@epfl.ch', role: 'member', joinedAt: '2026-05-16T11:45:00.000Z' },
-      { userId: 'user-participant-20', name: 'Ryan O\'Connor', email: 'ryan.oconnor@ucd.ie', role: 'member', joinedAt: '2026-05-17T08:30:00.000Z' },
+      {
+        userId: 'user-participant-18',
+        name: 'Ibrahim Hassan',
+        email: 'ibrahim.h@cairo.edu.eg',
+        role: 'leader',
+        joinedAt: '2026-05-16T10:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-19',
+        name: 'Sophie Laurent',
+        email: 'sophie.laurent@epfl.ch',
+        role: 'member',
+        joinedAt: '2026-05-16T11:45:00.000Z',
+      },
+      {
+        userId: 'user-participant-20',
+        name: "Ryan O'Connor",
+        email: 'ryan.oconnor@ucd.ie',
+        role: 'member',
+        joinedAt: '2026-05-17T08:30:00.000Z',
+      },
     ],
   },
   {
@@ -119,8 +239,20 @@ const coreTeams: Team[] = [
     leaderboardPosition: 8,
     score: 79.9,
     members: [
-      { userId: 'user-participant-21', name: 'Keiko Yamamoto', email: 'keiko.y@kyoto-u.ac.jp', role: 'leader', joinedAt: '2026-05-18T15:00:00.000Z' },
-      { userId: 'user-participant-22', name: 'Amir Rezaei', email: 'amir.rezaei@sharif.edu', role: 'member', joinedAt: '2026-05-18T16:30:00.000Z' },
+      {
+        userId: 'user-participant-21',
+        name: 'Keiko Yamamoto',
+        email: 'keiko.y@kyoto-u.ac.jp',
+        role: 'leader',
+        joinedAt: '2026-05-18T15:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-22',
+        name: 'Amir Rezaei',
+        email: 'amir.rezaei@sharif.edu',
+        role: 'member',
+        joinedAt: '2026-05-18T16:30:00.000Z',
+      },
     ],
   },
   {
@@ -133,9 +265,27 @@ const coreTeams: Team[] = [
     leaderboardPosition: 9,
     score: 78.2,
     members: [
-      { userId: 'user-participant-23', name: 'Grace Kim', email: 'grace.kim@kaist.ac.kr', role: 'leader', joinedAt: '2026-05-20T09:15:00.000Z' },
-      { userId: 'user-participant-24', name: 'Mohammed Ali', email: 'mohammed.ali@uaeu.ac.ae', role: 'member', joinedAt: '2026-05-20T10:00:00.000Z' },
-      { userId: 'user-participant-25', name: 'Isabella Rossi', email: 'isabella.rossi@polimi.it', role: 'member', joinedAt: '2026-05-21T07:45:00.000Z' },
+      {
+        userId: 'user-participant-23',
+        name: 'Grace Kim',
+        email: 'grace.kim@kaist.ac.kr',
+        role: 'leader',
+        joinedAt: '2026-05-20T09:15:00.000Z',
+      },
+      {
+        userId: 'user-participant-24',
+        name: 'Mohammed Ali',
+        email: 'mohammed.ali@uaeu.ac.ae',
+        role: 'member',
+        joinedAt: '2026-05-20T10:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-25',
+        name: 'Isabella Rossi',
+        email: 'isabella.rossi@polimi.it',
+        role: 'member',
+        joinedAt: '2026-05-21T07:45:00.000Z',
+      },
     ],
   },
   {
@@ -148,8 +298,20 @@ const coreTeams: Team[] = [
     leaderboardPosition: 10,
     score: 76.8,
     members: [
-      { userId: 'user-participant-1', name: 'Alex Chen', email: 'alex.chen@university.edu', role: 'leader', joinedAt: '2026-05-22T12:00:00.000Z' },
-      { userId: 'user-participant-5', name: 'Vikram Singh', email: 'vikram.singh@dtu.ac.in', role: 'member', joinedAt: '2026-05-22T13:30:00.000Z' },
+      {
+        userId: 'user-participant-1',
+        name: 'Alex Chen',
+        email: 'alex.chen@university.edu',
+        role: 'leader',
+        joinedAt: '2026-05-22T12:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-5',
+        name: 'Vikram Singh',
+        email: 'vikram.singh@dtu.ac.in',
+        role: 'member',
+        joinedAt: '2026-05-22T13:30:00.000Z',
+      },
     ],
   },
   {
@@ -162,9 +324,27 @@ const coreTeams: Team[] = [
     leaderboardPosition: 1,
     score: 92.5,
     members: [
-      { userId: 'user-participant-2', name: 'Sneha Patel', email: 'sneha.patel@vit.ac.in', role: 'leader', joinedAt: '2026-05-20T08:00:00.000Z' },
-      { userId: 'user-participant-6', name: 'Aisha Khan', email: 'aisha.khan@iiit-h.ac.in', role: 'member', joinedAt: '2026-05-20T09:30:00.000Z' },
-      { userId: 'user-participant-11', name: 'Olivia Brooks', email: 'olivia.brooks@mit.edu', role: 'member', joinedAt: '2026-05-21T10:00:00.000Z' },
+      {
+        userId: 'user-participant-2',
+        name: 'Sneha Patel',
+        email: 'sneha.patel@vit.ac.in',
+        role: 'leader',
+        joinedAt: '2026-05-20T08:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-6',
+        name: 'Aisha Khan',
+        email: 'aisha.khan@iiit-h.ac.in',
+        role: 'member',
+        joinedAt: '2026-05-20T09:30:00.000Z',
+      },
+      {
+        userId: 'user-participant-11',
+        name: 'Olivia Brooks',
+        email: 'olivia.brooks@mit.edu',
+        role: 'member',
+        joinedAt: '2026-05-21T10:00:00.000Z',
+      },
     ],
   },
   {
@@ -175,9 +355,27 @@ const coreTeams: Team[] = [
     trackId: 'evt-active-2-track-ml',
     submissionStatus: 'draft',
     members: [
-      { userId: 'user-participant-7', name: 'David Park', email: 'david.park@stanford.edu', role: 'leader', joinedAt: '2026-05-22T14:00:00.000Z' },
-      { userId: 'user-participant-9', name: 'Lucas Müller', email: 'lucas.muller@tum.de', role: 'member', joinedAt: '2026-05-23T11:00:00.000Z' },
-      { userId: 'user-participant-13', name: 'Nina Volkov', email: 'nina.volkov@ethz.ch', role: 'member', joinedAt: '2026-05-24T09:00:00.000Z' },
+      {
+        userId: 'user-participant-7',
+        name: 'David Park',
+        email: 'david.park@stanford.edu',
+        role: 'leader',
+        joinedAt: '2026-05-22T14:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-9',
+        name: 'Lucas Müller',
+        email: 'lucas.muller@tum.de',
+        role: 'member',
+        joinedAt: '2026-05-23T11:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-13',
+        name: 'Nina Volkov',
+        email: 'nina.volkov@ethz.ch',
+        role: 'member',
+        joinedAt: '2026-05-24T09:00:00.000Z',
+      },
     ],
   },
   {
@@ -188,8 +386,20 @@ const coreTeams: Team[] = [
     trackId: 'evt-active-2-track-devtools',
     submissionStatus: 'submitted',
     members: [
-      { userId: 'user-participant-14', name: 'Ethan Wright', email: 'ethan.wright@cam.ac.uk', role: 'leader', joinedAt: '2026-05-25T10:30:00.000Z' },
-      { userId: 'user-participant-18', name: 'Ibrahim Hassan', email: 'ibrahim.h@cairo.edu.eg', role: 'member', joinedAt: '2026-05-25T11:15:00.000Z' },
+      {
+        userId: 'user-participant-14',
+        name: 'Ethan Wright',
+        email: 'ethan.wright@cam.ac.uk',
+        role: 'leader',
+        joinedAt: '2026-05-25T10:30:00.000Z',
+      },
+      {
+        userId: 'user-participant-18',
+        name: 'Ibrahim Hassan',
+        email: 'ibrahim.h@cairo.edu.eg',
+        role: 'member',
+        joinedAt: '2026-05-25T11:15:00.000Z',
+      },
     ],
   },
   {
@@ -200,10 +410,34 @@ const coreTeams: Team[] = [
     trackId: 'evt-active-2-track-ai',
     submissionStatus: 'not_started',
     members: [
-      { userId: 'user-participant-4', name: 'Meera Nair', email: 'meera.nair@nitt.edu', role: 'leader', joinedAt: '2026-05-28T16:00:00.000Z' },
-      { userId: 'user-participant-8', name: 'Fatima Al-Hassan', email: 'fatima.h@kaust.edu.sa', role: 'member', joinedAt: '2026-05-29T08:00:00.000Z' },
-      { userId: 'user-participant-15', name: 'Zara Ahmed', email: 'zara.ahmed@lums.edu.pk', role: 'member', joinedAt: '2026-05-30T12:00:00.000Z' },
-      { userId: 'user-participant-19', name: 'Sophie Laurent', email: 'sophie.laurent@epfl.ch', role: 'member', joinedAt: '2026-05-31T09:30:00.000Z' },
+      {
+        userId: 'user-participant-4',
+        name: 'Meera Nair',
+        email: 'meera.nair@nitt.edu',
+        role: 'leader',
+        joinedAt: '2026-05-28T16:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-8',
+        name: 'Fatima Al-Hassan',
+        email: 'fatima.h@kaust.edu.sa',
+        role: 'member',
+        joinedAt: '2026-05-29T08:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-15',
+        name: 'Zara Ahmed',
+        email: 'zara.ahmed@lums.edu.pk',
+        role: 'member',
+        joinedAt: '2026-05-30T12:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-19',
+        name: 'Sophie Laurent',
+        email: 'sophie.laurent@epfl.ch',
+        role: 'member',
+        joinedAt: '2026-05-31T09:30:00.000Z',
+      },
     ],
   },
   {
@@ -216,9 +450,27 @@ const coreTeams: Team[] = [
     leaderboardPosition: 1,
     score: 88.0,
     members: [
-      { userId: 'user-participant-3', name: 'Arjun Krishnan', email: 'arjun.k@bits-pilani.ac.in', role: 'leader', joinedAt: '2025-09-05T10:00:00.000Z' },
-      { userId: 'user-participant-10', name: 'Yuki Tanaka', email: 'yuki.tanaka@u-tokyo.ac.jp', role: 'member', joinedAt: '2025-09-06T14:00:00.000Z' },
-      { userId: 'user-participant-16', name: 'Tomás Silva', email: 'tomas.silva@usp.br', role: 'member', joinedAt: '2025-09-07T11:00:00.000Z' },
+      {
+        userId: 'user-participant-3',
+        name: 'Arjun Krishnan',
+        email: 'arjun.k@bits-pilani.ac.in',
+        role: 'leader',
+        joinedAt: '2025-09-05T10:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-10',
+        name: 'Yuki Tanaka',
+        email: 'yuki.tanaka@u-tokyo.ac.jp',
+        role: 'member',
+        joinedAt: '2025-09-06T14:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-16',
+        name: 'Tomás Silva',
+        email: 'tomas.silva@usp.br',
+        role: 'member',
+        joinedAt: '2025-09-07T11:00:00.000Z',
+      },
     ],
   },
   {
@@ -231,8 +483,20 @@ const coreTeams: Team[] = [
     leaderboardPosition: 2,
     score: 84.5,
     members: [
-      { userId: 'user-participant-12', name: 'Carlos Mendez', email: 'carlos.mendez@unam.mx', role: 'leader', joinedAt: '2025-09-08T09:00:00.000Z' },
-      { userId: 'user-participant-20', name: 'Ryan O\'Connor', email: 'ryan.oconnor@ucd.ie', role: 'member', joinedAt: '2025-09-09T15:30:00.000Z' },
+      {
+        userId: 'user-participant-12',
+        name: 'Carlos Mendez',
+        email: 'carlos.mendez@unam.mx',
+        role: 'leader',
+        joinedAt: '2025-09-08T09:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-20',
+        name: "Ryan O'Connor",
+        email: 'ryan.oconnor@ucd.ie',
+        role: 'member',
+        joinedAt: '2025-09-09T15:30:00.000Z',
+      },
     ],
   },
   {
@@ -245,9 +509,27 @@ const coreTeams: Team[] = [
     leaderboardPosition: 3,
     score: 80.2,
     members: [
-      { userId: 'user-participant-17', name: 'Hannah Lee', email: 'hannah.lee@nus.edu.sg', role: 'leader', joinedAt: '2025-09-10T08:00:00.000Z' },
-      { userId: 'user-participant-21', name: 'Keiko Yamamoto', email: 'keiko.y@kyoto-u.ac.jp', role: 'member', joinedAt: '2025-09-11T10:00:00.000Z' },
-      { userId: 'user-participant-23', name: 'Grace Kim', email: 'grace.kim@kaist.ac.kr', role: 'member', joinedAt: '2025-09-12T13:00:00.000Z' },
+      {
+        userId: 'user-participant-17',
+        name: 'Hannah Lee',
+        email: 'hannah.lee@nus.edu.sg',
+        role: 'leader',
+        joinedAt: '2025-09-10T08:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-21',
+        name: 'Keiko Yamamoto',
+        email: 'keiko.y@kyoto-u.ac.jp',
+        role: 'member',
+        joinedAt: '2025-09-11T10:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-23',
+        name: 'Grace Kim',
+        email: 'grace.kim@kaist.ac.kr',
+        role: 'member',
+        joinedAt: '2025-09-12T13:00:00.000Z',
+      },
     ],
   },
   {
@@ -260,9 +542,27 @@ const coreTeams: Team[] = [
     leaderboardPosition: 1,
     score: 90.3,
     members: [
-      { userId: 'user-participant-8', name: 'Fatima Al-Hassan', email: 'fatima.h@kaust.edu.sa', role: 'leader', joinedAt: '2025-03-10T11:00:00.000Z' },
-      { userId: 'user-participant-14', name: 'Ethan Wright', email: 'ethan.wright@cam.ac.uk', role: 'member', joinedAt: '2025-03-11T09:30:00.000Z' },
-      { userId: 'user-participant-22', name: 'Amir Rezaei', email: 'amir.rezaei@sharif.edu', role: 'member', joinedAt: '2025-03-12T14:00:00.000Z' },
+      {
+        userId: 'user-participant-8',
+        name: 'Fatima Al-Hassan',
+        email: 'fatima.h@kaust.edu.sa',
+        role: 'leader',
+        joinedAt: '2025-03-10T11:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-14',
+        name: 'Ethan Wright',
+        email: 'ethan.wright@cam.ac.uk',
+        role: 'member',
+        joinedAt: '2025-03-11T09:30:00.000Z',
+      },
+      {
+        userId: 'user-participant-22',
+        name: 'Amir Rezaei',
+        email: 'amir.rezaei@sharif.edu',
+        role: 'member',
+        joinedAt: '2025-03-12T14:00:00.000Z',
+      },
     ],
   },
   {
@@ -275,8 +575,20 @@ const coreTeams: Team[] = [
     leaderboardPosition: 2,
     score: 86.7,
     members: [
-      { userId: 'user-participant-10', name: 'Yuki Tanaka', email: 'yuki.tanaka@u-tokyo.ac.jp', role: 'leader', joinedAt: '2025-03-15T10:00:00.000Z' },
-      { userId: 'user-participant-24', name: 'Mohammed Ali', email: 'mohammed.ali@uaeu.ac.ae', role: 'member', joinedAt: '2025-03-16T08:00:00.000Z' },
+      {
+        userId: 'user-participant-10',
+        name: 'Yuki Tanaka',
+        email: 'yuki.tanaka@u-tokyo.ac.jp',
+        role: 'leader',
+        joinedAt: '2025-03-15T10:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-24',
+        name: 'Mohammed Ali',
+        email: 'mohammed.ali@uaeu.ac.ae',
+        role: 'member',
+        joinedAt: '2025-03-16T08:00:00.000Z',
+      },
     ],
   },
   {
@@ -289,15 +601,34 @@ const coreTeams: Team[] = [
     leaderboardPosition: 3,
     score: 82.1,
     members: [
-      { userId: 'user-participant-25', name: 'Isabella Rossi', email: 'isabella.rossi@polimi.it', role: 'leader', joinedAt: '2025-03-18T12:00:00.000Z' },
-      { userId: 'user-participant-19', name: 'Sophie Laurent', email: 'sophie.laurent@epfl.ch', role: 'member', joinedAt: '2025-03-19T16:00:00.000Z' },
-      { userId: 'user-participant-6', name: 'Aisha Khan', email: 'aisha.khan@iiit-h.ac.in', role: 'member', joinedAt: '2025-03-20T09:00:00.000Z' },
+      {
+        userId: 'user-participant-25',
+        name: 'Isabella Rossi',
+        email: 'isabella.rossi@polimi.it',
+        role: 'leader',
+        joinedAt: '2025-03-18T12:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-19',
+        name: 'Sophie Laurent',
+        email: 'sophie.laurent@epfl.ch',
+        role: 'member',
+        joinedAt: '2025-03-19T16:00:00.000Z',
+      },
+      {
+        userId: 'user-participant-6',
+        name: 'Aisha Khan',
+        email: 'aisha.khan@iiit-h.ac.in',
+        role: 'member',
+        joinedAt: '2025-03-20T09:00:00.000Z',
+      },
     ],
   },
 ]
 
 export const mockTeams: Team[] = [...coreTeams, ...scaleTeams]
 
-export const mockTeamById = Object.fromEntries(
-  mockTeams.map((team) => [team.id, team]),
-) as Record<string, Team>
+export const mockTeamById = Object.fromEntries(mockTeams.map((team) => [team.id, team])) as Record<
+  string,
+  Team
+>

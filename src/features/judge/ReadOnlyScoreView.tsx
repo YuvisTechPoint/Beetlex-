@@ -16,9 +16,7 @@ export function ReadOnlyScoreView({ existingScore }: ReadOnlyScoreViewProps) {
               <p className="text-sm font-medium">{label}</p>
               <p className="text-xs text-muted-foreground">{description}</p>
             </div>
-            <span className="text-lg font-semibold tabular-nums">
-              {existingScore[key]}
-            </span>
+            <span className="text-lg font-semibold tabular-nums">{existingScore[key]}</span>
           </div>
         </div>
       ))}

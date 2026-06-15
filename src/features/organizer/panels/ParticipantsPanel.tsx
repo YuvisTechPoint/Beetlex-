@@ -9,7 +9,7 @@ import { useEvent } from '@/hooks/useEvent'
 import { useParticipants } from '@/hooks/useParticipants'
 import { useVirtualRows } from '@/hooks/useVirtualRows'
 import { formatDateTime } from '@/utils'
-import { DEFAULT_EVENT_ID } from '../types'
+import { DEFAULT_EVENT_ID } from '../constants'
 import { downloadCsv } from '../utils'
 import { ParticipantDetailSheet } from './ParticipantDetailSheet'
 import { ParticipantsTable } from './ParticipantsTable'
@@ -49,8 +49,13 @@ export default function ParticipantsPanel() {
     [debouncedSearch, page, pageSize, sortDir, sortKey, statusFilter, trackFilter, useVirtual],
   )
 
-  const { data: participantsPage, isLoading, isFetching, isStale, refetch } =
-    useParticipants(queryParams)
+  const {
+    data: participantsPage,
+    isLoading,
+    isFetching,
+    isStale,
+    refetch,
+  } = useParticipants(queryParams)
   const { data: event } = useEvent(DEFAULT_EVENT_ID)
 
   const pageRows = participantsPage?.data ?? []
@@ -63,9 +68,7 @@ export default function ParticipantsPanel() {
     VIRTUAL_VIEWPORT_HEIGHT,
     VIRTUAL_ROW_HEIGHT,
   )
-  const visibleRows = useVirtual
-    ? pageRows.slice(virtualWindow.start, virtualWindow.end)
-    : pageRows
+  const visibleRows = useVirtual ? pageRows.slice(virtualWindow.start, virtualWindow.end) : pageRows
 
   const toggleSort = (key: ParticipantSortKey) => {
     if (sortKey === key) {

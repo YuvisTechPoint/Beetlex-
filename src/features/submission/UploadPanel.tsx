@@ -45,7 +45,13 @@ export function UploadPanel({
           <p className="text-sm text-destructive">
             Failed to upload <strong>{pendingUploadFile.name}</strong>. Please try again.
           </p>
-          <Button type="button" variant="outline" size="sm" className="mt-3" onClick={onRetryUpload}>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="mt-3"
+            onClick={onRetryUpload}
+          >
             Try again
           </Button>
         </div>

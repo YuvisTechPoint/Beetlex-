@@ -2,10 +2,7 @@ import { RegistrationAlreadyRegisteredView } from './RegistrationAlreadyRegister
 import { RegistrationAuthRequiredView } from './RegistrationAuthRequiredView'
 import { RegistrationClosedView } from './RegistrationClosedView'
 import { RegistrationErrorView } from './RegistrationErrorView'
-import {
-  RegistrationConfirmationView,
-  RegistrationFormView,
-} from './RegistrationFormView'
+import { RegistrationConfirmationView, RegistrationFormView } from './RegistrationFormView'
 import { RegistrationInProgressView } from './RegistrationInProgressView'
 import { RegistrationLoadingView } from './RegistrationLoadingView'
 import type { RegistrationPageState } from './useRegistrationPage'

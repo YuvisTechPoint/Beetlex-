@@ -68,10 +68,7 @@ export function EventGrid({
       </div>
 
       {totalPages > 1 && (
-        <nav
-          className="mt-8 flex items-center justify-center gap-2"
-          aria-label="Event pagination"
-        >
+        <nav className="mt-8 flex items-center justify-center gap-2" aria-label="Event pagination">
           <Button
             variant="outline"
             size="sm"

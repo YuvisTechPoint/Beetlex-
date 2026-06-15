@@ -39,7 +39,9 @@ export function AuthMenu() {
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
             {userInitials(user.name)}
           </span>
-          <span className="hidden max-w-[7rem] truncate text-sm font-medium md:inline">{user.name}</span>
+          <span className="hidden max-w-[7rem] truncate text-sm font-medium md:inline">
+            {user.name}
+          </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">

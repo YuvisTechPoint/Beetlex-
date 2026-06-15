@@ -8,7 +8,7 @@ import { useOrganizerStats } from '@/hooks/useOrganizerStats'
 import { useOrganizerSubmissions } from '@/hooks/useOrganizerSubmissions'
 import { useParticipants } from '@/hooks/useParticipants'
 import { OverviewStatCard } from '../components/OverviewStatCard'
-import { DEFAULT_EVENT_ID } from '../types'
+import { DEFAULT_EVENT_ID } from '../constants'
 import { OverviewActivityFeed } from './OverviewActivityFeed'
 
 const OverviewCharts = lazy(() => import('./OverviewCharts'))
@@ -57,7 +57,8 @@ export default function OverviewPanel() {
     if (stats?.tracksBreakdown) {
       return stats.tracksBreakdown.map((track) => ({
         name: track.trackName.split(' ').slice(0, 2).join(' '),
-        submissions: submissions?.filter((s) => s.trackId === track.trackId && !s.isDraft).length ?? 0,
+        submissions:
+          submissions?.filter((s) => s.trackId === track.trackId && !s.isDraft).length ?? 0,
         teams: track.teamCount,
       }))
     }

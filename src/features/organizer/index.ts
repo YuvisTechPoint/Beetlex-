@@ -1,7 +1,8 @@
 export { OverviewStatCard } from './components/OverviewStatCard'
 export { LeaderboardDeltaIndicator } from './components/LeaderboardDeltaIndicator'
 
-export { DEFAULT_EVENT_ID, TABS, type OrganizerTab } from './types'
+export { DEFAULT_EVENT_ID, TABS } from './constants'
+export type { OrganizerTab } from '@/types'
 export { downloadCsv, parseTab } from './utils'
 
 export { default as OverviewPanel } from './panels/OverviewPanel'

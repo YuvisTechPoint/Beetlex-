@@ -24,7 +24,8 @@ const coreSubmissions: Submission[] = [
         technicalExecution: 28,
         impact: 23,
         presentation: 19,
-        comments: 'Exceptional integration depth. The LSP approach is novel and the demo was flawless.',
+        comments:
+          'Exceptional integration depth. The LSP approach is novel and the demo was flawless.',
         submittedAt: '2026-06-14T11:30:00.000Z',
       },
       {
@@ -67,7 +68,8 @@ const coreSubmissions: Submission[] = [
         technicalExecution: 26,
         impact: 24,
         presentation: 18,
-        comments: 'High impact for teams without dedicated security engineers. Patch quality impressed.',
+        comments:
+          'High impact for teams without dedicated security engineers. Patch quality impressed.',
         submittedAt: '2026-06-14T11:00:00.000Z',
       },
       {

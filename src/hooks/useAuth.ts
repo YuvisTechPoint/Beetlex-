@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/store/authStore'
+import { isFirebaseConfigured } from '@/lib/firebase'
 
 export function useAuth() {
   const user = useAuthStore((s) => s.user)
@@ -8,7 +9,19 @@ export function useAuth() {
   const isLoading = useAuthStore((s) => s.isLoading)
   const error = useAuthStore((s) => s.error)
   const login = useAuthStore((s) => s.login)
+  const loginWithGoogle = useAuthStore((s) => s.loginWithGoogle)
   const logout = useAuthStore((s) => s.logout)
 
-  return { user, token, isAuthenticated, isHydrated, isLoading, error, login, logout }
+  return {
+    user,
+    token,
+    isAuthenticated,
+    isHydrated,
+    isLoading,
+    error,
+    login,
+    loginWithGoogle,
+    logout,
+    isGoogleSignInEnabled: isFirebaseConfigured(),
+  }
 }

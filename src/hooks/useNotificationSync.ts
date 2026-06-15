@@ -38,7 +38,7 @@ function showNotificationToast(notification: Notification) {
       ? 10_000
       : notification.type === 'score_update'
         ? 6_000
-        : TOAST_DURATIONS[notification.priority as keyof typeof TOAST_DURATIONS] ?? 5_000
+        : (TOAST_DURATIONS[notification.priority as keyof typeof TOAST_DURATIONS] ?? 5_000)
 
   if (notification.type === 'score_update') {
     toast.info(notification.title, {

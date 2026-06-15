@@ -139,11 +139,7 @@ export function generateScaleTeams(count: number, startIndex = 21): Team[] {
     const memberCount = 2 + Math.floor(rng() * 3)
     const submissionRoll = rng()
     const submissionStatus: Team['submissionStatus'] =
-      submissionRoll < 0.55
-        ? 'submitted'
-        : submissionRoll < 0.72
-          ? 'draft'
-          : 'not_started'
+      submissionRoll < 0.55 ? 'submitted' : submissionRoll < 0.72 ? 'draft' : 'not_started'
 
     const members = Array.from({ length: memberCount }, (_, memberIdx) => {
       const first = pick(rng, FIRST_NAMES)

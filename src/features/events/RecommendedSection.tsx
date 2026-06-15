@@ -28,7 +28,8 @@ export function RecommendedSection({ events, isLoading }: RecommendedSectionProp
           </span>
         </div>
         <p className="text-sm text-muted-foreground">
-          Ranked by track match, active status, and open registration — explained in-app, no external AI API.
+          Ranked by track match, active status, and open registration — explained in-app, no
+          external AI API.
         </p>
       </div>
 

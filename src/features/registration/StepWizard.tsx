@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
-import type { WizardStep } from './types'
+import type { WizardStep } from '@/types'
 
 export interface StepWizardProps {
   steps: readonly WizardStep[]

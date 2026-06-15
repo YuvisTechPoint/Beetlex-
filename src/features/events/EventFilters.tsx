@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
 import { STATUS_OPTIONS } from './constants'
-import type { EventFilterState } from './types'
+import type { EventFilterState } from '@/types'
 
 interface EventFiltersProps {
   filters: EventFilterState
@@ -36,14 +36,14 @@ export function EventFilters({ filters, onChange, tracks }: EventFiltersProps) {
     })
   }
 
-  const filtersActive =
-    filters.search ||
-    filters.status !== 'all' ||
-    filters.track ||
-    hasDateFilter
+  const filtersActive = filters.search || filters.status !== 'all' || filters.track || hasDateFilter
 
   return (
-    <div className="space-y-4 rounded-xl border bg-card p-4 shadow-sm" role="search" aria-label="Filter events">
+    <div
+      className="space-y-4 rounded-xl border bg-card p-4 shadow-sm"
+      role="search"
+      aria-label="Filter events"
+    >
       <div className="relative">
         <Search
           className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"

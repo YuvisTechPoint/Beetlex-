@@ -4,16 +4,13 @@ import { LIVE_LEADERBOARD_EVENT_ID } from './constants'
 export function LiveLeaderboardSection() {
   return (
     <section
-      className="border-t bg-muted/20 py-20"
+      className="section-shell border-t bg-muted/15"
       aria-labelledby="live-leaderboard-heading"
     >
-      <div className="container mx-auto px-4">
-        <h2 id="live-leaderboard-heading" className="sr-only">
-          Live Leaderboard
-        </h2>
+      <div className="container mx-auto max-w-3xl px-4">
         <PublicLiveLeaderboard
           eventId={LIVE_LEADERBOARD_EVENT_ID}
-          eventTitle="BeetleX Global Hackathon"
+          eventTitle="BeetleX AI Forge 2026"
           showDashboardLink
         />
       </div>

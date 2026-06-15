@@ -2,56 +2,58 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 export function ContactSection() {
   return (
-    <section id="contact" className="border-t bg-muted/20 py-20" aria-labelledby="contact-heading">
+    <section id="contact" className="section-shell border-t bg-muted/30" aria-labelledby="contact-heading">
       <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 id="contact-heading" className="text-3xl font-bold tracking-tight md:text-4xl">
+        <div className="section-intro-left">
+          <p className="text-label">Contact</p>
+          <h2 id="contact-heading" className="text-heading mt-3">
             Get in touch
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Questions about registration, sponsorship, or judging? Our team is here to help.
+          <p className="text-subtitle mt-3 max-w-lg">
+            Questions about registration, sponsorship, or judging — reach the team directly.
           </p>
         </div>
-        <div className="mx-auto mt-10 grid max-w-3xl gap-6 sm:grid-cols-3">
+
+        <div className="mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">
           <Card>
-            <CardHeader>
-              <CardTitle className="text-base">General</CardTitle>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">General</CardTitle>
               <CardDescription>Hackathon support</CardDescription>
             </CardHeader>
             <CardContent>
               <a
                 href="mailto:hello@beetlex.dev"
-                className="text-sm font-medium text-primary hover:underline"
+                className="text-sm font-medium text-foreground underline-offset-4 hover:underline"
               >
                 hello@beetlex.dev
               </a>
             </CardContent>
           </Card>
           <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Sponsors</CardTitle>
-              <CardDescription>Partnership inquiries</CardDescription>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Sponsors</CardTitle>
+              <CardDescription>Partnerships</CardDescription>
             </CardHeader>
             <CardContent>
               <a
                 href="mailto:sponsors@beetlex.dev"
-                className="text-sm font-medium text-primary hover:underline"
+                className="text-sm font-medium text-foreground underline-offset-4 hover:underline"
               >
                 sponsors@beetlex.dev
               </a>
             </CardContent>
           </Card>
           <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Discord</CardTitle>
-              <CardDescription>Community & mentors</CardDescription>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Community</CardTitle>
+              <CardDescription>Discord</CardDescription>
             </CardHeader>
             <CardContent>
               <a
                 href="https://discord.gg/beetlex"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-medium text-primary hover:underline"
+                className="text-sm font-medium text-foreground underline-offset-4 hover:underline"
               >
                 Join server
               </a>
