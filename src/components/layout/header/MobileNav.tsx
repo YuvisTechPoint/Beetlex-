@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Bug, Menu } from 'lucide-react'
+import { UserAvatar } from '@/components/shared/UserAvatar'
 import { useAuth } from '@/hooks/useAuth'
 import { useUiStore } from '@/store/uiStore'
 import { Button } from '@/components/ui/button'
@@ -30,8 +31,13 @@ export function MobileNav() {
         </nav>
         {isAuthenticated && user ? (
           <div className="mt-8 border-t pt-6">
-            <p className="text-sm font-medium">{user.name}</p>
-            <p className="text-xs text-muted-foreground">{user.email}</p>
+            <div className="flex items-center gap-3">
+              <UserAvatar name={user.name} avatarUrl={user.avatarUrl} className="h-10 w-10" />
+              <div className="min-w-0">
+                <p className="truncate text-sm font-medium">{user.name}</p>
+                <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+              </div>
+            </div>
             <Button asChild className="mt-4 w-full" size="sm">
               <Link to={dashboardPathForRole(user.role)}>{dashboardLabelForRole(user.role)}</Link>
             </Button>

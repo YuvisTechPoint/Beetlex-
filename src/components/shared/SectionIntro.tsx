@@ -66,5 +66,5 @@ export function SectionIntro({
 }
 
 export function GradientText({ children, className }: { children: ReactNode; className?: string }) {
-  return <span className={cn('text-heading-gradient', className)}>{children}</span>
+  return <span className={cn('text-heading-gradient font-semibold', className)}>{children}</span>
 }

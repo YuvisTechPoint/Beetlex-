@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { LayoutDashboard, Loader2, LogOut } from 'lucide-react'
 import { toast } from 'sonner'
+import { UserAvatar } from '@/components/shared/UserAvatar'
 import { useAuth } from '@/hooks/useAuth'
 import { Button } from '@/components/ui/button'
 import {
@@ -11,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { dashboardLabelForRole, dashboardPathForRole, userInitials } from './utils'
+import { dashboardLabelForRole, dashboardPathForRole } from './utils'
 
 export function AuthMenu() {
   const { user, logout, isLoading } = useAuth()
@@ -36,9 +37,7 @@ export function AuthMenu() {
           className="h-9 gap-2 rounded-full px-2 pl-1.5 pr-2.5 hover:bg-muted/80"
           aria-label="Account menu"
         >
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
-            {userInitials(user.name)}
-          </span>
+          <UserAvatar name={user.name} avatarUrl={user.avatarUrl} />
           <span className="hidden max-w-[7rem] truncate text-sm font-medium md:inline">
             {user.name}
           </span>
@@ -46,8 +45,13 @@ export function AuthMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="font-normal">
-          <p className="truncate text-sm font-medium">{user.name}</p>
-          <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+          <div className="flex items-center gap-3">
+            <UserAvatar name={user.name} avatarUrl={user.avatarUrl} className="h-9 w-9" />
+            <div className="min-w-0">
+              <p className="truncate text-sm font-medium">{user.name}</p>
+              <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+            </div>
+          </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>

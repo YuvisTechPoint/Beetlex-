@@ -11,6 +11,11 @@ import { isFirebaseIdToken } from '@/lib/firebaseJwt'
 import { isFirebaseConfigured, signInWithGooglePopup, signOutFirebase } from '@/lib/firebase'
 import type { User, UserRole } from '@/types'
 
+function withGooglePhoto(user: User, photoUrl?: string | null): User {
+  if (user.avatarUrl || !photoUrl) return user
+  return { ...user, avatarUrl: photoUrl }
+}
+
 const AUTH_CHANNEL = 'beetlex-auth-sync'
 const AUTH_STORAGE_KEY = 'beetlex-auth'
 
@@ -141,17 +146,18 @@ export const useAuthStore = create<AuthState>()(
 
         set({ isLoading: true, error: null })
         try {
-          const { idToken } = await signInWithGooglePopup()
+          const { user: firebaseUser, idToken } = await signInWithGooglePopup()
           const session = await loginWithFirebaseIdToken(idToken)
+          const user = withGooglePhoto(session.user, firebaseUser.photoURL)
           set({
-            user: session.user,
+            user,
             token: session.token,
             isAuthenticated: true,
             isHydrated: true,
             isLoading: false,
             error: null,
           })
-          broadcastAuth({ type: 'session', user: session.user, token: session.token })
+          broadcastAuth({ type: 'session', user, token: session.token })
         } catch (error) {
           const message =
             error instanceof ApiClientError

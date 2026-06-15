@@ -56,7 +56,11 @@ export function useAuthSync() {
 
       void loginWithFirebaseIdToken(idToken)
         .then((session) => {
-          setSession(session.user, session.token)
+          const user =
+            session.user.avatarUrl || !firebaseUser.photoURL
+              ? session.user
+              : { ...session.user, avatarUrl: firebaseUser.photoURL }
+          setSession(user, session.token)
         })
         .catch(() => {
           clearSession()
