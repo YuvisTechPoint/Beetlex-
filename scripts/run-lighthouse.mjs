@@ -14,6 +14,18 @@ const ROOT = path.resolve(__dirname, '..')
 const OUT_DIR = path.join(ROOT, 'reports', 'lighthouse')
 const BASE_URL = process.env.QA_BASE_URL ?? 'http://127.0.0.1:4173'
 const DEBUG_PORT = 9222
+const IS_LOCAL_PREVIEW =
+  BASE_URL.includes('127.0.0.1') || BASE_URL.includes('localhost')
+
+/** Local vite preview is fast; simulated mobile CPU throttling skews scores on dev machines. */
+const LOCAL_THROTTLING = {
+  rttMs: 40,
+  throughputKbps: 10_240,
+  cpuSlowdownMultiplier: 1,
+  requestLatencyMs: 0,
+  downloadThroughputKbps: 0,
+  uploadThroughputKbps: 0,
+}
 
 const ROUTES = [
   { slug: 'landing', path: '/' },
@@ -49,6 +61,9 @@ async function auditRoute(url, outputBase, formFactor) {
       port: DEBUG_PORT,
       onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'],
       formFactor,
+      ...(IS_LOCAL_PREVIEW && formFactor === 'desktop'
+        ? { throttling: LOCAL_THROTTLING }
+        : {}),
       screenEmulation:
         formFactor === 'mobile'
           ? { mobile: true, width: 375, height: 812, deviceScaleFactor: 2, disabled: false }
@@ -123,24 +138,37 @@ async function main() {
     }
   }
 
+  const mobileResults = results.filter((r) => r.formFactor === 'mobile')
+  const desktopResults = results.filter((r) => r.formFactor === 'desktop')
+
+  const avg = (items, key) =>
+    Math.round(items.reduce((sum, r) => sum + (r.scores[key] ?? 0), 0) / items.length)
+
   const summary = {
     generatedAt: new Date().toISOString(),
     baseUrl: BASE_URL,
     engine: 'playwright-chromium + lighthouse',
+    throttling: IS_LOCAL_PREVIEW
+      ? 'mobile: simulated; desktop: local-preview (cpuSlowdownMultiplier: 1)'
+      : 'lighthouse-default',
     results,
     averages: {
-      performance: Math.round(
-        results.reduce((sum, r) => sum + (r.scores.performance ?? 0), 0) / results.length,
-      ),
-      accessibility: Math.round(
-        results.reduce((sum, r) => sum + (r.scores.accessibility ?? 0), 0) / results.length,
-      ),
-      bestPractices: Math.round(
-        results.reduce((sum, r) => sum + (r.scores.bestPractices ?? 0), 0) / results.length,
-      ),
-      seo: Math.round(
-        results.reduce((sum, r) => sum + (r.scores.seo ?? 0), 0) / results.length,
-      ),
+      performance: avg(results, 'performance'),
+      accessibility: avg(results, 'accessibility'),
+      bestPractices: avg(results, 'bestPractices'),
+      seo: avg(results, 'seo'),
+    },
+    mobileAverages: {
+      performance: avg(mobileResults, 'performance'),
+      accessibility: avg(mobileResults, 'accessibility'),
+      bestPractices: avg(mobileResults, 'bestPractices'),
+      seo: avg(mobileResults, 'seo'),
+    },
+    desktopAverages: {
+      performance: avg(desktopResults, 'performance'),
+      accessibility: avg(desktopResults, 'accessibility'),
+      bestPractices: avg(desktopResults, 'bestPractices'),
+      seo: avg(desktopResults, 'seo'),
     },
   }
 
