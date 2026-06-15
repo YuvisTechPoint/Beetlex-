@@ -1,0 +1,36 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# QA artifacts (regenerate with npm run qa)
+reports/screenshots/*.png
+reports/lighthouse/*.html
+reports/lighthouse/*.json
+reports/playwright/
+reports/.tmp/
+reports/qa-run-meta.json
+
+# Keep report structure
+!reports/.gitkeep
+!reports/QUALITY_AUDIT_REPORT.md
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-06-15T13:39:40.509Z",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 568,
+      "bucket": "mobile",
+      "label": "mobile-xs"
+    },
+    {
+      "width": 375,
+      "height": 812,
+      "bucket": "mobile",
+      "label": "mobile-sm"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "bucket": "mobile",
+      "label": "mobile-md"
+    },
+    {
+      "width": 414,
+      "height": 896,
+      "bucket": "mobile",
+      "label": "mobile-lg"
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "bucket": "tablet",
+      "label": "tablet"
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "bucket": "tablet",
+      "label": "tablet-landscape"
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "bucket": "desktop",
+      "label": "laptop"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "bucket": "desktop",
+      "label": "desktop"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "bucket": "ultrawide",
+      "label": "ultrawide"
+    }
+  ],
+  "routes": [
+    "landing",
+    "events",
+    "events-filtered",
+    "events-page-2",
+    "event-detail",
+    "registration"
+  ],
+  "files": [
+    "event-detail--desktop--1280x800.png",
+    "event-detail--desktop--1440x900.png",
+    "event-detail--mobile--320x568.png",
+    "event-detail--mobile--375x812.png",
+    "event-detail--mobile--390x844.png",
+    "event-detail--mobile--414x896.png",
+    "event-detail--tablet--1024x768.png",
+    "event-detail--tablet--768x1024.png",
+    "event-detail--ultrawide--1920x1080.png",
+    "events--desktop--1280x800.png",
+    "events--desktop--1440x900.png",
+    "events--mobile--320x568.png",
+    "events--mobile--375x812.png",
+    "events--mobile--390x844.png",
+    "events--mobile--414x896.png",
+    "events--tablet--1024x768.png",
+    "events--tablet--768x1024.png",
+    "events--ultrawide--1920x1080.png",
+    "events-filtered--desktop--1280x800.png",
+    "events-filtered--desktop--1440x900.png",
+    "events-filtered--mobile--320x568.png",
+    "events-filtered--mobile--375x812.png",
+    "events-filtered--mobile--390x844.png",
+    "events-filtered--mobile--414x896.png",
+    "events-filtered--tablet--1024x768.png",
+    "events-filtered--tablet--768x1024.png",
+    "events-filtered--ultrawide--1920x1080.png",
+    "events-page-2--desktop--1280x800.png",
+    "events-page-2--desktop--1440x900.png",
+    "events-page-2--mobile--320x568.png",
+    "events-page-2--mobile--375x812.png",
+    "events-page-2--mobile--390x844.png",
+    "events-page-2--mobile--414x896.png",
+    "events-page-2--tablet--1024x768.png",
+    "events-page-2--tablet--768x1024.png",
+    "events-page-2--ultrawide--1920x1080.png",
+    "landing--desktop--1280x800.png",
+    "landing--desktop--1440x900.png",
+    "landing--mobile--320x568.png",
+    "landing--mobile--375x812.png",
+    "landing--mobile--390x844.png",
+    "landing--mobile--414x896.png",
+    "landing--tablet--1024x768.png",
+    "landing--tablet--768x1024.png",
+    "landing--ultrawide--1920x1080.png",
+    "registration--desktop--1280x800.png",
+    "registration--desktop--1440x900.png",
+    "registration--mobile--320x568.png",
+    "registration--mobile--375x812.png",
+    "registration--mobile--390x844.png",
+    "registration--mobile--414x896.png",
+    "registration--tablet--1024x768.png",
+    "registration--tablet--768x1024.png",
+    "registration--ultrawide--1920x1080.png"
+  ]
+}
