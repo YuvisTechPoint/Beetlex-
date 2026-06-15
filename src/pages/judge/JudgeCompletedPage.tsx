@@ -5,7 +5,7 @@ import { format } from 'date-fns'
 import { ArrowLeft, Eye } from 'lucide-react'
 import { getJudgeSubmission } from '@/api/judges'
 import { Header } from '@/components/layout/Header'
-import { ProjectDetail } from '@/pages/judge/JudgeDashboardPage'
+import { ProjectDetail, computeTotalScore } from '@/features/judge'
 import { useJudgeQueue } from '@/hooks/useJudgeQueue'
 import { useAuth } from '@/hooks/useAuth'
 import { Badge } from '@/components/ui/badge'
@@ -20,15 +20,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-
-function computeTotalScore(values: {
-  innovation: number
-  technicalExecution: number
-  impact: number
-  presentation: number
-}) {
-  return values.innovation + values.technicalExecution + values.impact + values.presentation
-}
 
 export default function JudgeCompletedPage() {
   const { user } = useAuth()

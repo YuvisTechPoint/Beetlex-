@@ -1,6 +1,8 @@
 import type { Event } from '@/types'
 import { createBeetlexSponsors, pickShowcaseSponsors } from '@/mocks/data/sponsors'
 import { extraMockEvents } from '@/mocks/data/extraEvents'
+import { mockTeams } from '@/mocks/data/teams'
+import { countParticipantsForEvent } from '@/mocks/data/scaleTeams'
 
 const coreMockEvents: Event[] = [
   {
@@ -10,7 +12,7 @@ const coreMockEvents: Event[] = [
     description:
       'BeetleX AI Forge is a 48-hour global hackathon focused on pushing the boundaries of artificial intelligence and machine learning. Participants will tackle real-world challenges across computer vision, natural language processing, and autonomous systems. Whether you are fine-tuning LLMs, building RAG pipelines, or deploying edge AI models, this is your arena to innovate. Top teams receive mentorship from industry leaders, cloud credits, and fast-track interviews at partner companies.',
     rules:
-      'All code must be written during the hackathon window. Open-source libraries are permitted. Teams of 2–4 members. One submission per team. Plagiarism or use of pre-built projects results in disqualification. Judges\' decisions are final.',
+      'All code must be written during the hackathon window. Open-source libraries are permitted. Register individually or in teams of 1–4 members. One submission per team. Plagiarism or use of pre-built projects results in disqualification. Judges\' decisions are final.',
     eligibility:
       'Open to students and professionals worldwide aged 16+. Valid government ID required. Previous BeetleX winners may participate but are ineligible for repeat grand prizes.',
     status: 'upcoming',
@@ -70,10 +72,10 @@ const coreMockEvents: Event[] = [
     judgingDate: '2026-08-25T10:00:00.000Z',
     resultsDate: '2026-08-26T18:00:00.000Z',
     participantCount: 0,
-    teamMinSize: 2,
+    teamMinSize: 1,
     teamMaxSize: 4,
     faqs: [
-      { question: 'Can I participate solo?', answer: 'No. Teams must have 2–4 members. You can find teammates via our Discord matching channel after registration opens.' },
+      { question: 'Can I participate solo?', answer: 'Yes. Choose individual registration during signup, or create a team and invite others later. Teams may have 1–4 members.' },
       { question: 'Do I need a GPU?', answer: 'Not required. We provide cloud GPU credits to all registered teams via our NVIDIA and Replicate partnerships.' },
       { question: 'Which LLM APIs are allowed?', answer: 'Any API is permitted including OpenAI, Anthropic, and open-source models. Document API usage in your README.' },
       { question: 'Is there an age limit?', answer: 'Participants must be 16 or older. Minors require parental consent submitted during registration.' },
@@ -236,7 +238,7 @@ const coreMockEvents: Event[] = [
     submissionDeadline: '2026-06-13T00:00:00.000Z',
     judgingDate: '2026-06-14T10:00:00.000Z',
     resultsDate: '2026-06-15T16:00:00.000Z',
-    participantCount: 412,
+    participantCount: countParticipantsForEvent(mockTeams, 'evt-active-1'),
     teamMinSize: 2,
     teamMaxSize: 4,
     faqs: [

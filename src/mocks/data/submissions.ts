@@ -1,6 +1,8 @@
 import type { Submission } from '@/types'
+import { generateScaleSubmissions } from './scaleTeams'
+import { mockTeams } from './teams'
 
-export const mockSubmissions: Submission[] = [
+const coreSubmissions: Submission[] = [
   {
     id: 'sub-1',
     teamId: 'team-1',
@@ -456,6 +458,12 @@ export const mockSubmissions: Submission[] = [
     ],
   },
 ]
+
+const scaleSubmissions = generateScaleSubmissions(
+  mockTeams.filter((team) => team.id.startsWith('team-scale')),
+)
+
+export const mockSubmissions: Submission[] = [...coreSubmissions, ...scaleSubmissions]
 
 export const mockSubmissionById = Object.fromEntries(
   mockSubmissions.map((submission) => [submission.id, submission]),

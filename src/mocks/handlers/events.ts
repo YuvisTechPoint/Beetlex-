@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw'
 import { randomGetDelay, randomMutateDelay } from '@/mocks/utils'
+import { getEventResources } from '@/mocks/data/resources'
 import { db } from './db'
 import { generateId, jsonError, requireAuth } from './helpers'
 import type { Registration, Team } from '@/types'
@@ -62,6 +63,17 @@ export const eventHandlers = [
     }
     return HttpResponse.json(event, {
       headers: { 'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60' },
+    })
+  }),
+
+  http.get('/api/events/:id/resources', async ({ params }) => {
+    await randomGetDelay()
+    const event = db.events.find((e) => e.id === params.id)
+    if (!event) {
+      return jsonError('NOT_FOUND', 'Event not found', 404)
+    }
+    return HttpResponse.json(getEventResources(event.id), {
+      headers: { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120' },
     })
   }),
 

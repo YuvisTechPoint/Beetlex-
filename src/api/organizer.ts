@@ -76,8 +76,37 @@ export function getOrganizerStats() {
   return apiClient.get<OrganizerStats>('/organizer/stats')
 }
 
-export function getParticipants() {
-  return apiClient.get<OrganizerParticipant[]>('/organizer/participants')
+export interface PaginatedResponse<T> {
+  data: T[]
+  total: number
+  page: number
+  pageSize: number
+  totalPages: number
+}
+
+export interface ParticipantQuery {
+  page?: number
+  pageSize?: number
+  q?: string
+  trackId?: string
+  status?: string
+  sort?: string
+  sortDir?: 'asc' | 'desc'
+}
+
+export function getParticipants(params?: ParticipantQuery) {
+  const search = new URLSearchParams()
+  if (params?.page) search.set('page', String(params.page))
+  if (params?.pageSize) search.set('pageSize', String(params.pageSize))
+  if (params?.q) search.set('q', params.q)
+  if (params?.trackId) search.set('trackId', params.trackId)
+  if (params?.status) search.set('status', params.status)
+  if (params?.sort) search.set('sort', params.sort)
+  if (params?.sortDir) search.set('sortDir', params.sortDir)
+  const query = search.toString()
+  return apiClient.get<PaginatedResponse<OrganizerParticipant>>(
+    `/organizer/participants${query ? `?${query}` : ''}`,
+  )
 }
 
 export function getOrganizerSubmissions() {

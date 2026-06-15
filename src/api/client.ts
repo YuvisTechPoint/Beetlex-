@@ -1,3 +1,5 @@
+import { ensureMswStarted } from '@/lib/mswBootstrap'
+import { resolveStaticApiUrl } from '@/lib/staticApi'
 import { clearAuthSession, getAuthToken } from '@/store/authStore'
 import type { ApiError } from '@/types'
 
@@ -44,8 +46,12 @@ async function parseError(response: Response): Promise<ApiClientError> {
 }
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
+  await ensureMswStarted()
+
   const { body, headers, ...rest } = options
-  const response = await fetch(`${BASE_URL}${path}`, {
+  const staticUrl = resolveStaticApiUrl(path)
+  const url = staticUrl ?? `${BASE_URL}${path}`
+  const response = await fetch(url, {
     ...rest,
     headers: buildHeaders(body, headers),
     body:

@@ -14,6 +14,62 @@ export const registrationHandlers = [
     return HttpResponse.json(registrations)
   }),
 
+  http.get('/api/registrations/check-email', async ({ request }) => {
+    await randomGetDelay()
+    const auth = requireAuth(request)
+    if (auth instanceof Response) return auth
+
+    const url = new URL(request.url)
+    const eventId = url.searchParams.get('eventId') ?? ''
+    const email = (url.searchParams.get('email') ?? '').trim().toLowerCase()
+
+    if (!eventId || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return HttpResponse.json({
+        available: false,
+        reason: 'invalid_email',
+        message: 'Enter a valid email address',
+      })
+    }
+
+    const user = db.users.find((u) => u.email.toLowerCase() === email)
+    const existingForUser = db.registrations.find(
+      (r) => r.userId === auth.id && r.eventId === eventId,
+    )
+    if (existingForUser) {
+      return HttpResponse.json({
+        available: false,
+        reason: 'already_registered',
+        message: 'You are already registered for this event',
+      })
+    }
+
+    const takenByOther = db.registrations.some((r) => {
+      if (r.eventId !== eventId) return false
+      const member = db.teams
+        .find((t) => t.id === r.teamId)
+        ?.members.find((m) => m.email.toLowerCase() === email)
+      return Boolean(member && r.userId !== auth.id)
+    })
+
+    if (takenByOther) {
+      return HttpResponse.json({
+        available: false,
+        reason: 'taken_by_other',
+        message: 'This email is already registered on another team for this event',
+      })
+    }
+
+    if (user && user.id !== auth.id) {
+      return HttpResponse.json({
+        available: false,
+        reason: 'taken_by_other',
+        message: 'This email is associated with another account',
+      })
+    }
+
+    return HttpResponse.json({ available: true })
+  }),
+
   http.get('/api/teams/me', async ({ request }) => {
     await randomGetDelay()
     const auth = requireAuth(request)

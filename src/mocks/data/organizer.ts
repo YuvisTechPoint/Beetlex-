@@ -1,7 +1,36 @@
 import { mockTeams } from './teams'
 import { mockSubmissions } from './submissions'
-import { mockRegistrations } from './registrations'
 import { mockUsers, mockUserById } from './users'
+import { countParticipantsForEvent } from './scaleTeams'
+
+const ACTIVE_EVENT_ID = 'evt-active-1'
+const activeEventTeams = mockTeams.filter((team) => team.eventId === ACTIVE_EVENT_ID)
+const activeEventSubmissions = mockSubmissions.filter((sub) => sub.eventId === ACTIVE_EVENT_ID)
+
+function trackBreakdown() {
+  const trackIds = [
+    'evt-active-1-track-devtools',
+    'evt-active-1-track-ai',
+    'evt-active-1-track-ml',
+    'evt-active-1-track-web3',
+  ] as const
+  const names: Record<string, string> = {
+    'evt-active-1-track-devtools': 'IDE & Editor Extensions',
+    'evt-active-1-track-ai': 'AI Code Assistants',
+    'evt-active-1-track-ml': 'Observability & Performance',
+    'evt-active-1-track-web3': 'Web3 Dev Infrastructure',
+  }
+  return trackIds.map((trackId) => ({
+    trackId,
+    trackName: names[trackId],
+    teamCount: activeEventTeams.filter((team) => team.trackId === trackId).length,
+  }))
+}
+
+const scoredCount = activeEventSubmissions.filter(
+  (sub) => !sub.isDraft && (sub.scores?.length ?? 0) > 0,
+).length
+const submittedCount = activeEventSubmissions.filter((sub) => !sub.isDraft).length
 
 export interface OrganizerStats {
   totalParticipants: number
@@ -15,19 +44,23 @@ export interface OrganizerStats {
 }
 
 export const mockOrganizerStats: OrganizerStats = {
-  totalParticipants: mockRegistrations.length + 24,
-  totalTeams: mockTeams.length,
-  registrationsToday: 3,
-  submissionsReceived: mockSubmissions.filter((s) => !s.isDraft).length,
-  submissionsPending: mockSubmissions.filter((s) => !s.isDraft && (!s.scores || s.scores.length === 0)).length,
-  draftSubmissions: mockSubmissions.filter((s) => s.isDraft).length,
-  judgingProgress: 33,
-  tracksBreakdown: [
-    { trackId: 'evt-active-1-track-devtools', trackName: 'IDE & Editor Extensions', teamCount: 3 },
-    { trackId: 'evt-active-1-track-ai', trackName: 'AI Code Assistants', teamCount: 2 },
-    { trackId: 'evt-active-1-track-ml', trackName: 'Observability & Performance', teamCount: 3 },
-    { trackId: 'evt-active-1-track-web3', trackName: 'Web3 Dev Infrastructure', teamCount: 2 },
-  ],
+  totalParticipants: countParticipantsForEvent(mockTeams, ACTIVE_EVENT_ID),
+  totalTeams: activeEventTeams.length,
+  registrationsToday: Math.max(
+    3,
+    activeEventTeams.flatMap((team) => team.members).filter((member) => {
+      const joined = new Date(member.joinedAt).getTime()
+      return joined >= Date.now() - 86_400_000
+    }).length,
+  ),
+  submissionsReceived: submittedCount,
+  submissionsPending: activeEventSubmissions.filter(
+    (sub) => !sub.isDraft && (sub.scores?.length ?? 0) === 0,
+  ).length,
+  draftSubmissions: activeEventSubmissions.filter((sub) => sub.isDraft).length,
+  judgingProgress:
+    submittedCount > 0 ? Math.round((scoredCount / submittedCount) * 100) : 0,
+  tracksBreakdown: trackBreakdown(),
 }
 
 export interface OrganizerParticipant {

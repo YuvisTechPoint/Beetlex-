@@ -79,6 +79,11 @@ export function useLeaderboardStream({ eventId, enabled = true }: UseLeaderboard
   const connectStream = useCallback(() => {
     if (!enabled || !snapshotQuery.data?.published) return
 
+    if (import.meta.env.VITE_STATIC_API) {
+      setConnectionMode('degraded')
+      return
+    }
+
     eventSourceRef.current?.close()
     setConnectionMode('connecting')
 

@@ -66,6 +66,14 @@ export interface FAQ {
   answer: string
 }
 
+export interface EventResource {
+  id: string
+  title: string
+  description: string
+  href: string
+  icon: 'book' | 'file' | 'calendar' | 'message'
+}
+
 export interface User {
   id: string
   name: string

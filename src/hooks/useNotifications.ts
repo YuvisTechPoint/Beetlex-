@@ -10,7 +10,7 @@ export function useNotifications(options: UseNotificationsOptions = {}) {
   return useQuery({
     queryKey: ['notifications'],
     queryFn: getNotifications,
-    refetchInterval: 15_000,
+    refetchInterval: 30_000,
     enabled,
   })
 }

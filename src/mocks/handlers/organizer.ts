@@ -3,6 +3,7 @@ import { randomGetDelay, randomMutateDelay } from '@/mocks/utils'
 import { db } from './db'
 import { generateId, jsonError, requireAuth } from './helpers'
 import type { Announcement } from '@/types'
+import type { OrganizerParticipant } from '@/api/organizer'
 import {
   mockOrganizerActivity,
   mockOrganizerJudges,
@@ -18,7 +19,7 @@ const TRACK_NAMES: Record<string, string> = {
   'evt-active-1-track-web3': 'Web3 Dev Infrastructure',
 }
 
-function buildParticipants() {
+function buildParticipants(): OrganizerParticipant[] {
   return db.teams.flatMap((team) =>
     team.members.map((member) => {
       const status =
@@ -43,6 +44,60 @@ function buildParticipants() {
       }
     }),
   )
+}
+
+function paginateParticipants(request: Request) {
+  const url = new URL(request.url)
+  const page = Math.max(1, Number.parseInt(url.searchParams.get('page') ?? '1', 10))
+  const pageSizeRaw = url.searchParams.get('pageSize')
+  const pageSize = pageSizeRaw ? Math.min(500, Math.max(1, Number.parseInt(pageSizeRaw, 10))) : 0
+  const q = url.searchParams.get('q')?.toLowerCase().trim()
+  const trackId = url.searchParams.get('trackId')
+  const status = url.searchParams.get('status')
+  const sort = url.searchParams.get('sort') ?? 'registeredAt'
+  const sortDir = url.searchParams.get('sortDir') === 'asc' ? 'asc' : 'desc'
+
+  let rows: OrganizerParticipant[] = buildParticipants()
+  if (rows.length === 0) {
+    rows = mockOrganizerParticipants
+  }
+
+  if (q) {
+    rows = rows.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.email.toLowerCase().includes(q) ||
+        p.teamName.toLowerCase().includes(q),
+    )
+  }
+  if (trackId && trackId !== 'all') {
+    rows = rows.filter((p) => p.trackId === trackId)
+  }
+  if (status && status !== 'all') {
+    rows = rows.filter((p) => p.status === status)
+  }
+
+  const sortKey = sort === 'index' ? 'name' : sort
+  rows = [...rows].sort((a, b) => {
+    const av = String(a[sortKey as keyof typeof a] ?? '')
+    const bv = String(b[sortKey as keyof typeof b] ?? '')
+    const cmp = av.localeCompare(bv, undefined, { numeric: true })
+    return sortDir === 'asc' ? cmp : -cmp
+  })
+
+  const total = rows.length
+  const effectivePageSize = pageSize > 0 ? pageSize : total || 1
+  const totalPages = pageSize > 0 ? Math.max(1, Math.ceil(total / pageSize)) : 1
+  const start = pageSize > 0 ? (page - 1) * pageSize : 0
+  const data = pageSize > 0 ? rows.slice(start, start + pageSize) : rows
+
+  return {
+    data,
+    total,
+    page: pageSize > 0 ? page : 1,
+    pageSize: effectivePageSize,
+    totalPages,
+  }
 }
 
 function buildSubmissions() {
@@ -152,10 +207,8 @@ export const organizerHandlers = [
       return jsonError('FORBIDDEN', 'Organizer access required', 403)
     }
 
-    const participants = buildParticipants()
-    return HttpResponse.json(
-      participants.length > 0 ? participants : mockOrganizerParticipants,
-    )
+    const payload = paginateParticipants(request)
+    return HttpResponse.json(payload)
   }),
 
   http.get('/api/organizer/submissions', async ({ request }) => {

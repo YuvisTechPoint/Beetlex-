@@ -1,5 +1,5 @@
 import { apiClient } from './client'
-import type { Announcement, Event, PaginatedResponse } from '@/types'
+import type { Announcement, Event, EventResource, PaginatedResponse } from '@/types'
 
 export interface EventsFilters {
   status?: Event['status']
@@ -66,4 +66,8 @@ export function registerForEvent(
 
 export function getEventAnnouncements(eventId: string) {
   return apiClient.get<Announcement[]>(`/events/${eventId}/announcements`)
+}
+
+export function getEventResources(eventId: string) {
+  return apiClient.get<EventResource[]>(`/events/${eventId}/resources`)
 }

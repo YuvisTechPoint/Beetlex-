@@ -1,6 +1,10 @@
 import type { Team } from '@/types'
+import { generateScaleTeams } from './scaleTeams'
 
-export const mockTeams: Team[] = [
+const SCALE_TEAM_COUNT = 380
+const scaleTeams = generateScaleTeams(SCALE_TEAM_COUNT)
+
+const coreTeams: Team[] = [
   {
     id: 'team-1',
     name: 'CodeFlow Labs',
@@ -291,6 +295,8 @@ export const mockTeams: Team[] = [
     ],
   },
 ]
+
+export const mockTeams: Team[] = [...coreTeams, ...scaleTeams]
 
 export const mockTeamById = Object.fromEntries(
   mockTeams.map((team) => [team.id, team]),

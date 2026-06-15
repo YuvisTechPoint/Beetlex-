@@ -27,15 +27,10 @@ function resortLeaderboard(entries: LeaderboardEntry[]): LeaderboardEntry[] {
 export const leaderboardStreamHandlers = [
   http.get('/api/leaderboard/:eventId/stream', ({ request, params }) => {
     const user = getUserFromRequest(request)
-    if (!user) {
-      return new Response(JSON.stringify({ code: 'UNAUTHORIZED', message: 'Authentication required' }), {
-        status: 401,
-        headers: { 'Content-Type': 'application/json' },
-      })
-    }
-
+    const isOrganizer = user?.role === 'organizer'
     const eventId = params.eventId as string
-    if (eventId !== 'evt-active-1' || (!db.leaderboardPublished && user.role !== 'organizer')) {
+
+    if (eventId !== 'evt-active-1' || (!db.leaderboardPublished && !isOrganizer)) {
       return new Response(null, { status: 204 })
     }
 

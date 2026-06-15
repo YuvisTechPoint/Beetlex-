@@ -8,10 +8,12 @@ import { DevToolbar } from '@/components/layout/DevToolbar'
 import { HashScrollHandler } from '@/components/layout/HashScrollHandler'
 import { PageWrapper } from '@/components/layout/PageWrapper'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { NetworkStatusBanner } from '@/components/shared/NetworkStatusBanner'
 import { PageSkeleton } from '@/components/shared/PageSkeleton'
 import { useUiStore } from '@/store/uiStore'
 
-const LandingPage = lazy(() => import('@/pages/landing/LandingPage'))
+import LandingPage from '@/pages/landing/LandingPage'
+
 const EventListingPage = lazy(() => import('@/pages/events/EventListingPage'))
 const EventDetailPage = lazy(() => import('@/pages/events/EventDetailPage'))
 const RegistrationPage = lazy(() => import('@/pages/registration/RegistrationPage'))
@@ -31,7 +33,14 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 30_000,
+      retry: 2,
+      retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 8_000),
+      refetchOnWindowFocus: true,
+      networkMode: 'offlineFirst',
+    },
+    mutations: {
       retry: 1,
+      networkMode: 'offlineFirst',
     },
   },
 })
@@ -57,6 +66,7 @@ export default function App() {
         <DarkModeSync />
         <HashScrollHandler />
         <PageWrapper>
+          <NetworkStatusBanner />
           <ErrorBoundary>
             <Suspense fallback={<PageSkeleton />}>
               <Routes>

@@ -5,6 +5,17 @@ export function getMyRegistrations() {
   return apiClient.get<Registration[]>('/registrations/me')
 }
 
+export interface EmailAvailabilityResult {
+  available: boolean
+  reason?: 'already_registered' | 'invalid_email' | 'taken_by_other'
+  message?: string
+}
+
+export function checkRegistrationEmail(eventId: string, email: string) {
+  const params = new URLSearchParams({ eventId, email })
+  return apiClient.get<EmailAvailabilityResult>(`/registrations/check-email?${params}`)
+}
+
 export interface JoinTeamPayload {
   inviteCode: string
 }

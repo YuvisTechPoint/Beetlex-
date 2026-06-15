@@ -31,6 +31,7 @@ export async function dismissOverlays(page: Page) {
 
 export async function waitForAppReady(page: Page) {
   await page.waitForSelector('#main-content', { state: 'visible', timeout: 30_000 })
-  await page.waitForLoadState('networkidle')
-  await page.waitForTimeout(300)
+  // Avoid networkidle — SSE notification/leaderboard streams keep connections open when auth is seeded.
+  await page.waitForLoadState('domcontentloaded')
+  await page.waitForTimeout(400)
 }

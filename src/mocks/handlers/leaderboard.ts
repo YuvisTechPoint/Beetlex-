@@ -1,44 +1,52 @@
 import { http, HttpResponse } from 'msw'
 import { randomGetDelay, randomMutateDelay } from '@/mocks/utils'
 import { db } from './db'
-import { generateId, jsonError, requireAuth } from './helpers'
+import { generateId, getUserFromRequest, jsonError } from './helpers'
+
+function leaderboardForEvent(eventId: string) {
+  if (eventId !== 'evt-active-1') {
+    return { published: false, entries: [] as typeof db.leaderboard }
+  }
+  return { published: db.leaderboardPublished, entries: db.leaderboard }
+}
 
 export const leaderboardHandlers = [
   http.get('/api/leaderboard/:eventId', async ({ params, request }) => {
     await randomGetDelay()
-    const auth = requireAuth(request)
-    if (auth instanceof Response) return auth
-
     const eventId = params.eventId as string
-    if (eventId !== 'evt-active-1') {
+    const user = getUserFromRequest(request)
+    const isOrganizer = user?.role === 'organizer'
+    const payload = leaderboardForEvent(eventId)
+
+    if (!payload.published && !isOrganizer) {
       return HttpResponse.json({ published: false, entries: [] })
     }
 
-    const isOrganizer = auth.role === 'organizer'
-    if (!db.leaderboardPublished && !isOrganizer) {
-      return HttpResponse.json({ published: false, entries: [] })
-    }
-
-    return HttpResponse.json({ published: db.leaderboardPublished, entries: db.leaderboard })
+    return HttpResponse.json(payload, {
+      headers: { 'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=30' },
+    })
   }),
 
   http.get('/api/leaderboard/:eventId/status', async ({ params, request }) => {
     await randomGetDelay()
-    const auth = requireAuth(request)
-    if (auth instanceof Response) return auth
-
+    const user = getUserFromRequest(request)
+    const isOrganizer = user?.role === 'organizer'
     const eventId = params.eventId as string
-    if (eventId !== 'evt-active-1') {
+    const { published } = leaderboardForEvent(eventId)
+
+    if (!published && !isOrganizer) {
       return HttpResponse.json({ published: false })
     }
 
-    return HttpResponse.json({ published: db.leaderboardPublished })
+    return HttpResponse.json({ published })
   }),
 
   http.put('/api/leaderboard/:eventId/publish', async ({ params, request }) => {
     await randomMutateDelay()
-    const auth = requireAuth(request)
-    if (auth instanceof Response) return auth
+    const auth = getUserFromRequest(request)
+    if (!auth) {
+      return jsonError('UNAUTHORIZED', 'Authentication required', 401)
+    }
     if (auth.role !== 'organizer') {
       return jsonError('FORBIDDEN', 'Organizer access required', 403)
     }
