@@ -23,7 +23,7 @@ export function DevToolbar() {
   return (
     <div
       className={cn(
-        'fixed bottom-4 left-4 z-50 flex flex-wrap items-center gap-2 rounded-lg border bg-card p-2 shadow-lg',
+        'fixed bottom-20 left-4 z-50 flex max-w-[calc(100vw-2rem)] flex-wrap items-center gap-2 rounded-lg border bg-card p-2 shadow-lg md:bottom-4',
       )}
       aria-label="Development role switcher"
     >

@@ -132,19 +132,19 @@ function HeroContent({
             <p className="text-xl font-bold text-primary sm:text-3xl md:text-4xl">
               <AnimatedCounter end={participants} />
             </p>
-            <p className="mt-1 text-[10px] text-muted-foreground sm:text-sm">Participants</p>
+            <p className="mt-1 text-xs text-muted-foreground sm:text-sm">Participants</p>
           </div>
           <div className="flex flex-col items-center text-center">
             <p className="text-xl font-bold text-primary sm:text-3xl md:text-4xl">
               $<AnimatedCounter end={Math.round(prizePool / 1000)} suffix="K+" />
             </p>
-            <p className="mt-1 text-[10px] text-muted-foreground sm:text-sm">Prize Pool</p>
+            <p className="mt-1 text-xs text-muted-foreground sm:text-sm">Prize Pool</p>
           </div>
           <div className="flex flex-col items-center text-center">
             <p className="text-xl font-bold text-primary sm:text-3xl md:text-4xl">
               <AnimatedCounter end={trackCount} />
             </p>
-            <p className="mt-1 text-[10px] text-muted-foreground sm:text-sm">Tracks</p>
+            <p className="mt-1 text-xs text-muted-foreground sm:text-sm">Tracks</p>
           </div>
         </motion.div>
       ) : (

@@ -83,7 +83,7 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
               <TabsTrigger
                 key={track.id}
                 value={track.id}
-                className="rounded-md border border-transparent data-[state=active]:border-border data-[state=active]:bg-surface"
+                className="max-w-full whitespace-normal text-center text-xs sm:text-sm rounded-md border border-transparent data-[state=active]:border-border data-[state=active]:bg-surface"
               >
                 {track.name}
               </TabsTrigger>
@@ -99,7 +99,7 @@ export function PrizesTracksSection({ event, isLoading }: PrizesTracksSectionPro
               <TabsContent key={track.id} value={track.id} className="mt-8">
                 <div className="mx-auto max-w-3xl text-center">
                   <p className="text-subtitle">{track.description}</p>
-                  <p className="text-meta mt-4">
+                  <p className="text-meta mt-4 break-words">
                     <span className="font-medium text-foreground">Problem — </span>
                     {track.problemStatement}
                   </p>

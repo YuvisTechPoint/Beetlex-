@@ -66,10 +66,10 @@ export function RegistrationConfirmation({ event, result }: RegistrationConfirma
         </CardHeader>
         <CardContent className="space-y-4 text-left">
           {result.registrationCode && (
-            <div className="flex items-center justify-between rounded-lg border bg-muted/30 p-3">
-              <div>
+            <div className="flex flex-col gap-2 rounded-lg border bg-muted/30 p-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
                 <p className="text-xs text-muted-foreground">Registration ID</p>
-                <p className="font-mono font-semibold">{result.registrationCode}</p>
+                <p className="break-all font-mono font-semibold">{result.registrationCode}</p>
               </div>
               <Button
                 variant="ghost"
@@ -84,10 +84,10 @@ export function RegistrationConfirmation({ event, result }: RegistrationConfirma
 
           {result.inviteCode && (result.mode === 'create' || result.mode === 'solo') && (
             <>
-              <div className="flex items-center justify-between rounded-lg border bg-muted/30 p-3">
-                <div>
+              <div className="flex flex-col gap-2 rounded-lg border bg-muted/30 p-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="min-w-0">
                   <p className="text-xs text-muted-foreground">Team invite code</p>
-                  <p className="font-mono font-semibold">{result.inviteCode}</p>
+                  <p className="break-all font-mono font-semibold">{result.inviteCode}</p>
                 </div>
                 <Button
                   variant="ghost"
@@ -98,10 +98,10 @@ export function RegistrationConfirmation({ event, result }: RegistrationConfirma
                   <Copy className="h-4 w-4" />
                 </Button>
               </div>
-              <div className="flex items-center justify-between rounded-lg border bg-muted/30 p-3">
-                <div className="min-w-0 flex-1 pr-2">
+              <div className="flex flex-col gap-2 rounded-lg border bg-muted/30 p-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="min-w-0 flex-1">
                   <p className="text-xs text-muted-foreground">Team invite link</p>
-                  <p className="truncate font-mono text-sm">{inviteLink}</p>
+                  <p className="break-all font-mono text-sm sm:truncate">{inviteLink}</p>
                 </div>
                 <Button
                   variant="ghost"

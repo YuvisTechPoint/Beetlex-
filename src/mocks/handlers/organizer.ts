@@ -3,6 +3,9 @@ import { randomGetDelay, randomMutateDelay } from '@/mocks/utils'
 import { db } from './db'
 import { generateId, jsonError, requireAuth } from './helpers'
 import type { Announcement } from '@/types'
+import type { CreateEventPayload } from '@/types'
+import type { Event } from '@/types'
+import { createBeetlexSponsors } from '@/mocks/data/sponsors'
 import type { OrganizerParticipant } from '@/api/organizer'
 import {
   mockOrganizerActivity,
@@ -397,5 +400,131 @@ export const organizerHandlers = [
     const body = (await request.json()) as { entries: typeof db.leaderboard }
     db.leaderboard = body.entries
     return HttpResponse.json(db.leaderboard)
+  }),
+
+  http.post('/api/organizer/become-organizer', async ({ request }) => {
+    await randomMutateDelay()
+    const auth = requireAuth(request)
+    if (auth instanceof Response) return auth
+
+    if (auth.role === 'organizer') {
+      return HttpResponse.json({ user: auth })
+    }
+
+    const userRecord = db.users.find((entry) => entry.id === auth.id)
+    if (userRecord) {
+      userRecord.role = 'organizer'
+    }
+    auth.role = 'organizer'
+
+    db.organizerActivity.unshift({
+      id: generateId('act'),
+      message: `${auth.name} became an event organizer`,
+      createdAt: new Date().toISOString(),
+      type: 'announcement',
+    })
+
+    return HttpResponse.json({ user: auth })
+  }),
+
+  http.post('/api/organizer/events', async ({ request }) => {
+    await randomMutateDelay()
+    const auth = requireAuth(request)
+    if (auth instanceof Response) return auth
+
+    const body = (await request.json()) as CreateEventPayload
+
+    if (!body.title?.trim() || !body.tagline?.trim() || !body.tracks?.length) {
+      return jsonError('VALIDATION_ERROR', 'Title, tagline, and at least one track are required', 400)
+    }
+
+    if (auth.role !== 'organizer') {
+      const userRecord = db.users.find((entry) => entry.id === auth.id)
+      if (userRecord) {
+        userRecord.role = 'organizer'
+      }
+      auth.role = 'organizer'
+    }
+
+    const eventId = generateId('evt')
+    const now = new Date().toISOString()
+    const tracks = body.tracks.map((track, index) => ({
+      id: `${eventId}-track-${index + 1}`,
+      name: track.name.trim(),
+      description: track.description.trim(),
+      problemStatement: track.description.trim(),
+      techStack: [] as string[],
+    }))
+
+    const event: Event = {
+      id: eventId,
+      title: body.title.trim(),
+      tagline: body.tagline.trim(),
+      description: body.description.trim(),
+      rules:
+        body.rules.trim() ||
+        'All code must be written during the hackathon window. One submission per team.',
+      eligibility:
+        body.eligibility.trim() ||
+        'Open to students and professionals worldwide. Valid ID may be required.',
+      status: 'upcoming',
+      tracks,
+      prizes: tracks.map((track) => ({
+        trackId: track.id,
+        rank: 1,
+        amount: 5000,
+        currency: 'USD',
+        perks: ['Mentorship session', 'Swag kit'],
+      })),
+      sponsors: createBeetlexSponsors(`sp-${eventId.slice(-6)}`),
+      timeline: [
+        {
+          date: body.registrationOpen,
+          label: 'Registration Opens',
+          description: 'Team registration and track selection begin.',
+        },
+        {
+          date: body.registrationClose,
+          label: 'Registration Closes',
+          description: 'Last day to register or join a team.',
+        },
+        {
+          date: body.submissionDeadline,
+          label: 'Submission Deadline',
+          description: 'Final deadline for project submissions.',
+        },
+        {
+          date: body.judgingDate,
+          label: 'Judging',
+          description: 'Judges review and score all submissions.',
+        },
+        {
+          date: body.resultsDate,
+          label: 'Results',
+          description: 'Winners announced and prizes distributed.',
+        },
+      ],
+      registrationOpen: body.registrationOpen,
+      registrationClose: body.registrationClose,
+      submissionDeadline: body.submissionDeadline,
+      judgingDate: body.judgingDate,
+      resultsDate: body.resultsDate,
+      participantCount: 0,
+      teamMinSize: body.teamMinSize,
+      teamMaxSize: body.teamMaxSize,
+      faqs: [],
+      createdAt: now,
+    }
+
+    db.events.unshift(event)
+
+    db.organizerActivity.unshift({
+      id: generateId('act'),
+      message: `New hackathon created: ${event.title}`,
+      createdAt: now,
+      type: 'announcement',
+    })
+
+    return HttpResponse.json({ event, user: auth })
   }),
 ]

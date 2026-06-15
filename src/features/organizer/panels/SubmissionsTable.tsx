@@ -39,8 +39,8 @@ export function SubmissionsTable({
   onAssign,
 }: SubmissionsTableProps) {
   return (
-    <div className="overflow-hidden rounded-lg border">
-      <Table>
+    <div className="mobile-scroll-x overflow-hidden rounded-lg border sm:overflow-hidden">
+      <Table className="min-w-[640px]">
         <TableHeader>
           <TableRow>
             <TableHead>Team</TableHead>

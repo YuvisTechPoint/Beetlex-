@@ -225,6 +225,32 @@ export type OrganizerTab =
   | 'announcements'
   | 'leaderboard'
 
+export interface CreateEventTrackInput {
+  name: string
+  description: string
+}
+
+export interface CreateEventPayload {
+  title: string
+  tagline: string
+  description: string
+  rules: string
+  eligibility: string
+  registrationOpen: string
+  registrationClose: string
+  submissionDeadline: string
+  judgingDate: string
+  resultsDate: string
+  teamMinSize: number
+  teamMaxSize: number
+  tracks: CreateEventTrackInput[]
+}
+
+export interface CreateEventResponse {
+  event: Event
+  user: User
+}
+
 // ─── Registration ──────────────────────────────────────────────────────────
 
 export interface WizardStep {

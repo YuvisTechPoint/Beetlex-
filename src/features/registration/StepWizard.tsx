@@ -65,23 +65,34 @@ export function StepWizard({
 
       <div className="min-h-[320px]">{children}</div>
 
-      <div className="flex items-center justify-between border-t pt-6">
+      <div className="flex flex-col-reverse gap-3 border-t pt-6 sm:flex-row sm:items-center sm:justify-between">
         <Button
           type="button"
           variant="outline"
           onClick={onBack}
           disabled={isFirstStep || isSubmitting}
+          className="w-full sm:w-auto"
         >
           <ChevronLeft className="mr-1 h-4 w-4" />
           Back
         </Button>
 
         {isLastStep ? (
-          <Button type="button" onClick={onSubmit} disabled={isSubmitting || nextDisabled}>
+          <Button
+            type="button"
+            onClick={onSubmit}
+            disabled={isSubmitting || nextDisabled}
+            className="w-full sm:w-auto"
+          >
             {isSubmitting ? 'Submitting…' : 'Complete Registration'}
           </Button>
         ) : (
-          <Button type="button" onClick={onNext} disabled={nextDisabled}>
+          <Button
+            type="button"
+            onClick={onNext}
+            disabled={nextDisabled}
+            className="w-full sm:w-auto"
+          >
             Next
             <ChevronRight className="ml-1 h-4 w-4" />
           </Button>

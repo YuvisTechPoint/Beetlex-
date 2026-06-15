@@ -97,7 +97,7 @@ export function DashboardSidebar({
       aria-label="Dashboard navigation"
       aria-expanded={sidebarOpen}
     >
-      <nav className="sticky top-14 flex h-[calc(100vh-3.5rem)] flex-col p-3">
+      <nav className="sticky top-[var(--site-header-height,3.5rem)] flex h-[calc(100vh-var(--site-header-height,3.5rem))] flex-col p-3">
         <div className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto">
           {NAV_ITEMS.map((item) => (
             <NavButton

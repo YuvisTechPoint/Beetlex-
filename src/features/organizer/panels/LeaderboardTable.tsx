@@ -25,8 +25,8 @@ type LeaderboardTableProps = {
 
 export function LeaderboardTable({ entries, scoreBreakdowns, trackName }: LeaderboardTableProps) {
   return (
-    <div className="overflow-hidden rounded-lg border">
-      <Table>
+    <div className="mobile-scroll-x overflow-hidden rounded-lg border sm:overflow-hidden">
+      <Table className="min-w-[640px]">
         <TableHeader>
           <TableRow>
             <TableHead className="w-16">Rank</TableHead>

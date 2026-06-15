@@ -13,14 +13,14 @@ export function HeaderActions() {
 
   return (
     <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-1.5">
-      <div className="flex items-center">
+      <div className="flex items-center gap-0.5 sm:gap-1">
         <DarkModeToggle />
         {isAuthenticated && <NotificationBell />}
       </div>
 
       {isAuthenticated && user ? (
         <>
-          <Button size="sm" asChild className="hidden h-9 rounded-full px-4 sm:inline-flex">
+          <Button size="sm" asChild className="hidden h-9 shrink-0 rounded-full px-4 lg:inline-flex">
             <Link to={dashboardPathForRole(user.role)}>{dashboardLabelForRole(user.role)}</Link>
           </Button>
           <AuthMenu />
@@ -35,7 +35,7 @@ export function HeaderActions() {
           >
             Sign In
           </Button>
-          <Button size="sm" asChild className="h-9 rounded-full px-4">
+          <Button size="sm" asChild className="hidden h-9 rounded-full px-4 sm:inline-flex">
             <Link to="/events">Register Now</Link>
           </Button>
         </>

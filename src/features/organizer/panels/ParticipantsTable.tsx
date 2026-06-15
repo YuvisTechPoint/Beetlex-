@@ -98,11 +98,14 @@ export function ParticipantsTable({
   return (
     <>
       <div
-        className={cn('overflow-hidden rounded-lg border', useVirtual && 'overflow-auto')}
+        className={cn(
+          'mobile-scroll-x overflow-hidden rounded-lg border sm:mx-0 sm:overflow-hidden',
+          useVirtual && 'overflow-auto',
+        )}
         style={useVirtual ? { maxHeight: VIRTUAL_VIEWPORT_HEIGHT } : undefined}
         onScroll={useVirtual ? (e) => onScrollTopChange(e.currentTarget.scrollTop) : undefined}
       >
-        <Table>
+        <Table className="min-w-[720px]">
           <TableHeader className={useVirtual ? 'sticky top-0 z-10 bg-background' : undefined}>
             <TableRow>
               <TableHead className="w-10">

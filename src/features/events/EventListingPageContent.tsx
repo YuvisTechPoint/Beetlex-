@@ -12,7 +12,7 @@ import type { EventListingPageState } from './useEventListingPage'
 
 export function EventListingPageContent({
   filters,
-  isOrganizer,
+  isAuthenticated,
   tracks,
   recommended,
   recommendedLoading,
@@ -45,10 +45,15 @@ export function EventListingPageContent({
                 {total} events · filter by status, track, or prize pool
               </p>
             </div>
-            {isOrganizer && (
-              <Button asChild>
-                <Link to="/organizer">Create Event</Link>
-              </Button>
+            {isAuthenticated && (
+              <div className="flex flex-wrap gap-2">
+                <Button asChild variant="outline">
+                  <Link to="/organize">Organize</Link>
+                </Button>
+                <Button asChild>
+                  <Link to="/organize/create">Create Event</Link>
+                </Button>
+              </div>
             )}
           </header>
 
@@ -56,7 +61,7 @@ export function EventListingPageContent({
             <RecommendedSection events={recommended} isLoading={recommendedLoading} />
           )}
 
-          <div className="sticky top-16 z-30 -mx-4 border-b bg-background/95 px-4 py-4 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+          <div className="sticky top-[var(--site-header-height,4rem)] z-30 -mx-4 border-b bg-background/95 px-4 py-4 backdrop-blur supports-[backdrop-filter]:bg-background/80">
             <EventFilters filters={filters} onChange={handleFiltersChange} tracks={tracks} />
             <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-sm text-muted-foreground">
               <span>

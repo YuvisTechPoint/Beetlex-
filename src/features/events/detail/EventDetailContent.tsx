@@ -30,8 +30,8 @@ export function EventDetailContent({
 }: EventDetailContentProps) {
   return (
     <>
-      <div className="container mx-auto grid gap-8 px-4 py-8 lg:grid-cols-3 lg:gap-10">
-        <div className="space-y-10 lg:col-span-2">
+      <div className="container mx-auto grid gap-8 px-4 py-6 sm:py-8 lg:grid-cols-3 lg:gap-10">
+        <div className="order-2 space-y-8 sm:space-y-10 lg:order-1 lg:col-span-2">
           <EventAboutTabs event={event} />
           <EventTracksSection event={event} prizesByTrack={prizesByTrack} />
           {event.id === LIVE_LEADERBOARD_EVENT_ID && (
@@ -45,13 +45,15 @@ export function EventDetailContent({
           <EventSponsorsFaqSection faqs={event.faqs} showcaseSponsors={showcaseSponsors} />
         </div>
 
-        <EventRegistrationSidebar
-          event={event}
-          isRegistered={isRegistered}
-          registrationOpen={registrationOpen}
-          isAuthenticated={isAuthenticated}
-          onSignIn={onSignIn}
-        />
+        <div className="order-1 lg:order-2 lg:col-span-1">
+          <EventRegistrationSidebar
+            event={event}
+            isRegistered={isRegistered}
+            registrationOpen={registrationOpen}
+            isAuthenticated={isAuthenticated}
+            onSignIn={onSignIn}
+          />
+        </div>
       </div>
 
       <EventMobileCta

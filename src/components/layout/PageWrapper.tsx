@@ -7,7 +7,7 @@ interface PageWrapperProps {
 
 export function PageWrapper({ children, className }: PageWrapperProps) {
   return (
-    <div className={cn('min-h-screen flex flex-col', className)}>
+    <div className={cn('min-h-screen flex flex-col overflow-x-clip', className)}>
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"

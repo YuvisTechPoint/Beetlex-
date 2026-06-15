@@ -59,12 +59,13 @@ export function EventFilters({ filters, onChange, tracks }: EventFiltersProps) {
         />
       </div>
 
-      <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by status">
+      <div className="mobile-scroll-x flex gap-2 pb-1 sm:flex-wrap sm:pb-0" role="group" aria-label="Filter by status">
         {STATUS_OPTIONS.map((option) => (
           <Button
             key={option.value}
             variant={filters.status === option.value ? 'default' : 'outline'}
             size="sm"
+            className="shrink-0"
             onClick={() => update({ status: option.value })}
             aria-pressed={filters.status === option.value}
           >

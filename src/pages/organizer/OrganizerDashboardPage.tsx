@@ -65,10 +65,10 @@ export default function OrganizerDashboardPage() {
           </div>
         </div>
         <nav
-          className="container mx-auto max-w-7xl overflow-x-auto px-4 pb-0"
+          className="container mx-auto max-w-7xl mobile-scroll-x px-4 pb-0 sm:overflow-visible"
           aria-label="Organizer dashboard tabs"
         >
-          <div className="flex min-w-max gap-1 border-b-0">
+          <div className="flex min-w-max snap-x snap-mandatory gap-1 border-b-0">
             {TABS.map((tab) => {
               const Icon = tab.icon
               const active = activeTab === tab.id
@@ -78,7 +78,7 @@ export default function OrganizerDashboardPage() {
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
                   className={cn(
-                    'inline-flex items-center gap-2 whitespace-nowrap border-b-2 px-4 py-3 text-sm font-medium transition-colors',
+                    'inline-flex shrink-0 snap-start items-center gap-2 whitespace-nowrap border-b-2 px-3 py-3 text-sm font-medium transition-colors sm:px-4',
                     active
                       ? 'border-primary text-primary'
                       : 'border-transparent text-muted-foreground hover:border-muted-foreground/30 hover:text-foreground',

@@ -84,11 +84,14 @@
   html {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+    --site-header-height: 3.5rem;
   }
 
   body {
     @apply bg-background font-sans text-foreground antialiased;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    overflow-x: clip;
   }
 
   h1,
@@ -101,11 +104,11 @@
 
 @layer components {
   .text-display {
-    @apply text-4xl font-semibold leading-[1.06] tracking-[-0.035em] md:text-[2.75rem] lg:text-[3.25rem];
+    @apply text-3xl font-semibold leading-[1.06] tracking-[-0.035em] sm:text-4xl md:text-[2.75rem] lg:text-[3.25rem];
   }
 
   .text-heading {
-    @apply text-2xl font-semibold leading-tight tracking-[-0.025em] md:text-[1.75rem];
+    @apply text-xl font-semibold leading-tight tracking-[-0.025em] sm:text-2xl md:text-[1.75rem];
   }
 
   .text-section-title {
@@ -137,7 +140,7 @@
   }
 
   .section-shell {
-    @apply py-16 md:py-20;
+    @apply py-12 md:py-20;
   }
 
   .section-intro {
@@ -202,6 +205,20 @@
 
   .bg-brand-gradient {
     @apply bg-gradient-to-r from-orange-500 via-primary to-amber-400;
+  }
+
+  .pb-safe {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+
+  .mobile-scroll-x {
+    @apply -mx-4 overflow-x-auto px-4 sm:mx-0 sm:overflow-visible sm:px-0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .mobile-scroll-x::-webkit-scrollbar {
+    display: none;
   }
 
   @keyframes rank-rise {

@@ -23,6 +23,14 @@ export function NavLinks({ onNavigate, mobile, className }: NavLinksProps) {
           className={mobile ? 'w-full rounded-lg px-3 py-2.5 text-left' : undefined}
         />
       ))}
+      {user && (
+        <NavLink
+          to="/organize"
+          label="Organize"
+          onNavigate={onNavigate}
+          className={mobile ? 'w-full rounded-lg px-3 py-2.5 text-left' : undefined}
+        />
+      )}
       {user?.role === 'organizer' && (
         <NavLink
           to="/organizer"

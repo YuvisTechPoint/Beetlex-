@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Bug, Menu } from 'lucide-react'
+import { Bug, Menu, Rocket } from 'lucide-react'
 import { UserAvatar } from '@/components/shared/UserAvatar'
 import { useAuth } from '@/hooks/useAuth'
 import { useUiStore } from '@/store/uiStore'
@@ -40,6 +40,12 @@ export function MobileNav() {
             </div>
             <Button asChild className="mt-4 w-full" size="sm">
               <Link to={dashboardPathForRole(user.role)}>{dashboardLabelForRole(user.role)}</Link>
+            </Button>
+            <Button asChild variant="outline" className="mt-2 w-full" size="sm">
+              <Link to="/organize">
+                <Rocket className="mr-2 h-4 w-4" aria-hidden="true" />
+                Organize Hackathon
+              </Link>
             </Button>
           </div>
         ) : (

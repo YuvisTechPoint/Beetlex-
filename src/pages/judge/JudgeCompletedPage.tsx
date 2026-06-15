@@ -92,19 +92,19 @@ export default function JudgeCompletedPage() {
             </Button>
           </div>
         ) : (
-          <div className="rounded-xl border">
-            <Table>
+          <div className="mobile-scroll-x rounded-xl border sm:overflow-hidden">
+            <Table className="min-w-[800px]">
               <TableHeader>
                 <TableRow>
                   <TableHead>Project</TableHead>
                   <TableHead>Team</TableHead>
-                  <TableHead>Track</TableHead>
-                  <TableHead className="text-center">Innovation</TableHead>
-                  <TableHead className="text-center">Technical</TableHead>
-                  <TableHead className="text-center">Impact</TableHead>
-                  <TableHead className="text-center">Presentation</TableHead>
+                  <TableHead className="hidden sm:table-cell">Track</TableHead>
+                  <TableHead className="hidden text-center lg:table-cell">Innovation</TableHead>
+                  <TableHead className="hidden text-center lg:table-cell">Technical</TableHead>
+                  <TableHead className="hidden text-center lg:table-cell">Impact</TableHead>
+                  <TableHead className="hidden text-center lg:table-cell">Presentation</TableHead>
                   <TableHead className="text-right">Total</TableHead>
-                  <TableHead className="text-right">Scored</TableHead>
+                  <TableHead className="hidden text-right sm:table-cell">Scored</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -115,25 +115,25 @@ export default function JudgeCompletedPage() {
                       {item.title}
                     </TableCell>
                     <TableCell>{item.teamName}</TableCell>
-                    <TableCell>
+                    <TableCell className="hidden sm:table-cell">
                       <Badge variant="outline">{item.trackName}</Badge>
                     </TableCell>
-                    <TableCell className="text-center tabular-nums">
+                    <TableCell className="hidden text-center tabular-nums lg:table-cell">
                       {score?.innovation ?? '—'}
                     </TableCell>
-                    <TableCell className="text-center tabular-nums">
+                    <TableCell className="hidden text-center tabular-nums lg:table-cell">
                       {score?.technicalExecution ?? '—'}
                     </TableCell>
-                    <TableCell className="text-center tabular-nums">
+                    <TableCell className="hidden text-center tabular-nums lg:table-cell">
                       {score?.impact ?? '—'}
                     </TableCell>
-                    <TableCell className="text-center tabular-nums">
+                    <TableCell className="hidden text-center tabular-nums lg:table-cell">
                       {score?.presentation ?? '—'}
                     </TableCell>
                     <TableCell className="text-right font-semibold tabular-nums">
                       {total !== null ? `${total}/40` : '—'}
                     </TableCell>
-                    <TableCell className="text-right text-muted-foreground">
+                    <TableCell className="hidden text-right text-muted-foreground sm:table-cell">
                       {submittedAt ? format(new Date(submittedAt), 'MMM d, yyyy') : '—'}
                     </TableCell>
                     <TableCell className="text-right">

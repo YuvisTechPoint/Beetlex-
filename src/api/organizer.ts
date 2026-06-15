@@ -1,5 +1,5 @@
 import { apiClient } from './client'
-import type { Announcement, LeaderboardEntry } from '@/types'
+import type { Announcement, CreateEventPayload, CreateEventResponse, LeaderboardEntry, User } from '@/types'
 
 export interface OrganizerStats {
   totalParticipants: number
@@ -171,4 +171,12 @@ export function updateLeaderboard(payload: UpdateLeaderboardPayload) {
 
 export function setLeaderboardPublished(published: boolean) {
   return apiClient.put<{ published: boolean }>('/organizer/leaderboard/publish', { published })
+}
+
+export function becomeOrganizer() {
+  return apiClient.post<{ user: User }>('/organizer/become-organizer')
+}
+
+export function createOrganizerEvent(payload: CreateEventPayload) {
+  return apiClient.post<CreateEventResponse>('/organizer/events', payload)
 }

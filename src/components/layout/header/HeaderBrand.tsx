@@ -4,7 +4,7 @@ export function HeaderBrand() {
   return (
     <Link
       to="/"
-      className="group flex items-center gap-2.5 rounded-md py-1 pr-1 transition-opacity hover:opacity-80"
+      className="group flex h-9 items-center gap-2.5 rounded-md pr-1 transition-opacity hover:opacity-80"
       aria-label="BeetleX home"
     >
       <span

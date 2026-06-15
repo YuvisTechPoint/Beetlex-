@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useNotificationSync } from '@/hooks/useNotificationSync'
 import { useUiStore } from '@/store/uiStore'
 import { cn } from '@/lib/utils'
@@ -25,19 +25,40 @@ export function Header({ overHero = false }: HeaderProps) {
   useNotificationSync()
   useHeroNavBeam(navMeasureRef, headerRef, overHero && isDark)
 
+  useEffect(() => {
+    const node = headerRef.current
+    if (!node) return
+
+    const syncHeight = () => {
+      document.documentElement.style.setProperty('--site-header-height', `${node.offsetHeight}px`)
+    }
+
+    syncHeight()
+    const observer = new ResizeObserver(syncHeight)
+    observer.observe(node)
+    window.addEventListener('resize', syncHeight)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', syncHeight)
+      document.documentElement.style.removeProperty('--site-header-height')
+    }
+  }, [])
+
   return (
-    <div className={cn('z-50 w-full', overHero ? 'absolute inset-x-0 top-0' : 'sticky top-0')}>
+    <header
+      ref={headerRef}
+      className={cn(
+        'z-50 w-full backdrop-blur-md supports-[backdrop-filter]:backdrop-blur-md',
+        overHero
+          ? 'absolute inset-x-0 top-0 border-b-0 bg-background/70 dark:bg-background/45'
+          : 'sticky top-0 border-b border-border bg-background/95 supports-[backdrop-filter]:bg-background/90',
+      )}
+    >
       <SignInDialog open={signInOpen} onOpenChange={setSignInOpen} />
       <UrgentBanner />
-      <header
-        ref={headerRef}
-        className={cn(
-          'relative backdrop-blur-md supports-[backdrop-filter]:backdrop-blur-md',
-          overHero
-            ? 'border-b-0 bg-background/70 dark:bg-background/45'
-            : 'border-b border-border bg-background/95 supports-[backdrop-filter]:bg-background/90',
-        )}
-      >
+
+      <div className="relative">
         {overHero && isDark && beamWidth != null && beamLeft != null && (
           <div
             className="pointer-events-none absolute bottom-0"
@@ -47,21 +68,24 @@ export function Header({ overHero = false }: HeaderProps) {
           </div>
         )}
 
-        <div className="container mx-auto flex h-14 items-center gap-4 px-4">
-          <div className="flex shrink-0 items-center gap-2">
+        <div className="container mx-auto flex h-14 min-w-0 max-w-7xl items-center gap-3 px-4 sm:px-6">
+          <div className="flex min-w-0 shrink-0 items-center gap-2">
             <MobileNav />
             <HeaderBrand />
           </div>
 
-          <nav className="hidden flex-1 justify-center md:flex" aria-label="Main navigation">
-            <div ref={navMeasureRef} className="inline-flex">
+          <nav
+            className="hidden min-w-0 flex-1 items-center justify-center md:flex"
+            aria-label="Main navigation"
+          >
+            <div ref={navMeasureRef} className="inline-flex items-center">
               <NavLinks />
             </div>
           </nav>
 
           <HeaderActions />
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
   )
 }

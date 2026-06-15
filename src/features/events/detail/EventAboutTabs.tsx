@@ -8,7 +8,7 @@ interface EventAboutTabsProps {
 export function EventAboutTabs({ event }: EventAboutTabsProps) {
   return (
     <Tabs defaultValue="about">
-      <TabsList className="w-full justify-start">
+      <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="about">About</TabsTrigger>
         <TabsTrigger value="rules">Rules</TabsTrigger>
         <TabsTrigger value="eligibility">Eligibility</TabsTrigger>

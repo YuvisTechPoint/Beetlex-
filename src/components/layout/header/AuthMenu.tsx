@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { LayoutDashboard, Loader2, LogOut } from 'lucide-react'
+import { CalendarPlus, LayoutDashboard, Loader2, LogOut, Rocket } from 'lucide-react'
 import { toast } from 'sonner'
 import { UserAvatar } from '@/components/shared/UserAvatar'
 import { useAuth } from '@/hooks/useAuth'
@@ -38,12 +38,12 @@ export function AuthMenu() {
           aria-label="Account menu"
         >
           <UserAvatar name={user.name} avatarUrl={user.avatarUrl} />
-          <span className="hidden max-w-[7rem] truncate text-sm font-medium md:inline">
+          <span className="hidden max-w-[6rem] truncate text-sm font-medium lg:inline xl:max-w-[7rem]">
             {user.name}
           </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent align="end" className="w-56 max-w-[calc(100vw-1rem)]">
         <DropdownMenuLabel className="font-normal">
           <div className="flex items-center gap-3">
             <UserAvatar name={user.name} avatarUrl={user.avatarUrl} className="h-9 w-9" />
@@ -58,6 +58,18 @@ export function AuthMenu() {
           <Link to={dashboardPath} className="cursor-pointer">
             <LayoutDashboard className="mr-2 h-4 w-4" />
             {dashboardLabelForRole(user.role)}
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/organize" className="cursor-pointer">
+            <Rocket className="mr-2 h-4 w-4" />
+            Organize Hackathon
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/organize/create" className="cursor-pointer">
+            <CalendarPlus className="mr-2 h-4 w-4" />
+            Create Hackathon
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

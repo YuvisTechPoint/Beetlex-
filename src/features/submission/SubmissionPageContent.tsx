@@ -63,12 +63,12 @@ export function SubmissionPageContent({
     <div className="flex min-h-screen flex-col">
       <Header />
       <div className="container mx-auto max-w-3xl flex-1 px-4 py-8">
-        <div className="mb-6 flex items-center justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">Project Submission</h1>
-            <p className="text-sm text-muted-foreground">{event.title}</p>
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+          <div className="min-w-0">
+            <h1 className="text-xl font-bold tracking-tight sm:text-2xl">Project Submission</h1>
+            <p className="truncate text-sm text-muted-foreground">{event.title}</p>
           </div>
-          <Button variant="outline" size="sm" asChild>
+          <Button variant="outline" size="sm" asChild className="w-full shrink-0 sm:w-auto">
             <Link to="/dashboard">Back to Dashboard</Link>
           </Button>
         </div>

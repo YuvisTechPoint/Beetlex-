@@ -29,12 +29,12 @@ export function EventDetailHero({
             <Trophy className="mr-1 h-3 w-3" />${prizePool.toLocaleString()} prize pool
           </Badge>
         </div>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
+        <h1 className="mt-4 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
           {event.title}
         </h1>
         <p className="mt-3 max-w-2xl text-lg text-muted-foreground">{event.tagline}</p>
 
-        <div className="mt-6 grid min-h-[88px] grid-cols-2 gap-4 rounded-lg border bg-card/50 p-4 sm:grid-cols-4">
+        <div className="mt-6 grid min-h-[88px] grid-cols-2 gap-3 rounded-lg border bg-card/50 p-3 sm:grid-cols-4 sm:gap-4 sm:p-4">
           <div className="text-center">
             <p className="text-xs text-muted-foreground">Prize Pool</p>
             <p className="text-lg font-bold text-primary">${prizePool.toLocaleString()}</p>
@@ -53,7 +53,7 @@ export function EventDetailHero({
           </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <Button variant="outline" size="sm" onClick={() => void onCopyLink()}>
             <Copy className="mr-2 h-4 w-4" />
             Copy link

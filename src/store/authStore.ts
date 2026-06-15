@@ -30,6 +30,7 @@ interface AuthState {
   loginWithGoogle: () => Promise<void>
   logout: () => Promise<void>
   setSession: (user: User | null, token: string | null) => void
+  patchUser: (patch: Partial<User>) => void
   clearSession: () => void
   hydrate: () => Promise<void>
 }
@@ -68,6 +69,12 @@ export const useAuthStore = create<AuthState>()(
           isAuthenticated: Boolean(user && token),
           error: null,
         })
+      },
+
+      patchUser: (patch) => {
+        const { user } = get()
+        if (!user) return
+        set({ user: { ...user, ...patch } })
       },
 
       clearSession: () => {

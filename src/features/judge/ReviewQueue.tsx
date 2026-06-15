@@ -71,9 +71,15 @@ export function ReviewQueue({
 
       <Tabs value={filter} onValueChange={(v) => onFilterChange(v as QueueFilter)}>
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="all">All ({items.length})</TabsTrigger>
-          <TabsTrigger value="pending">Pending ({items.length - scoredCount})</TabsTrigger>
-          <TabsTrigger value="completed">Done ({scoredCount})</TabsTrigger>
+          <TabsTrigger value="all" className="px-1 text-xs sm:px-3 sm:text-sm">
+            All ({items.length})
+          </TabsTrigger>
+          <TabsTrigger value="pending" className="px-1 text-xs sm:px-3 sm:text-sm">
+            Pending ({items.length - scoredCount})
+          </TabsTrigger>
+          <TabsTrigger value="completed" className="px-1 text-xs sm:px-3 sm:text-sm">
+            Done ({scoredCount})
+          </TabsTrigger>
         </TabsList>
       </Tabs>
 

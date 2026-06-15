@@ -168,7 +168,7 @@ export function AboutSection() {
 
             <div
               ref={trackRef}
-              className="about-scroll-track flex gap-4 overflow-x-auto scroll-smooth pb-2 pt-1 md:gap-5"
+              className="about-scroll-track flex gap-4 overflow-x-auto scroll-smooth pb-2 pl-1 pt-1 md:gap-5 md:pl-0"
               aria-label="Why BeetleX highlights"
             >
               {HIGHLIGHTS.map(({ tag, title, description }, index) => {

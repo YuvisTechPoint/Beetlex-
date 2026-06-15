@@ -12,6 +12,7 @@ export interface EventListingPageState {
   page: number
   isParticipant: boolean
   isOrganizer: boolean
+  isAuthenticated: boolean
   tracks: { id: string; name: string }[]
   recommended: Event[]
   recommendedLoading: boolean
@@ -116,6 +117,7 @@ export function useEventListingPage(): EventListingPageState {
     page,
     isParticipant,
     isOrganizer,
+    isAuthenticated,
     tracks,
     recommended,
     recommendedLoading: registrationsLoading || !allEventsData,

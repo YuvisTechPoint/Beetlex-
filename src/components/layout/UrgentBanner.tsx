@@ -16,6 +16,8 @@ export function UrgentBanner() {
       description={urgent.message}
       onDismiss={() => markAsRead(urgent.id)}
       dismissLabel={`Dismiss: ${urgent.title}`}
+      flush
+      contained={false}
     />
   )
 }

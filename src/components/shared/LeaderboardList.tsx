@@ -57,7 +57,7 @@ const LeaderboardListRow = memo(function LeaderboardListRow({
           'relative grid items-center gap-3 px-3 interactive-row',
           compact
             ? 'grid-cols-[2.5rem_minmax(0,1fr)_4rem] py-2'
-            : 'grid-cols-[3rem_minmax(0,1fr)_minmax(0,6rem)_4.5rem_3rem] py-2.5 sm:px-4',
+            : 'grid-cols-[2.5rem_minmax(0,1fr)_4rem] py-2 sm:grid-cols-[3rem_minmax(0,1fr)_minmax(0,6rem)_4.5rem_3rem] sm:py-2.5 sm:px-4',
         )}
       >
         <span
@@ -136,7 +136,7 @@ export function LeaderboardList({
     <div className="overflow-hidden rounded-lg border border-border/80 bg-surface">
       {showHeader && !compact && (
         <div
-          className="grid grid-cols-[3rem_minmax(0,1fr)_minmax(0,6rem)_4.5rem_3rem] gap-3 border-b border-border/80 bg-muted/30 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground sm:px-4"
+          className="hidden grid-cols-[3rem_minmax(0,1fr)_minmax(0,6rem)_4.5rem_3rem] gap-3 border-b border-border/80 bg-muted/30 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground sm:grid sm:px-4"
           aria-hidden="true"
         >
           <span>Rank</span>

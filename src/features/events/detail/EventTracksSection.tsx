@@ -22,9 +22,11 @@ export function EventTracksSection({ event, prizesByTrack }: EventTracksSectionP
           return (
             <AccordionItem key={track.id} value={track.id}>
               <AccordionTrigger className="text-left hover:no-underline">
-                <div>
-                  <p className="font-medium">{track.name}</p>
-                  <p className="text-sm font-normal text-muted-foreground">{track.description}</p>
+                <div className="min-w-0 flex-1 pr-2 text-left">
+                  <p className="break-words font-medium">{track.name}</p>
+                  <p className="break-words text-sm font-normal text-muted-foreground">
+                    {track.description}
+                  </p>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4">

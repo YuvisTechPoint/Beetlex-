@@ -22,8 +22,8 @@ export function EventRegistrationSidebar({
   onSignIn,
 }: EventRegistrationSidebarProps) {
   return (
-    <aside className="lg:col-span-1">
-      <div className="sticky top-20 space-y-4">
+    <aside>
+      <div className="space-y-4 lg:sticky lg:top-20">
         <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-lg">Registration</CardTitle>

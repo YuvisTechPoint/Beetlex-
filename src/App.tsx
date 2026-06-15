@@ -22,6 +22,8 @@ const SubmissionPage = lazy(() => import('@/pages/submission/SubmissionPage'))
 const JudgeDashboardPage = lazy(() => import('@/pages/judge/JudgeDashboardPage'))
 const JudgeCompletedPage = lazy(() => import('@/pages/judge/JudgeCompletedPage'))
 const OrganizerDashboardPage = lazy(() => import('@/pages/organizer/OrganizerDashboardPage'))
+const OrganizeHubPage = lazy(() => import('@/pages/organize/OrganizeHubPage'))
+const CreateHackathonPage = lazy(() => import('@/pages/organize/CreateHackathonPage'))
 const PrivacyPage = lazy(() =>
   import('@/pages/legal/LegalPages').then((m) => ({ default: m.PrivacyPage })),
 )
@@ -113,6 +115,22 @@ export default function App() {
                     element={
                       <ProtectedRoute requiredRole="organizer">
                         <OrganizerDashboardPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/organize"
+                    element={
+                      <ProtectedRoute>
+                        <OrganizeHubPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/organize/create"
+                    element={
+                      <ProtectedRoute>
+                        <CreateHackathonPage />
                       </ProtectedRoute>
                     }
                   />

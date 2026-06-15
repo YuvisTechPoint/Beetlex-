@@ -22,6 +22,8 @@ export interface AlertBannerProps {
   className?: string
   /** When false, skips outer container padding (e.g. embedded in a card). */
   contained?: boolean
+  /** Full-width bar flush with a parent header (no rounded corners or outer shell). */
+  flush?: boolean
   ariaLive?: 'polite' | 'assertive'
 }
 
@@ -37,6 +39,7 @@ export function AlertBanner({
   action,
   className,
   contained = true,
+  flush = false,
   ariaLive = priority === 'urgent' ? 'assertive' : 'polite',
 }: AlertBannerProps) {
   const [closing, setClosing] = useState(false)
@@ -55,14 +58,16 @@ export function AlertBanner({
       aria-live={ariaLive}
       aria-atomic="true"
       className={cn(
-        'flex w-full items-start gap-2.5 rounded-lg border px-3 py-2 sm:items-center sm:gap-3 sm:py-2.5',
-        styles.container,
+        'flex w-full items-center gap-2.5 px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5',
+        flush
+          ? cn('rounded-none border-x-0 border-t-0', styles.container)
+          : cn('items-start rounded-lg border px-3 py-2 sm:items-center sm:py-2.5', styles.container),
         closing ? 'alert-banner-exit' : 'alert-banner-enter',
         className,
       )}
     >
       <Icon
-        className={cn('mt-0.5 h-4 w-4 shrink-0 sm:mt-0', styles.iconClass)}
+        className={cn('h-4 w-4 shrink-0', flush ? styles.iconClass : cn('mt-0.5 sm:mt-0', styles.iconClass))}
         aria-hidden="true"
       />
 
@@ -77,7 +82,7 @@ export function AlertBanner({
         {children}
       </div>
 
-      <div className="flex shrink-0 items-center gap-0.5 self-start sm:self-center">
+      <div className="flex shrink-0 items-center gap-0.5">
         {action && (
           <Button
             type="button"
@@ -104,6 +109,10 @@ export function AlertBanner({
       </div>
     </div>
   )
+
+  if (flush) {
+    return alert
+  }
 
   if (!contained) {
     return alert
