@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
 import { buildAuthStreamUrl } from '@/api/auth'
 import { AUTH_CHANNEL, AUTH_STORAGE_KEY, useAuthStore } from '@/store/authStore'
 import type { User } from '@/types'
@@ -107,6 +108,7 @@ export function useAuthSync() {
 
     es.addEventListener('signed_out', () => {
       clearSession()
+      toast.info('Your session ended. Please sign in again.')
     })
 
     es.onerror = () => {

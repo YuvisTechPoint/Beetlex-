@@ -5,7 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>BeetleX Hackathon Platform</title>
+    <script>
+      try {
+        const stored = localStorage.getItem('beetlex-ui')
+        if (stored) {
+          const parsed = JSON.parse(stored)
+          if (parsed?.state?.darkMode) {
+            document.documentElement.classList.add('dark')
+          }
+        }
+      } catch (_) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

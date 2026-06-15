@@ -14,6 +14,7 @@
     "qa:lighthouse": "node scripts/run-lighthouse.mjs",
     "qa:report": "node scripts/generate-quality-report.mjs",
     "qa": "node scripts/qa-pipeline.mjs",
+    "analyze": "vite-bundle-visualizer",
     "postinstall": "playwright install chromium"
   },
   "dependencies": {

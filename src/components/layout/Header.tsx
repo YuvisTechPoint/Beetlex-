@@ -1,3 +1,4 @@
+import { createElement } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { formatDistanceToNow } from 'date-fns'
 import {
@@ -5,6 +6,7 @@ import {
   AlertTriangle,
   Bell,
   Bug,
+  Clock,
   Info,
   LayoutDashboard,
   Loader2,
@@ -12,11 +14,12 @@ import {
   Menu,
   Moon,
   Sun,
+  Trophy,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { useAuth } from '@/hooks/useAuth'
 import { useUiStore } from '@/store/uiStore'
-import { SignInDialog } from '@/components/auth/SignInDialog'
+import { SignInDialog } from '@/components/layout/SignInDialog'
 import { useNotificationStore } from '@/store/notificationStore'
 import { useNotificationSync } from '@/hooks/useNotificationSync'
 import { useNotificationActions } from '@/hooks/useNotificationActions'
@@ -64,6 +67,15 @@ const PRIORITY_STYLES = {
   urgent: 'text-red-600 dark:text-red-400',
 } as const
 
+function userInitials(name: string) {
+  return name
+    .split(' ')
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
+}
+
 function dashboardPathForRole(role: UserRole) {
   if (role === 'judge') return '/judge'
   if (role === 'organizer') return '/organizer'
@@ -86,13 +98,18 @@ function isNavActive(to: string, pathname: string, hash: string) {
   return pathname === to
 }
 
-function userInitials(name: string) {
-  return name
-    .split(' ')
-    .map((part) => part[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase()
+const TYPE_ICONS = {
+  announcement: Info,
+  score_update: Trophy,
+  deadline_alert: Clock,
+  system: Bell,
+} as const
+
+function notificationIcon(notification: Notification) {
+  if (notification.type in TYPE_ICONS) {
+    return TYPE_ICONS[notification.type as keyof typeof TYPE_ICONS]
+  }
+  return PRIORITY_ICONS[notification.priority]
 }
 
 function NotificationItem({
@@ -102,8 +119,6 @@ function NotificationItem({
   notification: Notification
   onRead: (id: string) => void
 }) {
-  const Icon = PRIORITY_ICONS[notification.priority]
-
   return (
     <button
       type="button"
@@ -113,10 +128,10 @@ function NotificationItem({
         !notification.read && 'bg-muted/50',
       )}
     >
-      <Icon
-        className={cn('mt-0.5 h-4 w-4 shrink-0', PRIORITY_STYLES[notification.priority])}
-        aria-hidden="true"
-      />
+      {createElement(notificationIcon(notification), {
+        className: cn('mt-0.5 h-4 w-4 shrink-0', PRIORITY_STYLES[notification.priority]),
+        'aria-hidden': true,
+      })}
       <div className="min-w-0 flex-1">
         <p className={cn('font-medium leading-snug', !notification.read && 'text-foreground')}>
           {notification.title}

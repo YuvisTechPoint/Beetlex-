@@ -1,8 +1,9 @@
 import { http } from 'msw'
 import { createSseResponse } from '@/lib/sse'
 import { db } from './db'
-import { getUserFromRequest } from './helpers'
-import type { LeaderboardEntry } from '@/types'
+import { emitNotification } from './notificationBus'
+import { generateId, getUserFromRequest } from './helpers'
+import type { LeaderboardEntry, Notification } from '@/types'
 
 function bumpLeaderboardEntry(entry: LeaderboardEntry): LeaderboardEntry {
   const delta = Math.random() > 0.5 ? (Math.random() > 0.5 ? 1 : -1) : 0
@@ -61,6 +62,21 @@ export const leaderboardStreamHandlers = [
           rank: updated.rank,
           previousRank: updated.previousRank,
         })
+
+        if (updated.delta !== 0) {
+          const direction = updated.delta > 0 ? 'moved up' : 'moved down'
+          const notification: Notification = {
+            id: generateId('notif'),
+            title: 'Live leaderboard update',
+            message: `${updated.teamName} ${direction} to #${updated.rank} (${updated.score.toFixed(1)} pts)`,
+            type: 'score_update',
+            priority: 'info',
+            createdAt: new Date().toISOString(),
+            read: false,
+          }
+          db.notifications.unshift(notification)
+          emitNotification(notification)
+        }
       }, 3500 + Math.random() * 1500)
 
       return () => {

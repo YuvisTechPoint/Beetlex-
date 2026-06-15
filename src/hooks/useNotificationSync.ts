@@ -33,9 +33,32 @@ function playUrgentSound() {
 function showNotificationToast(notification: Notification) {
   if (notification.priority === 'urgent') return
 
-  const duration = TOAST_DURATIONS[notification.priority]
-  const toastFn = notification.priority === 'warning' ? toast.warning : toast.info
+  const duration =
+    notification.type === 'deadline_alert'
+      ? 10_000
+      : notification.type === 'score_update'
+        ? 6_000
+        : TOAST_DURATIONS[notification.priority as keyof typeof TOAST_DURATIONS] ?? 5_000
 
+  if (notification.type === 'score_update') {
+    toast.info(notification.title, {
+      id: notification.id,
+      description: notification.message,
+      duration,
+    })
+    return
+  }
+
+  if (notification.type === 'deadline_alert') {
+    toast.warning(notification.title, {
+      id: notification.id,
+      description: notification.message,
+      duration,
+    })
+    return
+  }
+
+  const toastFn = notification.priority === 'warning' ? toast.warning : toast.info
   toastFn(notification.title, {
     id: notification.id,
     description: notification.message,

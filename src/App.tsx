@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from '@/components/ui/sonner'
-import { AuthProvider } from '@/components/auth/AuthProvider'
+import { useAuthSync } from '@/hooks/useAuthSync'
 import { ProtectedRoute } from '@/components/layout/ProtectedRoute'
 import { DevToolbar } from '@/components/layout/DevToolbar'
 import { HashScrollHandler } from '@/components/layout/HashScrollHandler'
@@ -20,8 +20,12 @@ const SubmissionPage = lazy(() => import('@/pages/submission/SubmissionPage'))
 const JudgeDashboardPage = lazy(() => import('@/pages/judge/JudgeDashboardPage'))
 const JudgeCompletedPage = lazy(() => import('@/pages/judge/JudgeCompletedPage'))
 const OrganizerDashboardPage = lazy(() => import('@/pages/organizer/OrganizerDashboardPage'))
-const PrivacyPage = lazy(() => import('@/pages/legal/PrivacyPage'))
-const TermsPage = lazy(() => import('@/pages/legal/TermsPage'))
+const PrivacyPage = lazy(() =>
+  import('@/pages/legal/LegalPages').then((m) => ({ default: m.PrivacyPage })),
+)
+const TermsPage = lazy(() =>
+  import('@/pages/legal/LegalPages').then((m) => ({ default: m.TermsPage })),
+)
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +35,11 @@ const queryClient = new QueryClient({
     },
   },
 })
+
+function AuthBootstrap({ children }: { children: React.ReactNode }) {
+  useAuthSync()
+  return children
+}
 
 function DarkModeSync() {
   const darkMode = useUiStore((s) => s.darkMode)
@@ -43,7 +52,7 @@ function DarkModeSync() {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
+      <AuthBootstrap>
       <BrowserRouter>
         <DarkModeSync />
         <HashScrollHandler />
@@ -104,7 +113,7 @@ export default function App() {
         <DevToolbar />
         <Toaster richColors position="bottom-right" offset={16} />
       </BrowserRouter>
-      </AuthProvider>
+      </AuthBootstrap>
     </QueryClientProvider>
   )
 }

@@ -7,22 +7,28 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies & build
 node_modules
 dist
 dist-ssr
 *.local
+*.tsbuildinfo
 
-# QA artifacts (regenerate with npm run qa)
-reports/screenshots/*.png
-reports/lighthouse/*.html
-reports/lighthouse/*.json
-reports/playwright/
-reports/.tmp/
-reports/qa-run-meta.json
+# Environment (never commit secrets)
+.env
+.env.*
+!.env.example
 
-# Keep report structure
+# Playwright (local run outputs)
+test-results/
+playwright-report/
+
+# QA artifacts — regenerate with `npm run qa`
+reports/**
 !reports/.gitkeep
-!reports/QUALITY_AUDIT_REPORT.md
+!reports/screenshots/.gitkeep
+!reports/lighthouse/.gitkeep
+!reports/playwright/.gitkeep
 
 # Editor directories and files
 .vscode/*

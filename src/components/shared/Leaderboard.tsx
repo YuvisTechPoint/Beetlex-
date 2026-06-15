@@ -88,7 +88,7 @@ const LeaderboardRow = memo(function LeaderboardRow({
   return (
     <TableRow
       className={cn(
-        'transition-colors duration-300',
+        'transition-all duration-500 ease-out',
         isCurrentTeam && 'bg-primary/5 font-medium',
         rankChanged && movedUp && 'leaderboard-rank-up',
         rankChanged && movedDown && 'leaderboard-rank-down',

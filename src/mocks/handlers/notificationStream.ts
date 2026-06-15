@@ -2,6 +2,7 @@ import { http } from 'msw'
 import { createSseResponse } from '@/lib/sse'
 import { randomNotificationTemplates } from '@/mocks/data'
 import { db } from './db'
+import { emitNotification, subscribeNotifications } from './notificationBus'
 import { generateId, getUserFromRequest } from './helpers'
 import type { Notification } from '@/types'
 
@@ -21,15 +22,20 @@ export const notificationStreamHandlers = [
     return createSseResponse((send, close) => {
       send('0', 'connected', { ts: Date.now() })
 
-      const alreadySent = new Set<string>()
+      const pushNotification = (notification: Notification) => {
+        send(notification.id, 'notification', notification)
+      }
+
+      const unsubscribeBus = subscribeNotifications(pushNotification)
+
       for (const notification of db.notifications) {
         if (notification.id > lastEventId) {
-          alreadySent.add(notification.id)
+          pushNotification(notification)
         }
       }
 
       const interval = setInterval(() => {
-        if (Math.random() > 0.55) return
+        if (Math.random() > 0.5) return
 
         const template =
           randomNotificationTemplates[
@@ -44,11 +50,12 @@ export const notificationStreamHandlers = [
 
         db.notifications.unshift(notification)
         db.lastRandomNotificationAt = Date.now()
-        send(notification.id, 'notification', notification)
-      }, 20_000)
+        emitNotification(notification)
+      }, 18_000)
 
       return () => {
         clearInterval(interval)
+        unsubscribeBus()
         close()
       }
     })

@@ -1,4 +1,6 @@
 export { useLeaderboardStream } from './useLeaderboardStream'
+export { useWebSocket, MOCK_WS_URL } from './useWebSocket'
+export type { WebSocketStatus, WebSocketMessage } from './useWebSocket'
 export { useNotificationStream } from './useNotificationStream'
 export { useAuthSync } from './useAuthSync'
 export { useAuth } from './useAuth'

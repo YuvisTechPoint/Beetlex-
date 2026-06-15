@@ -55,4 +55,22 @@ export const randomNotificationTemplates: Omit<Notification, 'id' | 'createdAt' 
     type: 'deadline_alert',
     priority: 'urgent',
   },
+  {
+    title: 'Leaderboard update',
+    message: 'NeuralCraft moved up to #3 on the live leaderboard.',
+    type: 'score_update',
+    priority: 'info',
+  },
+  {
+    title: 'Score change on your track',
+    message: 'A team in your track gained points — check the live leaderboard.',
+    type: 'score_update',
+    priority: 'info',
+  },
+  {
+    title: 'Submission deadline in 24 hours',
+    message: 'Final project submissions close tomorrow at 11:59 PM. Save your draft now.',
+    type: 'deadline_alert',
+    priority: 'warning',
+  },
 ]

@@ -15,11 +15,13 @@ Runs at http://localhost:5173
 
 ## Documentation
 
-- **[GAP_AUDIT.md](./GAP_AUDIT.md)** — implementation checklist vs `SYSTEM_DESIGN.md`
-- **[SYSTEM_DESIGN.md](./SYSTEM_DESIGN.md)** — Q1–Q5 architecture answers
-- **[QUALITY_AUDIT_REPORT.md](./reports/QUALITY_AUDIT_REPORT.md)** — automated QA output (`npm run qa`)
-- **[FINAL_AUDIT_REPORT.md](./FINAL_AUDIT_REPORT.md)** — assignment audit summary
-- **[GITHUB_REPOS.md](./GITHUB_REPOS.md)** — reference repositories
+- **[docs/GAP_AUDIT.md](./docs/GAP_AUDIT.md)** — implementation checklist vs `SYSTEM_DESIGN.md`
+- **[docs/SYSTEM_DESIGN.md](./docs/SYSTEM_DESIGN.md)** — Q1–Q5 architecture answers
+- **`reports/QUALITY_AUDIT_REPORT.md`** — generated locally by `npm run qa` (not committed)
+- **[docs/FINAL_AUDIT_REPORT.md](./docs/FINAL_AUDIT_REPORT.md)** — assignment audit summary
+- **[docs/GITHUB_REPOS.md](./docs/GITHUB_REPOS.md)** — reference repositories
+
+See **[docs/README.md](./docs/README.md)** for the full documentation index.
 
 ## Quality assurance (automated)
 
@@ -126,17 +128,26 @@ Toggle **Overload** in the dev toolbar, then register for an event. The mock API
 ## Project Structure
 
 ```
-e2e/              # Playwright screenshot suite
-scripts/          # qa-pipeline, lighthouse, report generator
-reports/          # Generated QA artifacts (see npm run qa)
-src/
-├── api/           # Typed API client functions
-├── components/    # UI primitives, layout, shared widgets
-├── features/      # Domain-specific feature components
-├── hooks/         # React Query hooks + SSE hooks
-├── lib/           # retry, sessionDraft, registrationLock, sse, qaMode
-├── mocks/         # MSW handlers + mock data
-├── pages/         # Route-level page components
-├── store/         # Zustand stores
-└── types/         # TypeScript interfaces
+beetlex-hackathon/
+├── docs/              # Design docs, audits, references
+├── e2e/               # Playwright E2E tests
+├── public/            # Static assets (favicons, sponsor SVGs)
+├── reports/           # Generated QA artifacts (`npm run qa`)
+├── scripts/           # QA pipeline, Lighthouse, report generator
+├── src/
+│   ├── api/           # Typed API clients
+│   ├── components/
+│   │   ├── layout/    # Header, Footer, routing shells, SignInDialog
+│   │   ├── shared/    # Cross-page widgets (Leaderboard, AnnouncementFeed, …)
+│   │   └── ui/        # shadcn/ui primitives
+│   ├── data/          # Static app data (sponsors catalog)
+│   ├── hooks/         # React Query + realtime hooks
+│   ├── lib/           # Utilities (retry, SSE, session draft, …)
+│   ├── mocks/         # MSW handlers and mock data
+│   ├── pages/         # Route modules (one folder per major flow)
+│   ├── store/         # Zustand stores
+│   ├── types/         # Shared TypeScript types
+│   └── utils/         # Formatting and helpers
+├── README.md
+└── package.json
 ```

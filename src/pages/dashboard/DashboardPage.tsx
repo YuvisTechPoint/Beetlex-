@@ -33,13 +33,13 @@ import { useAuth } from '@/hooks/useAuth'
 import { useEvent } from '@/hooks/useEvent'
 import { useMyTeam } from '@/hooks/useMyTeam'
 import { useMySubmission } from '@/hooks/useMySubmission'
-import { useLeaderboard } from '@/hooks/useLeaderboard'
 import { useLeaderboardStream } from '@/hooks/useLeaderboardStream'
 import { useEventAnnouncements } from '@/hooks/useEventAnnouncements'
 import { useCountdown } from '@/hooks/useCountdown'
 import { useNotificationStore } from '@/store/notificationStore'
 import { useLeaderboardStore } from '@/store/leaderboardStore'
 import type { LeaderboardConnectionMode } from '@/store/leaderboardStore'
+import { useWebSocket, MOCK_WS_URL, type WebSocketStatus } from '@/hooks/useWebSocket'
 import { cn } from '@/lib/utils'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
@@ -192,21 +192,49 @@ function NavButton({
   )
 }
 
+const WS_STATUS_CONFIG: Record<
+  WebSocketStatus,
+  { label: string; dotClass: string }
+> = {
+  connecting: { label: 'Platform connecting…', dotClass: 'bg-amber-500 animate-pulse' },
+  connected: { label: 'Platform live', dotClass: 'bg-emerald-500' },
+  disconnected: { label: 'Platform offline', dotClass: 'bg-red-500' },
+}
+
 function ConnectionStatus() {
   const connectionMode = useLeaderboardStore((s) => s.connectionMode)
   const config = STATUS_CONFIG[connectionMode]
   const Icon = config.icon
+  const { status: wsStatus } = useWebSocket(MOCK_WS_URL, { enabled: true })
+  const wsConfig = WS_STATUS_CONFIG[wsStatus]
 
   return (
-    <div
-      className="flex items-center gap-2 text-xs text-muted-foreground"
-      role="status"
-      aria-live="polite"
-      aria-label={`Connection status: ${config.label}`}
-    >
-      <span className={cn('h-2 w-2 rounded-full', config.dotClass)} aria-hidden="true" />
-      <Icon className="h-3.5 w-3.5" aria-hidden="true" />
-      <span>{config.label}</span>
+    <div className="flex flex-wrap items-center justify-end gap-4">
+      <div
+        className="flex items-center gap-2 text-xs text-muted-foreground"
+        role="status"
+        aria-live="polite"
+        aria-label={`Leaderboard connection: ${config.label}`}
+      >
+        <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground/80">
+          Leaderboard
+        </span>
+        <span className={cn('h-2 w-2 rounded-full', config.dotClass)} aria-hidden="true" />
+        <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+        <span>{config.label}</span>
+      </div>
+      <div
+        className="flex items-center gap-2 text-xs text-muted-foreground"
+        role="status"
+        aria-live="polite"
+        aria-label={`Platform connection: ${wsConfig.label}`}
+      >
+        <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground/80">
+          Events
+        </span>
+        <span className={cn('h-2 w-2 rounded-full', wsConfig.dotClass)} aria-hidden="true" />
+        <span>{wsConfig.label}</span>
+      </div>
     </div>
   )
 }
@@ -333,9 +361,18 @@ function OverviewPanel() {
   const eventId = team?.eventId
   const { data: event, isLoading: eventLoading } = useEvent(eventId)
   const { data: submission } = useMySubmission()
-  const { data: leaderboard, isLoading: leaderboardLoading, published } = useLeaderboard(
-    team?.eventId ?? 'evt-active-1',
-    { refetchInterval: 30_000 },
+  const eventIdForLeaderboard = team?.eventId ?? 'evt-active-1'
+  const {
+    entries: leaderboardEntries,
+    isLoading: leaderboardLoading,
+    published,
+  } = useLeaderboardStream({
+    eventId: eventIdForLeaderboard,
+    enabled: Boolean(team),
+  })
+  const leaderboard = useMemo(
+    () => leaderboardEntries.slice(0, 10),
+    [leaderboardEntries],
   )
   const { data: announcements, isLoading: announcementsLoading } = useEventAnnouncements(eventId)
   const countdown = useCountdown(event?.submissionDeadline)
@@ -349,7 +386,9 @@ function OverviewPanel() {
       : 'submitted'
     : (team?.submissionStatus ?? 'not_started')
 
-  const position = team?.leaderboardPosition
+  const position =
+    team?.leaderboardPosition ??
+    (team ? leaderboard.find((e) => e.teamId === team.id)?.rank : undefined)
   const totalTeams = leaderboard?.length ?? 0
 
   const trackerSteps = [
